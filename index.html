@@ -543,10 +543,12 @@ $(document).ready(function(){
                 localStorage.setItem('portalChosen', 'true');
                 localStorage.setItem('selectedUser', 'akma');
                 window.location.href = 'login.html';
-            } else {
-                alert("🌀 ASSIGNIFY PORTAL is under dimensional reconstruction.\n\nStay tuned for the next update ✨");
-                $portal.css('transform', '');
-            }
+} else {
+    // AIN PORTAL - Redirect to signin page
+    localStorage.setItem('portalChosen', 'true');
+    localStorage.setItem('selectedUser', 'ain');
+    window.location.href = 'signin.html';
+}
         }, 200);
     });
     
