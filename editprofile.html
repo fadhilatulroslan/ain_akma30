@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>FIXORA • Edit Profile</title>
+    <link rel="stylesheet" href="css/inventra.css">
+    <link rel="stylesheet" href="css/editprofile.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+<div class="app">
+    
+    <div class="top">
+        <div class="logo-badge">✏️</div>
+        <h1>edit profile</h1>
+        <p>update your personal info</p>
+    </div>
+
+    <div class="edit-profile-container">
+        
+        <!-- Toggle between Emoji and Image -->
+        <div class="avatar-toggle">
+            <button id="emojiToggle" class="toggle-btn active">😊 Emoji</button>
+            <button id="imageToggle" class="toggle-btn">📸 Upload Image</button>
+        </div>
+
+        <!-- Emoji Avatar Section -->
+        <div id="emojiSection">
+            <div class="avatar-section">
+                <div class="avatar-preview" id="avatarPreview">
+                    <div class="avatar-emoji" id="avatarEmoji">👨‍💻</div>
+                </div>
+                <button class="change-avatar-btn" id="changeAvatarBtn">🎨 Change Avatar</button>
+                
+                <div id="avatarGrid" class="avatar-grid" style="display: none;">
+                    <div class="avatar-option" data-avatar="👨‍💻">👨‍💻</div>
+                    <div class="avatar-option" data-avatar="👩‍💻">👩‍💻</div>
+                    <div class="avatar-option" data-avatar="🧑‍💻">🧑‍💻</div>
+                    <div class="avatar-option" data-avatar="💻">💻</div>
+                    <div class="avatar-option" data-avatar="🖥️">🖥️</div>
+                    <div class="avatar-option" data-avatar="🔧">🔧</div>
+                    <div class="avatar-option" data-avatar="🛠️">🛠️</div>
+                    <div class="avatar-option" data-avatar="⭐">⭐</div>
+                    <div class="avatar-option" data-avatar="🐱‍💻">🐱‍💻</div>
+                    <div class="avatar-option" data-avatar="🐧">🐧</div>
+                    <div class="avatar-option" data-avatar="🚀">🚀</div>
+                    <div class="avatar-option" data-avatar="🎮">🎮</div>
+                    <div class="avatar-option" data-avatar="📱">📱</div>
+                    <div class="avatar-option" data-avatar="⚡">⚡</div>
+                    <div class="avatar-option" data-avatar="🔥">🔥</div>
+                    <div class="avatar-option" data-avatar="💪">💪</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upload Image Section (Hidden by default) -->
+        <div id="imageSection" class="hidden">
+            <div class="upload-section">
+                <img id="profileImage" class="image-preview" src="https://via.placeholder.com/100?text=Avatar" alt="Profile">
+                <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+                <button id="uploadBtn" class="upload-btn">📸 Choose Photo</button>
+                <p style="font-size: 11px; color: #888; margin-top: 8px;">Max 2MB • JPG/PNG</p>
+            </div>
+        </div>
+
+        <!-- Form -->
+        <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input type="text" id="fullName" class="form-input" placeholder="Your full name">
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Username</label>
+            <input type="text" id="username" class="form-input" placeholder="Username">
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" id="email" class="form-input" placeholder="Email address">
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Bio</label>
+            <textarea id="bio" class="form-textarea" placeholder="Tell us about yourself..."></textarea>
+        </div>
+
+        <button id="saveProfileBtn" class="save-btn">💾 Save Changes</button>
+        <button id="cancelBtn" class="cancel-btn">← Cancel</button>
+
+    </div>
+
+    <div class="bottom-nav">
+        <a href="index.html" class="nav"><span class="nav-icon">🏠</span><span>home</span></a>
+        <a href="shops.html" class="nav"><span class="nav-icon">📍</span><span>shops</span></a>
+        <a href="community.html" class="nav"><span class="nav-icon">💬</span><span>community</span></a>
+        <a href="profile.html" class="nav"><span class="nav-icon">👤</span><span>profile</span></a>
+    </div>
+
+</div>
+
+<script src="js/main.js"></script>
+<script>
+    $(document).ready(function(){
+        
+        let currentAvatarType = localStorage.getItem('avatarType') || 'emoji';
+        let savedImageData = localStorage.getItem('userImage');
+        
+        // ========================================
+        // TOGGLE BETWEEN EMOJI AND IMAGE
+        // ========================================
+        
+        function toggleSections(type) {
+            if (type === 'emoji') {
+                $('#emojiSection').removeClass('hidden');
+                $('#imageSection').addClass('hidden');
+                $('#emojiToggle').addClass('active');
+                $('#imageToggle').removeClass('active');
+                currentAvatarType = 'emoji';
+            } else {
+                $('#emojiSection').addClass('hidden');
+                $('#imageSection').removeClass('hidden');
+                $('#emojiToggle').removeClass('active');
+                $('#imageToggle').addClass('active');
+                currentAvatarType = 'image';
+            }
+        }
+        
+        $('#emojiToggle').on('click', function() {
+            toggleSections('emoji');
+        });
+        
+        $('#imageToggle').on('click', function() {
+            toggleSections('image');
+        });
+        
+        // ========================================
+        // LOAD CURRENT DATA
+        // ========================================
+        
+        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        let savedAvatar = localStorage.getItem('userAvatar') || '👨‍💻';
+        let savedUsername = localStorage.getItem('inventraUsername') || currentUser?.name || 'laptop_user';
+        let savedFullName = localStorage.getItem('userFullName') || currentUser?.name || '';
+        let savedEmail = localStorage.getItem('userEmail') || currentUser?.email || '';
+        let savedBio = localStorage.getItem('userBio') || '';
+        
+        // Load avatar type
+        if (localStorage.getItem('avatarType') === 'image' && savedImageData) {
+            toggleSections('image');
+            $('#profileImage').attr('src', savedImageData);
+        } else {
+            toggleSections('emoji');
+            $('#avatarEmoji').text(savedAvatar);
+        }
+        
+        $('#fullName').val(savedFullName);
+        $('#username').val(savedUsername);
+        $('#email').val(savedEmail);
+        $('#bio').val(savedBio);
+        
+        // ========================================
+        // EMOJI SELECTION
+        // ========================================
+        
+        $('#changeAvatarBtn').on('click', function() {
+            $('#avatarGrid').slideToggle(300);
+        });
+        
+        $('.avatar-option').on('click', function() {
+            let selectedAvatar = $(this).data('avatar');
+            $('#avatarEmoji').text(selectedAvatar);
+            $('.avatar-option').removeClass('selected');
+            $(this).addClass('selected');
+            setTimeout(() => {
+                $('#avatarGrid').slideUp(300);
+            }, 500);
+        });
+        
+        // ========================================
+        // IMAGE UPLOAD
+        // ========================================
+        
+        $('#uploadBtn, #profileImage').on('click', function() {
+            $('#imageUpload').click();
+        });
+        
+        $('#imageUpload').on('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                // Check file size (max 2MB)
+                if (file.size > 2 * 1024 * 1024) {
+                    alert('File too large! Maximum 2MB.');
+                    return;
+                }
+                
+                // Check file type
+                if (!file.type.match('image.*')) {
+                    alert('Please select an image file (JPG, PNG)');
+                    return;
+                }
+                
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const imageData = event.target.result;
+                    $('#profileImage').attr('src', imageData);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        
+        // ========================================
+        // SAVE PROFILE
+        // ========================================
+        
+        $('#saveProfileBtn').on('click', function() {
+            let newFullName = $('#fullName').val().trim();
+            let newUsername = $('#username').val().trim();
+            let newEmail = $('#email').val().trim();
+            let newBio = $('#bio').val().trim();
+            
+            if (!newUsername) {
+                alert('Username cannot be empty');
+                return;
+            }
+            
+            // Save based on avatar type
+            if (currentAvatarType === 'emoji') {
+                let newAvatar = $('#avatarEmoji').text();
+                localStorage.setItem('userAvatar', newAvatar);
+                localStorage.setItem('avatarType', 'emoji');
+                localStorage.removeItem('userImage');
+            } else {
+                let imageUrl = $('#profileImage').attr('src');
+                if (imageUrl && !imageUrl.includes('via.placeholder.com')) {
+                    localStorage.setItem('userImage', imageUrl);
+                    localStorage.setItem('avatarType', 'image');
+                    localStorage.removeItem('userAvatar');
+                }
+            }
+            
+            localStorage.setItem('inventraUsername', newUsername);
+            localStorage.setItem('userFullName', newFullName);
+            localStorage.setItem('userEmail', newEmail);
+            localStorage.setItem('userBio', newBio);
+            
+            // Update currentUser
+            if (currentUser) {
+                currentUser.name = newUsername;
+                currentUser.email = newEmail;
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            }
+            
+            alert('✅ Profile updated successfully!');
+            window.location.href = 'profile.html';
+        });
+        
+        // Cancel button
+        $('#cancelBtn').on('click', function() {
+            if (confirm('Discard changes?')) {
+                window.location.href = 'profile.html';
+            }
+        });
+        
+    });
+</script>
+</body>
+</html>

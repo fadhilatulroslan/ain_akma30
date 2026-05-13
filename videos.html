@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>FIXORA • Videos</title>
+    <link rel="stylesheet" href="css/inventra.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+    <link rel="stylesheet" href="css/videos.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+<div class="app">
+
+    <!-- HEADER -->
+    <div class="top">
+        <img src="images/fifth.jpg" alt="Fixora Logo" style="width: 28px; height: 28px; object-fit: cover; border-radius: 8px;">
+        <h1>all videos</h1>
+        <p>laptop tutorials & tips</p>
+    </div>
+
+    <!-- WELCOME CARD -->
+    <div class="welcome-card">
+        <div class="welcome-text">🎥 Watch and learn</div>
+        <div class="welcome-sub">Step by step laptop tutorials</div>
+    </div>
+
+    <!-- SEARCH BAR -->
+    <div class="videos-search-section">
+        <div class="videos-search-box">
+            <span class="search-icon-left">🔍</span>
+            <input type="text" id="videoSearchInput" placeholder="Search tutorials...">
+            <button id="clearSearch" style="display:none;">✕</button>
+        </div>
+    </div>
+
+    <!-- FILTER TABS -->
+    <div class="filter-tabs-row">
+        <button class="filter-tab active" data-filter="all">All</button>
+        <button class="filter-tab" data-filter="cleaning">🧹 Cleaning</button>
+        <button class="filter-tab" data-filter="performance">⚡ Speed</button>
+        <button class="filter-tab" data-filter="hardware">🔧 Hardware</button>
+        <button class="filter-tab" data-filter="security">🛡️ Security</button>
+    </div>
+
+    <!-- VIDEO COUNT -->
+    <div class="videos-count" id="videosCount">6 tutorials</div>
+
+    <!-- VIDEO LIST — skeleton dulu -->
+    <div class="videos-container">
+        <div class="video-list" id="videosList">
+
+            <!-- SKELETON -->
+            <div class="skeleton-video-item" id="skeletonList">
+                <div class="skeleton sk-video-thumb"></div>
+                <div class="sk-video-info">
+                    <div class="skeleton sk-text-lg" style="width:80%"></div>
+                    <div class="skeleton sk-text-md" style="width:50%"></div>
+                    <div class="skeleton sk-text-sm" style="width:35%"></div>
+                </div>
+            </div>
+            <div class="skeleton-video-item">
+                <div class="skeleton sk-video-thumb"></div>
+                <div class="sk-video-info">
+                    <div class="skeleton sk-text-lg" style="width:70%"></div>
+                    <div class="skeleton sk-text-md" style="width:55%"></div>
+                    <div class="skeleton sk-text-sm" style="width:40%"></div>
+                </div>
+            </div>
+            <div class="skeleton-video-item">
+                <div class="skeleton sk-video-thumb"></div>
+                <div class="sk-video-info">
+                    <div class="skeleton sk-text-lg" style="width:75%"></div>
+                    <div class="skeleton sk-text-md" style="width:45%"></div>
+                    <div class="skeleton sk-text-sm" style="width:30%"></div>
+                </div>
+            </div>
+            <div class="skeleton-video-item">
+                <div class="skeleton sk-video-thumb"></div>
+                <div class="sk-video-info">
+                    <div class="skeleton sk-text-lg" style="width:65%"></div>
+                    <div class="skeleton sk-text-md" style="width:50%"></div>
+                    <div class="skeleton sk-text-sm" style="width:38%"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- BOTTOM NAV -->
+    <div class="bottom-nav">
+        <a href="index.html" class="nav"><span class="nav-icon">🏠</span><span>home</span></a>
+        <a href="shops.html" class="nav"><span class="nav-icon">📍</span><span>shops</span></a>
+        <a href="community.html" class="nav"><span class="nav-icon">💬</span><span>community</span></a>
+        <a href="profile.html" class="nav"><span class="nav-icon">👤</span><span>profile</span></a>
+    </div>
+
+</div>
+
+<script src="js/main.js"></script>
+<script>
+$(document).ready(function(){
+
+    const videos = [
+        {
+            id: 'fan',
+            title: 'How to clean laptop fan',
+            channel: 'Tech Tutorial',
+            views: '125K views',
+            time: '2 months ago',
+            icon: '🧹',
+            image: 'images/fan.jpg',
+            embed: 'https://www.youtube.com/embed/J1KlRklVGMk',
+            description: 'Learn how to clean your laptop fan safely without opening the case. Compressed air method.',
+            tags: ['cleaning'],
+            duration: '8:24'
+        },
+        {
+            id: 'battery',
+            title: 'Extend laptop battery life',
+            channel: 'Battery Saver',
+            views: '89K views',
+            time: '1 month ago',
+            icon: '🔋',
+            image: 'images/battery.jpg',
+            embed: 'https://www.youtube.com/embed/kTFnGwW2e_Y',
+            description: 'Simple tips to make your laptop battery last longer. Lower brightness, close background apps.',
+            tags: ['performance'],
+            duration: '6:15'
+        },
+        {
+            id: 'virus',
+            title: 'Remove virus from laptop',
+            channel: 'Security Tips',
+            views: '234K views',
+            time: '3 weeks ago',
+            icon: '🦠',
+            image: 'images/virus.jpg',
+            embed: 'https://www.youtube.com/embed/SfdzO0o9604',
+            description: 'Step by step guide to remove viruses and malware from your Windows laptop.',
+            tags: ['security'],
+            duration: '12:40'
+        },
+        {
+            id: 'ram',
+            title: 'How to upgrade laptop RAM',
+            channel: 'Hardware Guide',
+            views: '167K views',
+            time: '1 week ago',
+            icon: '💾',
+            image: 'images/ram.jpg',
+            embed: 'https://www.youtube.com/embed/zt7sSPhN7UA',
+            description: 'Easy RAM upgrade tutorial. Check compatibility and install correctly.',
+            tags: ['hardware'],
+            duration: '10:05'
+        },
+        {
+            id: 'overheating',
+            title: 'Fix laptop overheating',
+            channel: 'Cooling Solutions',
+            views: '98K views',
+            time: '2 weeks ago',
+            icon: '🌡️',
+            image: 'images/overheating.jpg',
+            embed: 'https://www.youtube.com/embed/FmSAk9qU8dM',
+            description: 'Stop your laptop from overheating with these simple fixes. Clean vents, use cooling pad.',
+            tags: ['cleaning', 'performance'],
+            duration: '9:33'
+        },
+        {
+            id: 'slow',
+            title: 'Make laptop faster',
+            channel: 'Speed Boost',
+            views: '312K views',
+            time: '5 days ago',
+            icon: '🐌',
+            image: 'images/slow.jpg',
+            embed: 'https://www.youtube.com/embed/3CHk0lBidac',
+            description: 'Speed up your slow laptop with these performance tips. Disable startup apps.',
+            tags: ['performance'],
+            duration: '7:18'
+        }
+    ];
+
+    let currentFilter = 'all';
+    let currentSearch = '';
+
+    // ── RENDER VIDEOS ──────────────────────────
+    function renderVideos() {
+        let filtered = videos.filter(v => {
+            let matchFilter = currentFilter === 'all' || v.tags.includes(currentFilter);
+            let matchSearch = v.title.toLowerCase().includes(currentSearch) ||
+                              v.channel.toLowerCase().includes(currentSearch);
+            return matchFilter && matchSearch;
+        });
+
+        $('#videosCount').text(filtered.length + ' tutorial' + (filtered.length !== 1 ? 's' : ''));
+
+        if (filtered.length === 0) {
+            $('#videosList').html(`
+                <div class="no-videos-found">
+                    <div style="font-size:56px;margin-bottom:14px;">🎬</div>
+                    <div style="font-size:17px;font-weight:700;color:#333;margin-bottom:8px;">No videos found</div>
+                    <div style="font-size:13px;color:#888;">Try a different search or filter</div>
+                </div>
+            `);
+            return;
+        }
+
+        let html = '';
+        filtered.forEach((video, i) => {
+            let watchHistory = JSON.parse(localStorage.getItem('watchHistory') || '{}');
+            let progress = watchHistory[video.id] || 0;
+            let bookmarks = JSON.parse(localStorage.getItem('bookmarkedVideos') || '[]');
+            let isBookmarked = bookmarks.some(b => b.id === video.id);
+
+            html += `
+                <div class="video-item fade-in-up" 
+                     data-id="${video.id}"
+                     data-title="${video.title}"
+                     data-embed="${video.embed}"
+                     data-channel="${video.channel}"
+                     data-views="${video.views}"
+                     data-time="${video.time}"
+                     data-image="${video.image}"
+                     data-description="${video.description}"
+                     style="animation-delay: ${i * 0.05}s">
+                    <div class="video-thumb-wrap">
+                        <div class="video-thumb-bg" style="background: var(--thumb-bg-${video.id}, linear-gradient(135deg, #f7d4e0, #e8b4c8));">
+                            <img src="${video.image}" 
+                                 alt="${video.title}" 
+                                 class="video-img"
+                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                            <div class="video-icon-fallback">${video.icon}</div>
+                        </div>
+                        <div class="video-duration-badge">${video.duration}</div>
+                        <div class="video-play-overlay">
+                            <div class="play-circle">▶</div>
+                        </div>
+                        ${progress > 0 ? `<div class="video-progress-bar"><div class="video-progress-fill" style="width:${progress}%"></div></div>` : ''}
+                    </div>
+                    <div class="video-info">
+                        <div class="video-item-title">${video.title}</div>
+                        <div class="video-item-channel">${video.channel}</div>
+                        <div class="video-item-meta">${video.views} • ${video.time}</div>
+                        ${isBookmarked ? '<div class="video-bookmarked-badge">🔖 Saved</div>' : ''}
+                    </div>
+                    <div class="video-item-arrow">›</div>
+                </div>
+            `;
+        });
+
+        $('#videosList').html(html);
+
+        // Click handler
+        $('.video-item').on('click', function() {
+            let videoData = {
+                id: $(this).data('id'),
+                title: $(this).data('title'),
+                embed: $(this).data('embed'),
+                channel: $(this).data('channel'),
+                views: $(this).data('views'),
+                time: $(this).data('time'),
+                image: $(this).data('image'),
+                description: $(this).data('description')
+            };
+            localStorage.setItem('selectedVideo', JSON.stringify(videoData));
+            window.location.href = 'videodetail.html';
+        });
+    }
+
+    // ── SKELETON → REAL ───────────────────────
+    setTimeout(() => {
+        renderVideos();
+    }, 700);
+
+    // ── FILTER TABS ───────────────────────────
+    $('.filter-tab').on('click', function() {
+        $('.filter-tab').removeClass('active');
+        $(this).addClass('active');
+        currentFilter = $(this).data('filter');
+        renderVideos();
+    });
+
+    // ── SEARCH ────────────────────────────────
+    $('#videoSearchInput').on('input', function() {
+        currentSearch = $(this).val().toLowerCase().trim();
+        $('#clearSearch').toggle(currentSearch.length > 0);
+        renderVideos();
+    });
+
+    $('#clearSearch').on('click', function() {
+        $('#videoSearchInput').val('');
+        currentSearch = '';
+        $(this).hide();
+        renderVideos();
+    });
+
+});
+</script>
+</body>
+</html>

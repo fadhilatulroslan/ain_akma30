@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <title>FIXORA • AI Diagnose</title>
+
+    <link rel="stylesheet" href="css/inventra.css">
+    <link rel="stylesheet" href="css/diagnose.css">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- TOP HEADER -->
+    <div class="top">
+        <div class="logo-badge">
+            <img src="images/robot.gif" alt="AI" style="width: 20px; height: 20px;">
+        </div>
+
+        <h1>ai diagnose</h1>
+        <p>let AI help you fix your laptop</p>
+
+        <div id="aiStatus" class="ai-status">
+            ● Initializing AI...
+        </div>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <div class="diagnose-container">
+
+        <!-- Upload Area -->
+        <div id="uploadArea" class="upload-area">
+
+            <div class="upload-icon">
+                📸
+            </div>
+
+            <div id="uploadText">
+                <div class="upload-text">
+                    Tap to upload laptop photo
+                </div>
+
+                <div class="upload-sub">
+                    or drag & drop · JPG, PNG max 2MB
+                </div>
+            </div>
+
+            <div id="imagePreviewContainer"
+                 class="image-preview-container"
+                 style="display: none;">
+
+                <img id="imagePreview"
+                     class="image-preview"
+                     src=""
+                     alt="Preview">
+
+                <button id="removeImage"
+                        class="remove-image">
+                    ✕
+                </button>
+            </div>
+
+        </div>
+
+        <input type="file"
+               id="imageUpload"
+               accept="image/*"
+               style="display: none;">
+
+        <!-- Quick Problems -->
+        <div class="quick-problems">
+
+            <span class="problem-chip"
+                  data-problem="My laptop is overheating">
+                🌡️ Overheating
+            </span>
+
+            <span class="problem-chip"
+                  data-problem="My laptop is very slow">
+                🐌 Slow
+            </span>
+
+            <span class="problem-chip"
+                  data-problem="Battery drains very fast">
+                🔋 Battery
+            </span>
+
+            <span class="problem-chip"
+                  data-problem="Screen is flickering">
+                🖥️ Screen
+            </span>
+
+            <span class="problem-chip"
+                  data-problem="No sound coming out">
+                🔊 No sound
+            </span>
+
+            <span class="problem-chip"
+                  data-problem="WiFi keeps disconnecting">
+                📶 WiFi
+            </span>
+
+        </div>
+
+        <!-- Problem Input -->
+        <textarea id="problemInput"
+                  class="problem-input"
+                  rows="3"
+                  placeholder="Describe your laptop problem...">
+        </textarea>
+
+        <!-- Diagnose Button -->
+        <button id="diagnoseBtn"
+                class="diagnose-btn">
+
+            🔍 Diagnose with AI
+
+        </button>
+
+        <!-- Loading -->
+        <div id="loadingState"
+             class="loading-state"
+             style="display: none;">
+
+            <div class="loading-spinner"></div>
+
+            <div class="loading-text">
+                🤖 AI is analyzing your laptop...
+            </div>
+
+            <div class="loading-sub">
+                This may take a few seconds
+            </div>
+
+        </div>
+
+        <!-- Result -->
+        <div id="resultCard"
+             class="result-card"
+             style="display: none;">
+
+            <div class="result-title">
+                <span>🤖</span>
+                AI Diagnosis
+            </div>
+
+            <div id="resultContent"
+                 class="result-content">
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+
+        <a href="index.html" class="nav">
+            <span class="nav-icon">🏠</span>
+            <span>home</span>
+        </a>
+
+        <a href="shops.html" class="nav">
+            <span class="nav-icon">📍</span>
+            <span>shops</span>
+        </a>
+
+        <a href="community.html" class="nav">
+            <span class="nav-icon">💬</span>
+            <span>community</span>
+        </a>
+
+        <a href="profile.html" class="nav">
+            <span class="nav-icon">👤</span>
+            <span>profile</span>
+        </a>
+
+    </div>
+
+</div>
+
+<!-- Main JS -->
+<script src="js/main.js"></script>
+
+<!-- Diagnose JS (MODULE) -->
+<script type="module" src="js/diagnose.js"></script>
+
+</body>
+</html>

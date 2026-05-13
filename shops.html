@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>FIXORA • Shops</title>
+    <link rel="stylesheet" href="css/inventra.css">
+    <link rel="stylesheet" href="css/shops.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+<div class="app">
+
+    <div class="top">
+        <img src="images/second.jpg" alt="Fixora Logo" style="width: 28px; height: 28px; object-fit: cover; border-radius: 8px;">
+        <h1>find repair shops</h1>
+        <p>laptop repair shops near you</p>
+    </div>
+
+    <div class="welcome-card">
+        <div class="welcome-text">🔍 Find trusted repair shops</div>
+        <div class="welcome-sub">Search by GPS or area name</div>
+    </div>
+
+    <div class="shops-section">
+        <div id="locationStatus" class="location-status">
+            ⚠️ Tap below to find shops near you
+        </div>
+        <button id="getLocationBtn" class="primary-btn" style="margin-top: 10px;">
+            📍 Get My Location
+        </button>
+    </div>
+
+    <div class="shops-section" style="border-top: 1px solid #f0f0f0;">
+        <div class="search-area-box">
+            <input type="text" id="areaSearch" placeholder="🔍 Search area (Ipoh, Cheras, Subang...)">
+            <button id="searchAreaBtn">Search</button>
+        </div>
+    </div>
+
+    <div class="shops-section radius-row" style="border-top: 1px solid #f0f0f0; border-bottom: 8px solid #f5f5f5;">
+        <span class="radius-label">📏 Radius</span>
+        <div class="radius-pills">
+            <button class="radius-pill active" data-val="1000">1 km</button>
+            <button class="radius-pill" data-val="2000">2 km</button>
+            <button class="radius-pill" data-val="3000">3 km</button>
+            <button class="radius-pill" data-val="5000">5 km</button>
+            <button class="radius-pill" data-val="10000">10 km</button>
+        </div>
+        <select id="radiusSelect" style="display:none;">
+            <option value="1000">1 km</option>
+            <option value="2000">2 km</option>
+            <option value="3000" selected>3 km</option>
+            <option value="5000">5 km</option>
+            <option value="10000">10 km</option>
+        </select>
+    </div>
+
+    <div class="results-count" id="resultsCount"></div>
+
+    <!-- SKELETON SHOPS -->
+    <div id="shopsList" class="shops-list">
+        <div class="skeleton-shop">
+            <div class="sk-shop-header">
+                <div class="skeleton sk-shop-name"></div>
+                <div class="skeleton sk-badge"></div>
+            </div>
+            <div class="skeleton sk-shop-line" style="width:75%"></div>
+            <div class="skeleton sk-shop-line" style="width:55%"></div>
+            <div class="skeleton sk-shop-line" style="width:65%"></div>
+            <div class="skeleton sk-btn"></div>
+        </div>
+        <div class="skeleton-shop">
+            <div class="sk-shop-header">
+                <div class="skeleton sk-shop-name"></div>
+                <div class="skeleton sk-badge"></div>
+            </div>
+            <div class="skeleton sk-shop-line" style="width:80%"></div>
+            <div class="skeleton sk-shop-line" style="width:50%"></div>
+            <div class="skeleton sk-shop-line" style="width:70%"></div>
+            <div class="skeleton sk-btn"></div>
+        </div>
+        <div class="skeleton-shop">
+            <div class="sk-shop-header">
+                <div class="skeleton sk-shop-name"></div>
+                <div class="skeleton sk-badge"></div>
+            </div>
+            <div class="skeleton sk-shop-line" style="width:60%"></div>
+            <div class="skeleton sk-shop-line" style="width:75%"></div>
+            <div class="skeleton sk-shop-line" style="width:45%"></div>
+            <div class="skeleton sk-btn"></div>
+        </div>
+    </div>
+
+    <div class="bottom-nav">
+        <a href="index.html" class="nav"><span class="nav-icon">🏠</span><span>home</span></a>
+        <a href="shops.html" class="nav active"><span class="nav-icon">📍</span><span>shops</span></a>
+        <a href="community.html" class="nav"><span class="nav-icon">💬</span><span>community</span></a>
+        <a href="profile.html" class="nav"><span class="nav-icon">👤</span><span>profile</span></a>
+    </div>
+
+</div>
+
+<script src="js/main.js"></script>
+<script src="js/shops.js"></script>
+<script>
+$(document).ready(function() {
+    // Replace skeleton dengan empty state selepas 2s
+    setTimeout(function() {
+        if ($('#shopsList .skeleton-shop').length > 0) {
+            $('#shopsList').html(`
+                <div class="no-shops-found">
+                    <div class="no-shops-icon">📍</div>
+                    <div class="no-shops-title">Ready to search!</div>
+                    <div class="no-shops-message">Tap "Get My Location" or search an area to find laptop repair shops near you.</div>
+                </div>
+            `);
+        }
+    }, 2000);
+
+    // Radius pill
+    $('.radius-pill').on('click', function() {
+        $('.radius-pill').removeClass('active');
+        $(this).addClass('active');
+        $('#radiusSelect').val($(this).data('val')).trigger('change');
+    });
+});
+</script>
+</body>
+</html>

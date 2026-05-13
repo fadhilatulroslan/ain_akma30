@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>FIXORA • Watch</title>
+    <link rel="stylesheet" href="css/inventra.css">
+    <link rel="stylesheet" href="css/videos.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        /* Additional styles for watch page */
+        .fixora-toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: #e01a8c;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 600;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            opacity: 0;
+            transition: all 0.2s ease;
+            pointer-events: none;
+        }
+        .fixora-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        .btn-like.pop .like-icon {
+            animation: likePop 0.3s cubic-bezier(0.34,1.56,0.64,1);
+        }
+        @keyframes likePop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.4); }
+            100% { transform: scale(1); }
+        }
+        .btn-like.liked {
+            background: linear-gradient(135deg, #ff2a8c, #e01a8c);
+            border-color: #ff69b4;
+        }
+        .btn-like.liked .like-icon {
+            filter: drop-shadow(0 0 4px #ff69b4);
+        }
+        .btn-later.saved-later {
+            background: rgba(124, 58, 237, 0.2);
+            border-color: #8b5cf6;
+            color: #c4b5fd;
+        }
+        .star {
+            cursor: pointer;
+            font-size: 28px;
+            color: #555;
+            transition: all 0.1s;
+        }
+        .star.active {
+            color: #f4a800;
+            text-shadow: 0 0 8px #f4a800;
+        }
+        .star.inactive {
+            color: #333;
+        }
+        body.dark-mode .star.inactive {
+            color: #555;
+        }
+        .watch-progress-wrap {
+            padding: 0 16px;
+            margin-top: 8px;
+        }
+        .watch-progress-bar {
+            height: 3px;
+            background: linear-gradient(90deg, #e01a8c, #ff69b4);
+            width: 0%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+
+<div class="app">
+
+    <!-- TOP HEADER -->
+    <div class="top video-top">
+        <div class="top-bar">
+            <a href="videos.html" class="back-btn">
+                <span>←</span>
+            </a>
+            <div class="top-label">
+                <span class="live-dot"></span>
+                tutorial
+            </div>
+            <button id="bookmarkBtn" class="bookmark-btn">🔖</button>
+        </div>
+        <h1 id="videoPageTitle">Loading...</h1>
+        <div class="video-meta-row">
+            <span class="meta-badge" id="channelBadge">📺 Channel</span>
+            <span class="meta-badge views-badge" id="viewsBadge">👁 0 views</span>
+        </div>
+    </div>
+
+    <!-- WATCH PROGRESS BAR -->
+    <div class="watch-progress-wrap">
+        <div class="watch-progress-bar" id="watchProgress"></div>
+    </div>
+
+    <!-- VIDEO PLAYER -->
+    <div class="video-player-section" id="videoDetail"></div>
+
+    <!-- RATING SECTION -->
+    <div class="rating-section" id="ratingSection">
+        <div class="rating-label">Rate this tutorial</div>
+        <div class="stars-row" id="starsRow">
+            <span class="star" data-val="1">★</span>
+            <span class="star" data-val="2">★</span>
+            <span class="star" data-val="3">★</span>
+            <span class="star" data-val="4">★</span>
+            <span class="star" data-val="5">★</span>
+        </div>
+        <div class="rating-msg" id="ratingMsg">Tap a star to rate</div>
+    </div>
+
+    <!-- ACTION BUTTONS -->
+    <div class="action-buttons">
+        <button id="likeBtn" class="btn-like">
+            <span class="like-icon">❤️</span>
+            <span class="like-text">Like</span>
+            <span class="like-count" id="likeCount">0</span>
+        </button>
+        <button id="shareVideoBtn" class="btn-share">
+            <span>📤</span> Share
+        </button>
+        <button id="watchLaterBtn" class="btn-later">
+            <span>⏰</span> Later
+        </button>
+    </div>
+
+    <!-- DESCRIPTION CARD -->
+    <div class="desc-card" id="descCard">
+        <div class="desc-header">
+            <span class="desc-icon">📋</span>
+            <span>About this video</span>
+        </div>
+        <p class="desc-text" id="descText">Loading...</p>
+        <div class="tags-row" id="tagsRow"></div>
+    </div>
+
+    <!-- RELATED TIPS CARD -->
+    <div class="related-card">
+        <div class="related-header">✨ Quick Tips</div>
+        <div class="quick-tips-list" id="quickTipsList">
+            <div class="qtip">🔧 Follow each step carefully before moving on</div>
+            <div class="qtip">📱 Watch on full screen for better visibility</div>
+            <div class="qtip">⏸️ Pause anytime — no rush, you got this!</div>
+        </div>
+    </div>
+
+    <!-- BOTTOM NAV -->
+    <div class="bottom-nav">
+        <a href="index.html" class="nav"><span class="nav-icon">🏠</span><span>home</span></a>
+        <a href="shops.html" class="nav"><span class="nav-icon">📍</span><span>shops</span></a>
+        <a href="community.html" class="nav"><span class="nav-icon">💬</span><span>community</span></a>
+        <a href="profile.html" class="nav"><span class="nav-icon">👤</span><span>profile</span></a>
+    </div>
+
+</div>
+
+<script src="js/main.js"></script>
+<script>
+$(document).ready(function(){
+
+    // ========================================
+    // CURRENT USER
+    // ========================================
+    let currentUser = localStorage.getItem('inventraUsername') || 'guest';
+
+    // ========================================
+    // VIDEO DATA
+    // ========================================
+    let videoData = JSON.parse(localStorage.getItem('selectedVideo'));
+    if (!videoData) {
+        videoData = {
+            id: 'fan',
+            title: 'How to Clean Laptop Fan',
+            embed: 'https://www.youtube.com/embed/J1KlRklVGMk',
+            channel: 'Tech Tutorial',
+            views: '125K views',
+            icon: '🧹',
+            tags: ['cleaning', 'fan', 'hardware']
+        };
+    }
+
+    // ========================================
+    // POPULATE HEADER & METADATA
+    // ========================================
+    $('#videoPageTitle').text(videoData.title);
+    $('#channelBadge').html('📺 ' + videoData.channel);
+    $('#viewsBadge').html('👁 ' + videoData.views);
+    $('#descText').text('Watch this tutorial to learn how to ' + videoData.title.toLowerCase() + '. Follow along step by step for the best results.');
+
+    // Tags
+    let tags = videoData.tags || ['tutorial', 'laptop', 'fix'];
+    let tagHtml = tags.map(t => `<span class="tag">#${t}</span>`).join('');
+    $('#tagsRow').html(tagHtml);
+
+    // Video player
+    $('#videoDetail').html(`
+        <div class="video-frame-wrap">
+            <iframe
+                src="${videoData.embed}"
+                frameborder="0"
+                allowfullscreen
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+            </iframe>
+        </div>
+    `);
+
+    // ========================================
+    // WATCH PROGRESS
+    // ========================================
+    let watchHistory = JSON.parse(localStorage.getItem('watchHistory') || '{}');
+    let savedProgress = watchHistory[videoData.id] || 0;
+    $('#watchProgress').css('width', savedProgress + '%');
+
+    let progress = savedProgress;
+    let progressTimer = setInterval(function(){
+        if (progress < 95) {
+            progress += 0.5;
+            $('#watchProgress').css('width', progress + '%');
+            watchHistory[videoData.id] = Math.round(progress);
+            localStorage.setItem('watchHistory', JSON.stringify(watchHistory));
+        }
+    }, 2000);
+
+    // ========================================
+    // BOOKMARK
+    // ========================================
+    let bookmarks = JSON.parse(localStorage.getItem('bookmarkedVideos') || '[]');
+    let isBookmarked = bookmarks.some(b => b.id === videoData.id);
+    updateBookmarkBtn();
+
+    function updateBookmarkBtn() {
+        $('#bookmarkBtn').text(isBookmarked ? '🔖' : '🔲').css('opacity', isBookmarked ? 1 : 0.6);
+    }
+
+    $('#bookmarkBtn').on('click', function(){
+        if (isBookmarked) {
+            bookmarks = bookmarks.filter(b => b.id !== videoData.id);
+            isBookmarked = false;
+            showToast('Removed from bookmarks', '#888');
+        } else {
+            bookmarks.push({ id: videoData.id, title: videoData.title, embed: videoData.embed, channel: videoData.channel, views: videoData.views, icon: videoData.icon });
+            isBookmarked = true;
+            showToast('🔖 Bookmarked!', '#e01a8c');
+        }
+        localStorage.setItem('bookmarkedVideos', JSON.stringify(bookmarks));
+        updateBookmarkBtn();
+    });
+
+    // ========================================
+    // STAR RATING
+    // ========================================
+    let videoRatings = JSON.parse(localStorage.getItem('videoRatings') || '{}');
+    let userRating = videoRatings[videoData.id] ? videoRatings[videoData.id][currentUser] : 0;
+
+    function renderStars(val) {
+        $('.star').each(function(){
+            let sv = parseInt($(this).data('val'));
+            $(this).toggleClass('active', sv <= val).toggleClass('inactive', sv > val);
+        });
+    }
+
+    renderStars(userRating || 0);
+    if (userRating) $('#ratingMsg').text('Your rating: ' + '⭐'.repeat(userRating));
+
+    $('.star').on('mouseenter', function(){
+        renderStars(parseInt($(this).data('val')));
+    }).on('mouseleave', function(){
+        renderStars(userRating || 0);
+    }).on('click', function(){
+        let val = parseInt($(this).data('val'));
+        userRating = val;
+        if (!videoRatings[videoData.id]) videoRatings[videoData.id] = {};
+        videoRatings[videoData.id][currentUser] = val;
+        localStorage.setItem('videoRatings', JSON.stringify(videoRatings));
+        renderStars(val);
+        $('#ratingMsg').text('Thanks! You rated ' + '⭐'.repeat(val));
+        showToast('Rating saved! ' + '⭐'.repeat(val), '#f4a800');
+    });
+
+    // ========================================
+    // LIKE SYSTEM - TOGGLE (FULLY FUNCTIONAL)
+    // ========================================
+    
+    let videoLikes = JSON.parse(localStorage.getItem('videoLikes') || '{}');
+    let userLikedVideos = JSON.parse(localStorage.getItem('userLikedVideos') || '{}');
+    
+    // Check if user already liked this video
+    let userHasLiked = userLikedVideos[currentUser] && userLikedVideos[currentUser].includes(videoData.id);
+    let totalLikes = videoLikes[videoData.id] || 0;
+    
+    function updateLikeUI() {
+        $('#likeCount').text(totalLikes);
+        if (userHasLiked) {
+            $('#likeBtn').addClass('liked');
+            $('#likeBtn .like-icon').text('💖');
+        } else {
+            $('#likeBtn').removeClass('liked');
+            $('#likeBtn .like-icon').text('❤️');
+        }
+    }
+    
+    updateLikeUI();
+    
+    $('#likeBtn').on('click', function(){
+        // Animation pop
+        $(this).addClass('pop');
+        setTimeout(() => $('#likeBtn').removeClass('pop'), 300);
+        
+        if (userHasLiked) {
+            // UNLIKE
+            totalLikes--;
+            videoLikes[videoData.id] = totalLikes;
+            userLikedVideos[currentUser] = (userLikedVideos[currentUser] || []).filter(id => id !== videoData.id);
+            userHasLiked = false;
+            showToast('👎 Like removed', '#888');
+        } else {
+            // LIKE
+            totalLikes++;
+            videoLikes[videoData.id] = totalLikes;
+            if (!userLikedVideos[currentUser]) userLikedVideos[currentUser] = [];
+            userLikedVideos[currentUser].push(videoData.id);
+            userHasLiked = true;
+            showToast('💖 Liked!', '#e01a8c');
+        }
+        
+        // Save to localStorage
+        localStorage.setItem('videoLikes', JSON.stringify(videoLikes));
+        localStorage.setItem('userLikedVideos', JSON.stringify(userLikedVideos));
+        
+        // Update UI
+        updateLikeUI();
+    });
+
+    // ========================================
+    // WATCH LATER
+    // ========================================
+    let watchLater = JSON.parse(localStorage.getItem('watchLater') || '[]');
+    let inWatchLater = watchLater.some(v => v.id === videoData.id);
+    updateWatchLaterBtn();
+
+    function updateWatchLaterBtn() {
+        if (inWatchLater) {
+            $('#watchLaterBtn').html('<span>✅</span> Saved').addClass('saved-later');
+        } else {
+            $('#watchLaterBtn').html('<span>⏰</span> Later').removeClass('saved-later');
+        }
+    }
+
+    $('#watchLaterBtn').on('click', function(){
+        if (inWatchLater) {
+            watchLater = watchLater.filter(v => v.id !== videoData.id);
+            inWatchLater = false;
+            showToast('Removed from Watch Later', '#888');
+        } else {
+            watchLater.push(videoData);
+            inWatchLater = true;
+            showToast('⏰ Added to Watch Later!', '#7c3aed');
+        }
+        localStorage.setItem('watchLater', JSON.stringify(watchLater));
+        updateWatchLaterBtn();
+    });
+
+    // ========================================
+    // SHARE
+    // ========================================
+    $('#shareVideoBtn').on('click', function(){
+        if (navigator.share) {
+            navigator.share({
+                title: videoData.title,
+                text: 'Check out this laptop tutorial on FIXORA!',
+                url: window.location.href
+            }).catch(() => {});
+        } else {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                showToast('🔗 Link copied!', '#4caf50');
+            }).catch(() => {
+                showToast('📤 Share: ' + videoData.title, '#4caf50');
+            });
+        }
+    });
+
+    // ========================================
+    // TOAST NOTIFICATION
+    // ========================================
+    function showToast(msg, color) {
+        $('.fixora-toast').remove();
+        let t = $(`<div class="fixora-toast">${msg}</div>`).css('background', color);
+        $('body').append(t);
+        setTimeout(() => t.addClass('show'), 10);
+        setTimeout(() => { 
+            t.removeClass('show'); 
+            setTimeout(() => t.remove(), 400); 
+        }, 2200);
+    }
+
+    // ========================================
+    // CLEANUP
+    // ========================================
+    $(window).on('beforeunload', function(){ 
+        clearInterval(progressTimer); 
+    });
+
+});
+</script>
+</body>
+</html>

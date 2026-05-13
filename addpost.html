@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>FIXORA • New Post</title>
+    <link rel="stylesheet" href="css/inventra.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        .form-container {
+            padding: 24px 20px 40px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            margin-bottom: 20px;
+            background: var(--card-bg, #ffffff);
+            border-radius: 28px;
+            padding: 16px 20px;
+            font-size: 15px;
+            transition: 0.2s;
+            border: 1.5px solid rgba(224,26,140,0.2);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .form-textarea {
+            min-height: 160px;
+            resize: vertical;
+            line-height: 1.5;
+        }
+
+        .character-counter {
+            text-align: right;
+            font-size: 12px;
+            color: #888;
+            margin: -12px 8px 20px 0;
+            font-weight: 600;
+        }
+
+        .char-limit {
+            color: #ff4d6d;
+            text-shadow: 0 0 4px #ff2a8c;
+        }
+
+        .publish-btn {
+            background: linear-gradient(135deg, #ff2a8c, #c2185b);
+            border: none;
+            padding: 16px 24px;
+            width: 100%;
+            border-radius: 60px;
+            font-weight: 800;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 8px 20px rgba(224,26,140,0.4);
+            font-family: inherit;
+        }
+
+        .publish-btn:hover {
+            transform: scale(1.02);
+            background: linear-gradient(135deg, #ff4d9d, #e01a8c);
+            box-shadow: 0 12px 28px rgba(224,26,140,0.6);
+        }
+
+        .publish-btn:active {
+            transform: scale(0.98);
+        }
+
+        body.dark-mode .form-input,
+        body.dark-mode .form-textarea {
+            background: #241420;
+            border-color: #ff2a8c30;
+            color: #f0d0e0;
+        }
+
+        body.dark-mode .character-counter {
+            color: #a07a8a;
+        }
+
+        @keyframes gentlePop {
+            0% { transform: scale(0.98); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .form-container {
+            animation: gentlePop 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+        }
+    </style>
+</head>
+<body>
+
+<div class="app">
+    
+    <div class="top">
+        <img src="images/post.jpg" alt="Fixora Logo" style="width: 28px; height: 28px; object-fit: cover; border-radius: 8px;">
+        <h1>create post</h1>
+        <p>share your laptop story ✨</p>
+    </div>
+
+    <div class="form-container">
+        <input type="text" id="postTitle" class="form-input" placeholder="Post title... e.g., 'My fan made a weird noise'">
+        <textarea id="postContent" class="form-textarea" rows="6" placeholder="Write your question or tip here... (min 10 characters)"></textarea>
+        <div class="character-counter">
+            <span id="charCount">0</span> / 500 characters
+        </div>
+        <button id="publishPostBtn" class="publish-btn">✨ Publish Post</button>
+    </div>
+
+    <!-- Bottom navigation -->
+    <div class="bottom-nav">
+        <a href="index.html" class="nav"><span>🏠</span><span>home</span></a>
+        <a href="shops.html" class="nav"><span>📍</span><span>shops</span></a>
+        <a href="community.html" class="nav active"><span>💬</span><span>community</span></a>
+        <a href="profile.html" class="nav"><span>👤</span><span>profile</span></a>
+    </div>
+
+</div>
+
+<script src="js/main.js"></script>
+<script>
+    $(document).ready(function(){
+        
+        // ========== CHARACTER COUNTER (dengan visual limit) ==========
+        $('#postContent').on('input', function() {
+            let length = $(this).val().length;
+            $('#charCount').text(length);
+            if (length >= 450) {
+                $('#charCount').addClass('char-limit');
+            } else {
+                $('#charCount').removeClass('char-limit');
+            }
+        });
+        
+        // ========== PUBLISH POST ==========
+        $('#publishPostBtn').on('click', function() {
+            let title = $('#postTitle').val().trim();
+            let content = $('#postContent').val().trim();
+            
+            if (!title) {
+                alert('📝 Please enter a post title');
+                $('#postTitle').focus();
+                return;
+            }
+            
+            if (title.length < 5) {
+                alert('Title too short! Minimum 5 characters.');
+                $('#postTitle').focus();
+                return;
+            }
+            
+            if (!content) {
+                alert('✏️ Please enter your post content');
+                $('#postContent').focus();
+                return;
+            }
+            
+            if (content.length < 10) {
+                alert('Content too short! Minimum 10 characters.');
+                $('#postContent').focus();
+                return;
+            }
+            
+            if (content.length > 500) {
+                alert('Content too long! Maximum 500 characters.');
+                $('#postContent').focus();
+                return;
+            }
+            
+            // ========== USERNAME ==========
+            let author = localStorage.getItem('inventraUsername');
+            if (!author) {
+                let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                if (currentUser) author = currentUser.name || currentUser.email;
+            }
+            if (!author) author = 'laptop_warrior';
+            
+            // ========== SAVE POST ==========
+            let posts = JSON.parse(localStorage.getItem('communityPosts') || '[]');
+            let now = new Date();
+            let timeString = 'just now';
+            
+            let newPost = {
+                id: Date.now(),
+                title: title,
+                content: content,
+                author: author,
+                time: timeString,
+                timestamp: now.getTime(),
+                likes: 0,
+                replies: [],
+                mood: 'discussion',     // default mood
+                reactions: { '❤️': 0, '🔥': 0, '💡': 0, '😂': 0 }
+            };
+            
+            posts.unshift(newPost);
+            localStorage.setItem('communityPosts', JSON.stringify(posts));
+            
+            alert('✅ Post published successfully!');
+            window.location.href = 'community.html';
+        });
+        
+        // ========== SHORTCUT Ctrl+Enter to publish ==========
+        $('#postContent').on('keydown', function(e) {
+            if (e.ctrlKey && e.which === 13) {
+                e.preventDefault();
+                $('#publishPostBtn').click();
+            }
+        });
+        
+    });
+</script>
+
+</body>
+</html>

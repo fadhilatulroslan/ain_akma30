@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+    <title>FIXORA • Login</title>
+    <link rel="stylesheet" href="css/inventra.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+<div class="auth-container">
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="circle circle-3"></div>
+    </div>
+
+    <div class="auth-card">
+        <div class="auth-logo">
+            <div class="auth-logo-wrapper">
+                <img src="Fixora2.png" alt="FIXORA" class="auth-logo-img">
+            </div>
+            <h1>fixora.</h1>
+            <p>your laptop's best friend</p>
+        </div>
+
+        <!-- Sliding Form Toggle -->
+        <div class="form-toggle">
+            <button id="loginToggle" class="toggle-btn active">Sign In</button>
+            <button id="signupToggle" class="toggle-btn">Sign Up</button>
+        </div>
+
+        <!-- ======================================== -->
+        <!-- LOGIN FORM -->
+        <!-- ======================================== -->
+        <div id="loginForm" class="form-panel active">
+            <div class="auth-title-small">welcome back! 👋</div>
+
+            <div id="loginErrorMsg" class="auth-error" style="display: none;"></div>
+
+            <div class="auth-input-group">
+                <div class="input-icon">📧</div>
+                <input type="email" id="loginEmail" class="auth-input" placeholder="Email address" autocomplete="email">
+            </div>
+            <div class="auth-input-group">
+                <div class="input-icon">🔒</div>
+                <input type="password" id="loginPassword" class="auth-input" placeholder="Password" autocomplete="current-password">
+            </div>
+
+            <div class="auth-options">
+                <label class="checkbox-label">
+                    <div class="custom-checkbox">
+                        <input type="checkbox" id="rememberMe">
+                        <span class="checkmark"></span>
+                    </div>
+                    <span>Remember me</span>
+                </label>
+                <a href="#" class="forgot-link" id="forgotLink">Forgot password?</a>
+            </div>
+
+            <button id="loginBtn" class="auth-btn">
+                <span class="btn-text">Sign In</span>
+                <span class="btn-icon">→</span>
+            </button>
+
+            <div class="demo-hint" id="loginDemoHint">
+                <span>🔐 Demo: demo@fixora.com / 123456</span>
+                <button class="fill-demo-btn" id="fillDemoBtn">📝 Fill</button>
+            </div>
+        </div>
+
+        <!-- ======================================== -->
+        <!-- SIGNUP FORM -->
+        <!-- ======================================== -->
+        <div id="signupForm" class="form-panel">
+            <div class="auth-title-small">create account ✨</div>
+
+            <div id="signupErrorMsg" class="auth-error" style="display: none;"></div>
+            <div id="signupSuccessMsg" class="auth-success" style="display: none;"></div>
+
+            <div class="auth-input-group">
+                <div class="input-icon">👤</div>
+                <input type="text" id="signupName" class="auth-input" placeholder="Full name" autocomplete="name">
+            </div>
+            <div class="auth-input-group">
+                <div class="input-icon">📧</div>
+                <input type="email" id="signupEmail" class="auth-input" placeholder="Email address" autocomplete="email">
+            </div>
+            <div class="auth-input-group">
+                <div class="input-icon">🔒</div>
+                <input type="password" id="signupPassword" class="auth-input" placeholder="Password (min 6 characters)" autocomplete="new-password">
+            </div>
+            <div class="auth-input-group">
+                <div class="input-icon">✓</div>
+                <input type="password" id="signupConfirmPassword" class="auth-input" placeholder="Confirm password">
+            </div>
+
+            <button id="signupBtn" class="auth-btn">
+                <span class="btn-text">Create Account</span>
+                <span class="btn-icon">✨</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<script src="js/auth.js"></script>
+<script>
+    $(document).ready(function() {
+        
+        // ========================================
+        // SLIDING FORM TOGGLE
+        // ========================================
+        $('#loginToggle').on('click', function() {
+            $(this).addClass('active');
+            $('#signupToggle').removeClass('active');
+            $('#signupForm').removeClass('active');
+            $('#loginForm').addClass('active');
+            
+            // Clear errors when switching
+            $('#loginErrorMsg').hide();
+            $('#signupErrorMsg').hide();
+            $('#signupSuccessMsg').hide();
+        });
+        
+        $('#signupToggle').on('click', function() {
+            $(this).addClass('active');
+            $('#loginToggle').removeClass('active');
+            $('#loginForm').removeClass('active');
+            $('#signupForm').addClass('active');
+            
+            // Clear errors when switching
+            $('#loginErrorMsg').hide();
+            $('#signupErrorMsg').hide();
+            $('#signupSuccessMsg').hide();
+        });
+        
+        // ========================================
+        // FILL DEMO BUTTON
+        // ========================================
+        $('#fillDemoBtn').on('click', function() {
+            $('#loginEmail').val('demo@fixora.com');
+            $('#loginPassword').val('123456');
+            $('#loginEmail').focus();
+            
+            // Highlight effect
+            $('#loginEmail, #loginPassword').css('border-color', '#4caf50');
+            setTimeout(() => {
+                $('#loginEmail, #loginPassword').css('border-color', '');
+            }, 1000);
+        });
+        
+        // ========================================
+        // FORGOT PASSWORD
+        // ========================================
+        $('#forgotLink').on('click', function(e) {
+            e.preventDefault();
+            alert('📧 Password reset link sent to your email!\n\n(For demo: use demo@fixora.com / 123456)');
+        });
+        
+        // ========================================
+        // ENTER KEY TO SUBMIT
+        // ========================================
+        $('#loginPassword, #loginEmail').on('keypress', function(e) {
+            if (e.which === 13) {
+                $('#loginBtn').click();
+            }
+        });
+        
+        $('#signupPassword, #signupConfirmPassword, #signupEmail, #signupName').on('keypress', function(e) {
+            if (e.which === 13) {
+                $('#signupBtn').click();
+            }
+        });
+        
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>FIXORA • Profile</title>
+    <link rel="stylesheet" href="css/inventra.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+<div class="app">
+    
+    <!-- HEADER -->
+    <div class="top">
+        <img src="images/fourth.jpg" alt="Fixora Logo" style="width: 28px; height: 28px; object-fit: cover; border-radius: 8px;">
+        <h1>my profile</h1>
+        <p>manage your account & saved items</p>
+    </div>
+
+    <!-- CONTENT CONTAINER -->
+    <div class="content-container">
+        
+        <!-- PROFILE CARD -->
+        <div class="card profile-card">
+            <div class="avatar-glow">
+                <div class="avatar-container" id="avatarContainer">
+                    <div class="avatar-emoji" id="avatarEmoji" style="display: flex;">👨‍💻</div>
+                    <img id="avatarImage" class="avatar-image" style="display: none;" src="" alt="Avatar">
+                    <div class="avatar-edit-overlay" id="editAvatarBtn">
+                        <span>📷</span>
+                    </div>
+                </div>
+            </div>
+            <div class="username" id="username">laptop_user</div>
+            <div class="member-since" id="memberSince">joined April 2026</div>
+            <button class="edit-profile-btn" id="editProfileBtn">✏️ Edit Profile</button>
+        </div>
+
+        <!-- STATS ROW -->
+        <div class="card stats-card">
+            <div class="stats-row">
+                <div class="stat">
+                    <div class="stat-num" id="tipCount">0</div>
+                    <div class="stat-label">💡 tips shared</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num" id="postCount">0</div>
+                    <div class="stat-label">📝 posts</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num" id="likeCount">156</div>
+                    <div class="stat-label">❤️ likes</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ADD TIP SECTION -->
+        <div class="card">
+            <div class="section-header">
+                <span class="section-icon">✏️</span>
+                <h3>share your laptop tip</h3>
+            </div>
+            <div class="add-tip-form">
+                <input type="text" id="tipTitle" placeholder="Tip title (e.g., How to clean keyboard)" class="input-standard">
+                <textarea id="tipDesc" placeholder="Write your tip here... (step by step)" rows="4" class="input-standard"></textarea>
+                <div class="tip-author-row">
+                    <span>👤</span>
+                    <input type="text" id="tipAuthor" placeholder="Your name" class="tip-author-input" value="laptop_user">
+                </div>
+                <button id="submitTipBtn" class="primary-btn">
+                    <span>📤</span> Share Tip
+                </button>
+            </div>
+        </div>
+
+        <!-- MY TIPS SECTION -->
+        <div class="card">
+            <div class="section-header">
+                <span class="section-icon">📝</span>
+                <h3>my tips</h3>
+                <span class="tip-badge" id="tipBadge">0</span>
+            </div>
+            <div id="myTipsList" class="tips-container"></div>
+        </div>
+
+        <!-- WATCH LATER SECTION - BARU TAMBAH! -->
+        <div class="card">
+            <div class="section-header">
+                <span class="section-icon">⏰</span>
+                <h3>watch later</h3>
+                <span class="tip-badge" id="watchLaterBadge">0</span>
+            </div>
+            <div id="watchLaterList" class="watch-later-container"></div>
+        </div>
+
+        <!-- QUICK LINKS -->
+        <div class="quick-links-section">
+            <div class="block-title">
+                <span>🔗</span>
+                <h3>quick links</h3>
+            </div>
+            <div class="quick-links-grid">
+                <a href="saved.html" class="quick-link">
+                    <img src="images/bm.jpg" alt="Saved" style="width: 28px; height: 28px;">
+                    <span>Saved</span>
+                </a>
+                <a href="about.html" class="quick-link">
+                    <img src="images/about.jpg" alt="About" style="width: 28px; height: 28px;">
+                    <span>About</span>
+                </a>
+                <a href="faq.html" class="quick-link">
+                    <img src="images/faq.jpg" alt="FAQ" style="width: 28px; height: 28px;">
+                    <span>FAQ</span>
+                </a>
+                <a href="contact.html" class="quick-link">
+                    <img src="images/contact.jpg" alt="Contact" style="width: 28px; height: 28px;">
+                    <span>Contact</span>
+                </a>
+                <a href="setting.html" class="quick-link">
+                    <img src="images/1.jpg" alt="Settings" style="width: 28px; height: 28px;">
+                    <span>Settings</span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- BOTTOM NAV -->
+    <div class="bottom-nav">
+        <a href="index.html" class="nav"><span>🏠</span><span>home</span></a>
+        <a href="shops.html" class="nav"><span>📍</span><span>shops</span></a>
+        <a href="community.html" class="nav"><span>💬</span><span>community</span></a>
+        <a href="profile.html" class="nav active"><span>👤</span><span>profile</span></a>
+    </div>
+
+</div>
+
+<!-- Hidden file upload input -->
+<input type="file" id="avatarUpload" accept="image/*" style="display: none;">
+
+<script src="js/main.js"></script>
+<script>
+    $(document).ready(function() {
+        
+        // ========================================
+        // DISPLAY AVATAR
+        // ========================================
+        
+        function displayAvatar() {
+            let avatarType = localStorage.getItem('avatarType');
+            let userImage = localStorage.getItem('userImage');
+            let userAvatar = localStorage.getItem('userAvatar');
+            
+            if (avatarType === 'image' && userImage && userImage !== 'null' && userImage !== '') {
+                $('#avatarEmoji').hide();
+                $('#avatarImage').show().attr('src', userImage);
+            } else {
+                let defaultAvatar = userAvatar || '👨‍💻';
+                $('#avatarImage').hide();
+                $('#avatarEmoji').show().text(defaultAvatar);
+            }
+        }
+        
+        // Open file upload when clicking edit avatar
+        $('#editAvatarBtn, .avatar-container').on('click', function(e) {
+            e.stopPropagation();
+            $('#avatarUpload').click();
+        });
+        
+        // Handle image upload
+        $('#avatarUpload').on('change', function(e) {
+            let file = e.target.files[0];
+            if (file && file.type.startsWith('image/')) {
+                let reader = new FileReader();
+                reader.onload = function(event) {
+                    let imageData = event.target.result;
+                    localStorage.setItem('userImage', imageData);
+                    localStorage.setItem('avatarType', 'image');
+                    localStorage.removeItem('userAvatar');
+                    displayAvatar();
+                    showToastMessage('Avatar updated! 🎉');
+                };
+                reader.readAsDataURL(file);
+            } else {
+                showToastMessage('Please select an image file');
+            }
+        });
+        
+        displayAvatar();
+        
+        // ========================================
+        // LOAD PROFILE DATA
+        // ========================================
+        
+        let savedUsername = localStorage.getItem('inventraUsername');
+        if (savedUsername) {
+            $('#username').text(savedUsername);
+            $('#tipAuthor').val(savedUsername);
+        } else {
+            let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (currentUser && currentUser.name) {
+                $('#username').text(currentUser.name);
+                $('#tipAuthor').val(currentUser.name);
+            }
+        }
+        
+        let memberSince = localStorage.getItem('memberSince');
+        if (memberSince) {
+            $('#memberSince').text(memberSince);
+        } else {
+            let joinDate = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+            $('#memberSince').text('joined ' + joinDate);
+            localStorage.setItem('memberSince', 'joined ' + joinDate);
+        }
+        
+        if (!localStorage.getItem('userAvatar') && !localStorage.getItem('userImage')) {
+            const avatars = ['👨‍💻', '👩‍💻', '🧑‍💻', '💻', '🖥️', '🔧', '🛠️', '⭐', '🐱‍💻', '🐧', '🚀', '🎮', '📱', '⚡', '🔥', '💪'];
+            const randomAvatar = avatars[Math.floor(Math.random() * avatars.length)];
+            localStorage.setItem('userAvatar', randomAvatar);
+            localStorage.setItem('avatarType', 'emoji');
+            displayAvatar();
+        }
+        
+        // Load post count
+        let posts = JSON.parse(localStorage.getItem('communityPosts') || '[]');
+        let currentUsername = localStorage.getItem('inventraUsername') || 'laptop_user';
+        let userPosts = posts.filter(p => p.author === currentUsername).length;
+        $('#postCount').text(userPosts);
+        
+        // Like count
+        let likeCount = localStorage.getItem('userLikes');
+        if (!likeCount) {
+            likeCount = Math.floor(Math.random() * 200) + 50;
+            localStorage.setItem('userLikes', likeCount);
+        }
+        $('#likeCount').text(likeCount);
+        
+        // ========================================
+        // WATCH LATER - DISPLAY & MANAGE
+        // ========================================
+        
+        function displayWatchLater() {
+            let watchLater = JSON.parse(localStorage.getItem('watchLater') || '[]');
+            $('#watchLaterBadge').text(watchLater.length);
+            
+            if (watchLater.length === 0) {
+                $('#watchLaterList').html('<div class="no-tips">⏰ No videos saved. Add from video page!</div>');
+                return;
+            }
+            
+            let html = '';
+            for (let i = 0; i < watchLater.length; i++) {
+                let video = watchLater[i];
+                html += `
+                    <div class="watch-later-item" data-id="${video.id}">
+                        <div class="watch-later-icon">🎬</div>
+                        <div class="watch-later-info">
+                            <div class="watch-later-title">${escapeHtml(video.title)}</div>
+                            <div class="watch-later-channel">${escapeHtml(video.channel || 'Tech Tutorial')}</div>
+                        </div>
+                        <button class="remove-watch-later" data-id="${video.id}">🗑️</button>
+                    </div>
+                `;
+            }
+            $('#watchLaterList').html(html);
+            
+            // Click to watch video
+            $('.watch-later-item').on('click', function(e) {
+                if ($(e.target).hasClass('remove-watch-later')) return;
+                let videoId = $(this).data('id');
+                let watchLater = JSON.parse(localStorage.getItem('watchLater') || '[]');
+                let video = watchLater.find(v => v.id == videoId);
+                if (video) {
+                    localStorage.setItem('selectedVideo', JSON.stringify(video));
+                    window.location.href = 'videodetail.html';
+                }
+            });
+            
+            // Remove from watch later
+            $('.remove-watch-later').on('click', function(e) {
+                e.stopPropagation();
+                let videoId = $(this).data('id');
+                let watchLater = JSON.parse(localStorage.getItem('watchLater') || '[]');
+                watchLater = watchLater.filter(v => v.id != videoId);
+                localStorage.setItem('watchLater', JSON.stringify(watchLater));
+                displayWatchLater();
+                showToastMessage('Removed from Watch Later');
+            });
+        }
+        
+        // ========================================
+        // EDIT PROFILE BUTTON
+        // ========================================
+        $('#editProfileBtn').on('click', function() {
+            let newName = prompt('Enter your username:', $('#username').text());
+            if (newName && newName.trim()) {
+                let oldName = localStorage.getItem('inventraUsername') || 'laptop_user';
+                localStorage.setItem('inventraUsername', newName);
+                $('#username').text(newName);
+                $('#tipAuthor').val(newName);
+                
+                let tips = loadSavedTips();
+                let updatedTips = tips.map(tip => {
+                    if (tip.author === oldName) tip.author = newName;
+                    return tip;
+                });
+                saveTipsToLocal(updatedTips);
+                displayMyTips();
+                showToastMessage('Profile updated! ✨');
+            }
+        });
+        
+        // ========================================
+        // TIPS MANAGEMENT
+        // ========================================
+        
+        function loadSavedTips() {
+            let savedTips = localStorage.getItem('userTips');
+            return savedTips ? JSON.parse(savedTips) : [];
+        }
+        
+        function saveTipsToLocal(tips) {
+            localStorage.setItem('userTips', JSON.stringify(tips));
+        }
+        
+        function escapeHtml(text) {
+            if (!text) return '';
+            return text.replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            });
+        }
+        
+        function displayMyTips() {
+            let tips = loadSavedTips();
+            let currentUser = localStorage.getItem('inventraUsername') || 'laptop_user';
+            let myTips = tips.filter(tip => tip.author === currentUser);
+            
+            $('#tipCount').text(myTips.length);
+            $('#tipBadge').text(myTips.length);
+            
+            if (myTips.length === 0) {
+                $('#myTipsList').html('<div class="no-tips">✨ No tips shared yet. Add your first tip above!</div>');
+                return;
+            }
+            
+            let html = '';
+            for (let i = myTips.length - 1; i >= 0; i--) {
+                let tip = myTips[i];
+                let originalIndex = tips.findIndex(t => t.title === tip.title && t.desc === tip.desc);
+                html += `
+                    <div class="my-tip-card">
+                        <div class="my-tip-title">💡 ${escapeHtml(tip.title)}</div>
+                        <div class="my-tip-desc">${escapeHtml(tip.desc.substring(0, 120))}${tip.desc.length > 120 ? '...' : ''}</div>
+                        <div class="my-tip-meta">— shared by ${escapeHtml(tip.author)}</div>
+                        <button class="delete-tip-btn" data-id="${originalIndex}">🗑️ Delete</button>
+                    </div>
+                `;
+            }
+            $('#myTipsList').html(html);
+            
+            $('.delete-tip-btn').on('click', function() {
+                let id = $(this).data('id');
+                if (confirm('Delete this tip?')) {
+                    let tips = loadSavedTips();
+                    tips.splice(id, 1);
+                    saveTipsToLocal(tips);
+                    displayMyTips();
+                    if (typeof displayTipsOnHome === 'function') {
+                        displayTipsOnHome();
+                    }
+                    showToastMessage('✅ Tip deleted successfully!');
+                }
+            });
+        }
+        
+        // Show toast message function
+        function showToastMessage(message) {
+            $('.custom-toast').remove();
+            let toast = $(`
+                <div class="custom-toast" style="
+                    position: fixed;
+                    bottom: 100px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: #4caf50;
+                    color: white;
+                    padding: 10px 20px;
+                    border-radius: 30px;
+                    font-size: 13px;
+                    z-index: 9999;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+                    animation: fadeInUp 0.3s ease;
+                ">${message}</div>
+            `);
+            $('body').append(toast);
+            setTimeout(() => toast.fadeOut(300, function() { $(this).remove(); }), 2000);
+        }
+        
+        // Submit new tip
+        $('#submitTipBtn').on('click', function() {
+            let title = $('#tipTitle').val().trim();
+            let desc = $('#tipDesc').val().trim();
+            let author = $('#tipAuthor').val().trim() || 'Anonymous';
+            
+            if (!title || !desc) {
+                showToastMessage('Please enter both title and description');
+                return;
+            }
+            
+            let tips = loadSavedTips();
+            tips.push({ title: title, desc: desc, author: author, date: new Date().toISOString() });
+            saveTipsToLocal(tips);
+            
+            $('#tipTitle').val('');
+            $('#tipDesc').val('');
+            
+            showToastMessage('✅ Tip shared successfully!');
+            
+            displayMyTips();
+            if (typeof displayTipsOnHome === 'function') {
+                displayTipsOnHome();
+            }
+        });
+        
+        displayMyTips();
+        displayWatchLater();
+        
+    });
+</script>
+</body>
+</html>

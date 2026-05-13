@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>INVENTRA • FAQ</title>
+    <link rel="stylesheet" href="css/inventra.css">
+    <link rel="stylesheet" href="css/faq.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+<div class="app">
+    
+    <div class="top">
+        <img src="images/qm.jpg" alt="Fixora Logo" style="width: 28px; height: 28px; object-fit: cover; border-radius: 8px;">
+        <h1>frequently asked</h1>
+        <p>got questions? we got answers</p>
+    </div>
+
+    <div class="welcome-card">
+        <div class="welcome-text">🤔 Need help?</div>
+        <div class="welcome-sub">Find answers to common questions</div>
+    </div>
+
+    <div class="faq-list">
+        <div class="faq-item">
+            <div class="faq-question">
+                🤔 How to save a tip?
+                <span class="faq-arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                Click the "🔖 Save Tip" button on any tip detail page to add to your saved items. You can view saved items in the Saved Items page.
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                📍 How to find shops near me?
+                <span class="faq-arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                Go to Shops page and tap "Get My Location". Allow location access when prompted. You can also search by area name like "Ipoh", "Cheras", or "Subang".
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                💬 How to post in community?
+                <span class="faq-arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                Go to Community page and tap "Create New Post". Fill in your title and content, then publish. Your post will appear in the community feed.
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                💡 Can I share my own tips?
+                <span class="faq-arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                Yes! Go to Profile page and fill the "Share a tip" form. Enter title, description, and your name. Your tip will appear on Home page and All Tips page.
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                🔍 Why no shops found?
+                <span class="faq-arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                Try increasing the search radius to 5km or 10km. Some areas may have limited data. You can also try searching a different area like a nearby city.
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                🌙 How to enable Dark Mode?
+                <span class="faq-arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                Go to Settings page and toggle the Dark Mode switch. The whole app will switch to dark theme. Your preference is saved automatically.
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                🔖 Where are my saved tips?
+                <span class="faq-arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                Tap "Saved" in the quick links section on Home page or Profile page. All your bookmarked tips will appear there.
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-nav">
+        <a href="index.html" class="nav"><span class="nav-icon">🏠</span><span>home</span></a>
+        <a href="shops.html" class="nav"><span class="nav-icon">📍</span><span>shops</span></a>
+        <a href="community.html" class="nav"><span class="nav-icon">💬</span><span>community</span></a>
+        <a href="profile.html" class="nav"><span class="nav-icon">👤</span><span>profile</span></a>
+    </div>
+
+</div>
+
+<script src="js/main.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.faq-question').on('click', function() {
+            $(this).parent().toggleClass('active');
+        });
+    });
+</script>
+</body>
+</html>

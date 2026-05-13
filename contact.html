@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>FIXORA • Contact</title>
+    <link rel="stylesheet" href="css/inventra.css">
+    <link rel="stylesheet" href="css/contact.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+<div class="app">
+    
+    <!-- HEADER - SAMA MACAM PAGE LAIN -->
+    <div class="top">
+        <div class="logo-badge">📧</div>
+        <h1>contact us</h1>
+        <p>we'd love to hear from you</p>
+    </div>
+
+    <!-- WELCOME CARD - SAMA MACAM PAGE LAIN -->
+    <div class="welcome-card">
+        <div class="welcome-text">💌 Get in touch</div>
+        <div class="welcome-sub">We'll respond within 24 hours</div>
+    </div>
+
+    <!-- CONTENT CONTAINER - STANDARD UNTUK SEMUA PAGE (PENTING!) -->
+    <div class="content-container">
+        
+        <!-- CARD 1: Contact Methods - GUNA CLASS .card -->
+        <div class="card">
+            <div class="contact-methods">
+                
+                <!-- EMAIL -->
+                <div class="contact-method">
+                    <div class="contact-icon-img">
+                        <img src="images/email.png" alt="Email" class="contact-img">
+                    </div>
+                    <div class="contact-details">
+                        <div class="contact-label">EMAIL</div>
+                        <div class="contact-value"><a href="mailto:fadhilatulroslan@gmail.com">fadhilatulroslan@gmail.com</a></div>
+                    </div>
+                </div>
+                
+                <!-- INSTAGRAM -->
+                <div class="contact-method">
+                    <div class="contact-icon-img">
+                        <img src="images/ig.jpg" alt="Instagram" class="contact-img">
+                    </div>
+                    <div class="contact-details">
+                        <div class="contact-label">INSTAGRAM</div>
+                        <div class="contact-value"><a href="#">@fixora_app</a></div>
+                    </div>
+                </div>
+                
+                <!-- TWITTER/X -->
+                <div class="contact-method">
+                    <div class="contact-icon-img">
+                        <img src="images/x.png" alt="Twitter/X" class="contact-img">
+                    </div>
+                    <div class="contact-details">
+                        <div class="contact-label">TWITTER</div>
+                        <div class="contact-value"><a href="#">@fixora</a></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- DIVIDER -->
+        <div class="divider">
+            <span>or send us a message</span>
+        </div>
+
+        <!-- CARD 2: Contact Form - GUNA CLASS .card -->
+        <div class="card">
+            <form id="contactForm">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_subject" value="📧 New Message from FIXORA App!">
+                
+                <div class="form-group">
+                    <input type="text" name="name" id="contactName" class="input-standard" placeholder="Your name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" id="contactEmail" class="input-standard" placeholder="Your email" required>
+                </div>
+                <div class="form-group">
+                    <textarea name="message" id="contactMessage" class="input-standard" rows="4" placeholder="Your message..." required></textarea>
+                </div>
+                <button type="submit" class="primary-btn">
+                    <span>📤</span> Send Message
+                </button>
+            </form>
+        </div>
+
+    </div>
+
+    <!-- BOTTOM NAV - SAMA MACAM PAGE LAIN -->
+    <div class="bottom-nav">
+        <a href="index.html" class="nav"><span>🏠</span><span>home</span></a>
+        <a href="shops.html" class="nav"><span>📍</span><span>shops</span></a>
+        <a href="community.html" class="nav"><span>💬</span><span>community</span></a>
+        <a href="profile.html" class="nav"><span>👤</span><span>profile</span></a>
+    </div>
+
+</div>
+
+<!-- NOTIFICATION POPUP -->
+<div id="notification" class="notification" style="display: none;">
+    <div class="notification-content">
+        <div class="notification-icon">✅</div>
+        <div class="notification-title">Success!</div>
+        <div class="notification-message">Message sent successfully! We'll get back to you soon.</div>
+        <button class="notification-btn">OK</button>
+    </div>
+</div>
+
+<script src="js/main.js"></script>
+<script>
+    $(document).ready(function(){
+        
+        $('#contactForm').on('submit', function(e) {
+            e.preventDefault();
+            
+            var name = $('#contactName').val().trim();
+            var email = $('#contactEmail').val().trim();
+            var message = $('#contactMessage').val().trim();
+            
+            if (!name || !email || !message) {
+                showNotification('error', 'Please fill in all fields');
+                return;
+            }
+            
+            if (!email.includes('@') || !email.includes('.')) {
+                showNotification('error', 'Please enter a valid email address');
+                return;
+            }
+            
+            var btn = $(this).find('button[type="submit"]');
+            var originalText = btn.html();
+            btn.html('📤 Sending...').prop('disabled', true);
+            
+            $.ajax({
+                url: 'https://formsubmit.co/ajax/fadhilatulroslan@gmail.com',
+                method: 'POST',
+                data: {
+                    name: name,
+                    email: email,
+                    message: message,
+                    _subject: '📧 New Message from FIXORA App!',
+                    _captcha: 'false'
+                },
+                dataType: 'json',
+                success: function() {
+                    showNotification('success', 'Message sent successfully! We\'ll get back to you soon.');
+                    $('#contactName, #contactEmail, #contactMessage').val('');
+                },
+                error: function() {
+                    showNotification('error', 'Something went wrong. Please try again.');
+                },
+                complete: function() {
+                    btn.html(originalText).prop('disabled', false);
+                }
+            });
+        });
+        
+        function showNotification(type, message) {
+            var notification = $('#notification');
+            var icon = type === 'success' ? '✅' : '❌';
+            var title = type === 'success' ? 'Success!' : 'Error!';
+            
+            notification.find('.notification-icon').text(icon);
+            notification.find('.notification-title').text(title);
+            notification.find('.notification-message').text(message);
+            notification.fadeIn(300);
+            
+            setTimeout(function() {
+                notification.fadeOut(300);
+            }, 3000);
+        }
+        
+        $(document).on('click', '.notification-btn', function() {
+            $('#notification').fadeOut(300);
+        });
+        
+    });
+</script>
+
+</body>
+</html>

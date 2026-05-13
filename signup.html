@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+    <title>FIXORA • Sign Up</title>
+    <link rel="stylesheet" href="css/inventra.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+<div class="auth-container">
+    <div class="animated-bg">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="circle circle-3"></div>
+    </div>
+
+    <div class="auth-card">
+        <div class="auth-logo">
+            <div class="auth-logo-wrapper">
+                <img src="images/fixora-logo.png" alt="FIXORA" class="auth-logo-img" onerror="this.src='Fixora2.png'">
+            </div>
+            <h1>fixora.</h1>
+            <p>join the community</p>
+        </div>
+
+        <div class="auth-title">
+            <span class="wave">🚀</span> get started
+        </div>
+
+        <!-- Selected User Badge -->
+        <div id="selectedUserBadge" class="selected-user-badge" style="display: none;">
+            <span>👤</span>
+            <span id="selectedUserNameDisplay"></span>
+            <button id="changeUserBtn" class="change-user-btn">Change</button>
+        </div>
+
+        <div id="errorMsg" class="auth-error" style="display: none;"></div>
+        <div id="successMsg" class="auth-success" style="display: none;"></div>
+
+        <div class="auth-input-group">
+            <div class="input-icon">👤</div>
+            <input type="text" id="signupName" class="auth-input" placeholder="Full name">
+        </div>
+        <div class="auth-input-group">
+            <div class="input-icon">📧</div>
+            <input type="email" id="signupEmail" class="auth-input" placeholder="Email address">
+        </div>
+        <div class="auth-input-group">
+            <div class="input-icon">🔒</div>
+            <input type="password" id="signupPassword" class="auth-input" placeholder="Password (min 6 chars)">
+        </div>
+        <div class="auth-input-group">
+            <div class="input-icon">✓</div>
+            <input type="password" id="signupConfirmPassword" class="auth-input" placeholder="Confirm password">
+        </div>
+
+        <button id="signupBtn" class="auth-btn">
+            <span class="btn-text">Create Account</span>
+            <span class="btn-icon">🚀</span>
+        </button>
+
+        <div class="auth-footer">
+            <span>Already have an account?</span>
+            <a href="login.html">Sign in →</a>
+        </div>
+    </div>
+</div>
+
+<script src="js/auth.js"></script>
+<script>
+    $(document).ready(function(){
+        
+        // ========================================
+        // DETECT SELECTED USER FROM CHOOSE-USER PAGE
+        // ========================================
+        
+        let selectedUser = localStorage.getItem('selectedUser');
+        let selectedUserName = localStorage.getItem('selectedUserName');
+        
+        if (selectedUser && selectedUserName) {
+            // Show badge with selected user
+            $('#selectedUserNameDisplay').text(selectedUserName);
+            $('#selectedUserBadge').show();
+            
+            // Pre-fill name field
+            $('#signupName').val(selectedUserName);
+            
+            // Optional: pre-fill email based on user
+            if (selectedUser === 'akma') {
+                $('#signupEmail').val('akma@fixora.com');
+            } else if (selectedUser === 'ain') {
+                $('#signupEmail').val('ain@fixora.com');
+            }
+        }
+        
+        // ========================================
+        // CHANGE USER BUTTON - GO BACK TO CHOOSE PAGE
+        // ========================================
+        
+        $('#changeUserBtn').on('click', function() {
+            window.location.href = 'choose-user.html';
+        });
+        
+        // ========================================
+        // OVERRIDE SIGNUP TO SAVE SELECTED USER
+        // ========================================
+        
+        // Backup original signup function
+        let originalSignup = window.handleSignup;
+        
+        // Enhance signup button
+        $('#signupBtn').on('click', function() {
+            let name = $('#signupName').val().trim();
+            let email = $('#signupEmail').val().trim();
+            let password = $('#signupPassword').val();
+            let confirm = $('#signupConfirmPassword').val();
+            
+            // Validation
+            if (!name) {
+                showError('Please enter your full name');
+                return;
+            }
+            if (!email) {
+                showError('Please enter your email');
+                return;
+            }
+            if (!email.includes('@') || !email.includes('.')) {
+                showError('Please enter a valid email address');
+                return;
+            }
+            if (password.length < 6) {
+                showError('Password must be at least 6 characters');
+                return;
+            }
+            if (password !== confirm) {
+                showError('Passwords do not match');
+                return;
+            }
+            
+            // Get existing users
+            let users = JSON.parse(localStorage.getItem('fixoraUsers') || '[]');
+            
+            // Check if email already exists
+            if (users.some(u => u.email === email)) {
+                showError('Email already registered. Please login instead.');
+                return;
+            }
+            
+            // Create new user
+            let newUser = {
+                id: Date.now(),
+                name: name,
+                email: email,
+                password: password,
+                role: selectedUser || 'user',
+                roleName: selectedUserName || name,
+                createdAt: new Date().toISOString(),
+                avatar: selectedUser === 'akma' ? 'images/akma.jpg' : (selectedUser === 'ain' ? 'images/ain.jpg' : null)
+            };
+            
+            users.push(newUser);
+            localStorage.setItem('fixoraUsers', JSON.stringify(users));
+            
+            // Auto login after signup
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('currentUser', JSON.stringify(newUser));
+            localStorage.setItem('inventraUsername', name);
+            localStorage.setItem('userRole', selectedUser || 'user');
+            
+            // Keep selected user info
+            if (selectedUser) {
+                localStorage.setItem('userType', selectedUser);
+            }
+            
+            showSuccess('Account created successfully! Redirecting...');
+            
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1500);
+        });
+        
+        function showError(message) {
+            $('#errorMsg').text(message).fadeIn(300);
+            setTimeout(() => $('#errorMsg').fadeOut(300), 3000);
+        }
+        
+        function showSuccess(message) {
+            $('#successMsg').text(message).fadeIn(300);
+            setTimeout(() => $('#successMsg').fadeOut(300), 3000);
+        }
+        
+    });
+</script>
+
+<style>
+    .selected-user-badge {
+        background: linear-gradient(135deg, rgba(224, 26, 140, 0.15), rgba(255, 105, 180, 0.1));
+        border-radius: 50px;
+        padding: 8px 16px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border: 1px solid rgba(224, 26, 140, 0.3);
+    }
+    
+    .selected-user-badge span:first-child {
+        font-size: 18px;
+    }
+    
+    .selected-user-badge span:nth-child(2) {
+        font-weight: 600;
+        color: #e01a8c;
+        flex: 1;
+        margin-left: 10px;
+    }
+    
+    .change-user-btn {
+        background: transparent;
+        border: 1px solid #e01a8c;
+        color: #e01a8c;
+        padding: 4px 12px;
+        border-radius: 30px;
+        font-size: 11px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    
+    .change-user-btn:hover {
+        background: #e01a8c;
+        color: white;
+    }
+    
+    body.dark-mode .selected-user-badge {
+        background: linear-gradient(135deg, rgba(224, 26, 140, 0.25), rgba(255, 105, 180, 0.15));
+    }
+</style>
+
+</body>
+</html>

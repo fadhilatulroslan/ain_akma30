@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Fixora • Tip Detail</title>
+    <link rel="stylesheet" href="css/inventra.css">
+    <link rel="stylesheet" href="css/tipdetail.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+<div class="app">
+    
+    <div class="top">
+        <div class="logo-badge">📖</div>
+        <h1>tip detail</h1>
+        <p>read and learn</p>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="tip-hero">
+        <div class="tip-hero-icon">💡</div>
+        <div class="tip-hero-title">Laptop Wisdom</div>
+        <div class="tip-hero-sub">Pro tips from the community</div>
+    </div>
+
+    <!-- Content -->
+    <div id="tipDetail"></div>
+
+    <!-- Stats Bar (dynamic) -->
+    <div class="tip-stats" id="tipStats" style="display: none;">
+        <div class="tip-stat">
+            <div class="tip-stat-number" id="saveCount">0</div>
+            <div class="tip-stat-label">saved</div>
+        </div>
+        <div class="tip-stat">
+            <div class="tip-stat-number" id="viewCount">0</div>
+            <div class="tip-stat-label">views</div>
+        </div>
+        <div class="tip-stat">
+            <div class="tip-stat-number" id="helpCount">0</div>
+            <div class="tip-stat-label">helped</div>
+        </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="action-buttons-enhanced">
+        <button id="saveTipBtn" class="btn-save-enhanced">🔖 Save Tip</button>
+        <button id="shareTipBtn" class="btn-share-enhanced">📤 Share</button>
+    </div>
+
+    <a href="tips.html" class="back-link-enhanced">← Back to All Tips</a>
+
+    <div class="bottom-nav">
+        <a href="index.html" class="nav"><span class="nav-icon">🏠</span><span>home</span></a>
+        <a href="shops.html" class="nav"><span class="nav-icon">📍</span><span>shops</span></a>
+        <a href="community.html" class="nav"><span class="nav-icon">💬</span><span>community</span></a>
+        <a href="profile.html" class="nav"><span class="nav-icon">👤</span><span>profile</span></a>
+    </div>
+
+</div>
+
+<script src="js/main.js"></script>
+<script src="js/tipdetail.js"></script>
+</body>
+</html>

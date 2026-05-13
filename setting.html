@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>FIXORA • Settings</title>
+    <link rel="stylesheet" href="css/inventra.css">
+    <link rel="stylesheet" href="css/setting.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+<div class="app">
+
+    <!-- AMBIENT BACKGROUND EFFECT -->
+    <div class="ambient-layer" aria-hidden="true">
+        <div class="orb orb-s1"></div>
+        <div class="orb orb-s2"></div>
+    </div>
+
+    <!-- HEADER - PREMIUM -->
+    <div class="top settings-top">
+        <div class="settings-topbar">
+            <a href="profile.html" class="back-pill">← back</a>
+            <div class="brand-pill">⚙️ settings</div>
+        </div>
+        <h1>Preferences</h1>
+        <p>make FIXORA yours</p>
+    </div>
+
+    <!-- SETTINGS BODY -->
+    <div class="settings-body">
+
+        <!-- ── APPEARANCE ── -->
+        <div class="settings-group">
+            <div class="group-label">🎨 Appearance</div>
+
+            <div class="setting-row" id="darkRow">
+                <div class="setting-info">
+                    <span class="setting-icon">🌙</span>
+                    <div>
+                        <div class="setting-name">Dark Mode</div>
+                        <div class="setting-sub">Easy on the eyes at night</div>
+                    </div>
+                </div>
+                <label class="toggle-pill">
+                    <input type="checkbox" id="darkModeToggle">
+                    <span class="pill-track"><span class="pill-thumb"></span></span>
+                </label>
+            </div>
+
+            <!-- ACCENT COLOUR PICKER -->
+            <div class="setting-row">
+                <div class="setting-info">
+                    <span class="setting-icon">🎨</span>
+                    <div>
+                        <div class="setting-name">Accent Colour</div>
+                        <div class="setting-sub">Pick your vibe</div>
+                    </div>
+                </div>
+                <div class="colour-dots" id="colourPicker">
+                    <button class="cdot active" data-colour="#e01a8c" style="background:#e01a8c" title="Pink"></button>
+                    <button class="cdot" data-colour="#7c3aed" style="background:#7c3aed" title="Purple"></button>
+                    <button class="cdot" data-colour="#0ea5e9" style="background:#0ea5e9" title="Sky"></button>
+                    <button class="cdot" data-colour="#10b981" style="background:#10b981" title="Emerald"></button>
+                    <button class="cdot" data-colour="#f59e0b" style="background:#f59e0b" title="Amber"></button>
+                    <button class="cdot" data-colour="#ef4444" style="background:#ef4444" title="Red"></button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ── NOTIFICATIONS ── -->
+        <div class="settings-group">
+            <div class="group-label">🔔 Alerts</div>
+
+            <div class="setting-row">
+                <div class="setting-info">
+                    <span class="setting-icon">🔔</span>
+                    <div>
+                        <div class="setting-name">Notifications</div>
+                        <div class="setting-sub">Community replies & tips</div>
+                    </div>
+                </div>
+                <label class="toggle-pill">
+                    <input type="checkbox" id="notifToggle">
+                    <span class="pill-track"><span class="pill-thumb"></span></span>
+                </label>
+            </div>
+
+        </div>
+
+        <!-- ── LOCATION ── -->
+        <div class="settings-group">
+            <div class="group-label">📍 Location</div>
+
+            <div class="setting-row">
+                <div class="setting-info">
+                    <span class="setting-icon">📏</span>
+                    <div>
+                        <div class="setting-name">Search Radius</div>
+                        <div class="setting-sub">For nearby repair shops</div>
+                    </div>
+                </div>
+                <select id="defaultRadius" class="setting-select">
+                    <option value="3">3 km</option>
+                    <option value="5">5 km</option>
+                    <option value="10">10 km</option>
+                    <option value="20">20 km</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- ── ACCOUNT ── -->
+        <div class="settings-group">
+            <div class="group-label">👤 Account</div>
+
+            <div class="setting-row info-row" id="dataSizeRow">
+                <div class="setting-info">
+                    <span class="setting-icon">📊</span>
+                    <div>
+                        <div class="setting-name">Your Data</div>
+                        <div class="setting-sub" id="dataSize">Calculating...</div>
+                    </div>
+                </div>
+                <span class="info-arrow">›</span>
+            </div>
+
+            <div class="setting-row info-row" id="versionRow">
+                <div class="setting-info">
+                    <span class="setting-icon">📦</span>
+                    <div>
+                        <div class="setting-name">Version</div>
+                        <div class="setting-sub">FIXORA v1.0.0</div>
+                    </div>
+                </div>
+                <span class="version-badge">Latest ✓</span>
+            </div>
+        </div>
+
+        <!-- ── DANGER ZONE ── -->
+        <div class="settings-group danger-group">
+            <div class="group-label">⚠️ Danger Zone</div>
+
+            <button id="logoutBtn" class="danger-btn outline-danger">
+                <span>🚪</span> Log Out
+            </button>
+
+            <button id="clearDataBtn" class="danger-btn fill-danger">
+                <span>🗑️</span> Clear All Data
+            </button>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="settings-footer">
+            Made with ❤️ for laptop lovers<br>
+            <span class="footer-version">FIXORA © 2026</span>
+        </div>
+
+    </div>
+
+    <!-- BOTTOM NAV -->
+    <div class="bottom-nav">
+        <a href="index.html" class="nav"><span>🏠</span><span>home</span></a>
+        <a href="shops.html" class="nav"><span>📍</span><span>shops</span></a>
+        <a href="community.html" class="nav"><span>💬</span><span>community</span></a>
+        <a href="profile.html" class="nav"><span>👤</span><span>profile</span></a>
+    </div>
+
+</div>
+
+<script src="js/main.js"></script>
+<script src="js/setting.js"></script>
+</body>
+</html>
