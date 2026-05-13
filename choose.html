@@ -528,7 +528,9 @@ $(document).ready(function(){
         createParticles();
     });
     
-    // Portal Selection
+    // ========================================
+    // PORTAL SELECTION - WITH portalChosen SET
+    // ========================================
     $('.portal').on('click', function() {
         let user = $(this).data('user');
         let $portal = $(this);
@@ -537,6 +539,9 @@ $(document).ready(function(){
         
         setTimeout(() => {
             if (user === 'akma') {
+                // SET PORTAL CHOSEN BEFORE REDIRECT
+                localStorage.setItem('portalChosen', 'true');
+                localStorage.setItem('selectedUser', 'akma');
                 window.location.href = 'login.html';
             } else {
                 alert("🌀 ASSIGNIFY PORTAL is under dimensional reconstruction.\n\nStay tuned for the next update ✨");
