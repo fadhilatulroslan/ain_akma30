@@ -10,11 +10,19 @@
 
 <script>
     // ========================================
-    // REDIRECT TO PORTAL CHOOSE PAGE FIRST
+    // REDIRECT PRIORITY: PORTAL → LOGIN → HOME
     // ========================================
-    // Kalau user belum pilih portal, redirect ke choose.html
+    
+    // FIRST: Check if user has chosen portal
     if (!localStorage.getItem('portalChosen')) {
         window.location.href = 'choose.html';
+        return;  // IMPORTANT: stop here
+    }
+    
+    // SECOND: Check if user is logged in
+    if (localStorage.getItem('isLoggedIn') !== 'true') {
+        window.location.href = 'login.html';
+        return;  // IMPORTANT: stop here
     }
 </script>
 
@@ -135,13 +143,6 @@
 <script src="js/main.js"></script>
 
 <script>
-    // ========================================
-    // CHECK LOGIN
-    // ========================================
-    if (localStorage.getItem('isLoggedIn') !== 'true') {
-        window.location.href = 'login.html';
-    }
-    
     // ========================================
     // DISPLAY USERNAME & AVATAR
     // ========================================
