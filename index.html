@@ -7,19 +7,29 @@
 
 <link rel="stylesheet" href="css/inventra.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-</head>
 
+<script>
+    // ========================================
+    // REDIRECT TO PORTAL CHOOSE PAGE FIRST
+    // ========================================
+    // Kalau user belum pilih portal, redirect ke choose.html
+    if (!localStorage.getItem('portalChosen')) {
+        window.location.href = 'choose.html';
+    }
+</script>
+
+</head>
 <body>
 
 <div class="app">
 
-<div class="top">
-    <div class="logo-badge">
-        <img src="images/first.jpg" alt="Fixora Logo" style="width: 28px; height: 28px; object-fit: cover; border-radius: 8px;">
+    <div class="top">
+        <div class="logo-badge">
+            <img src="images/first.jpg" alt="Fixora Logo" style="width: 28px; height: 28px; object-fit: cover; border-radius: 8px;">
+        </div>
+        <h1>Fixora.</h1>
+        <p>keep your laptop alive</p>
     </div>
-    <h1>Fixora.</h1>
-    <p>keep your laptop alive</p>
-</div>
 
     <!-- WELCOME CARD WITH AVATAR -->
     <div class="welcome-card" id="welcomeCard">
@@ -70,7 +80,7 @@
         <div id="tipContainer"></div>
     </div>
 
-    <!-- QUICK LINKS - DAH BETUL -->
+    <!-- QUICK LINKS -->
     <div class="quick-links-section">
         <div class="block-title">
             <span>🔗</span>
