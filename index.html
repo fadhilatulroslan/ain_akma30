@@ -9,23 +9,18 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 <script>
-    // ========================================
-    // REDIRECT PRIORITY: PORTAL → LOGIN → HOME
-    // ========================================
-    
     // FIRST: Check if user has chosen portal
     if (!localStorage.getItem('portalChosen')) {
         window.location.href = 'choose.html';
-        return;  // IMPORTANT: stop here
+        return;
     }
     
     // SECOND: Check if user is logged in
     if (localStorage.getItem('isLoggedIn') !== 'true') {
         window.location.href = 'login.html';
-        return;  // IMPORTANT: stop here
+        return;
     }
 </script>
-
 </head>
 <body>
 
