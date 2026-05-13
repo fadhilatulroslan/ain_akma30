@@ -1,0 +1,263 @@
+/* ========================================
+   FIXORA - EDIT PROFILE PAGE STYLES
+   ======================================== */
+
+/* Edit Profile Container */
+.edit-profile-container {
+    padding: 20px;
+}
+
+/* Avatar Section */
+.avatar-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.avatar-preview {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #e01a8c 0%, #ff6b9d 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px auto;
+    box-shadow: 0 8px 20px rgba(224,26,140,0.3);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.avatar-preview:hover {
+    transform: scale(1.05);
+}
+
+.avatar-emoji {
+    font-size: 55px;
+}
+
+.change-avatar-btn {
+    background: transparent;
+    border: 1px solid #e01a8c;
+    color: #e01a8c;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.change-avatar-btn:hover {
+    background: #e01a8c;
+    color: white;
+}
+
+/* Avatar Selection Grid */
+.avatar-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 20px;
+}
+
+.avatar-option {
+    text-align: center;
+    padding: 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 30px;
+}
+
+.avatar-option:hover {
+    background: #e01a8c;
+    transform: scale(1.1);
+}
+
+.avatar-option.selected {
+    background: #e01a8c;
+    box-shadow: 0 0 0 2px white, 0 0 0 4px #e01a8c;
+}
+
+/* Form Section */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.form-input, .form-textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1.5px solid #eee;
+    border-radius: 16px;
+    font-size: 14px;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.form-input:focus, .form-textarea:focus {
+    outline: none;
+    border-color: #e01a8c;
+    box-shadow: 0 0 0 3px rgba(224,26,140,0.1);
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Save Button */
+.save-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #e01a8c 0%, #c01578 100%);
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 40px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 10px;
+}
+
+.save-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(224,26,140,0.4);
+}
+
+.cancel-btn {
+    width: 100%;
+    background: transparent;
+    border: 1.5px solid #ddd;
+    color: #888;
+    padding: 12px;
+    border-radius: 40px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 10px;
+}
+
+.cancel-btn:hover {
+    border-color: #e01a8c;
+    color: #e01a8c;
+}
+
+/* ========================================
+   DARK MODE
+   ======================================== */
+
+body.dark-mode .form-label {
+    color: #eee;
+}
+
+body.dark-mode .form-input,
+body.dark-mode .form-textarea {
+    background: #2a2a2a;
+    border-color: #3a3a3a;
+    color: white;
+}
+
+body.dark-mode .avatar-grid {
+    background: #2a2a2a;
+}
+
+body.dark-mode .change-avatar-btn {
+    border-color: #e01a8c;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 480px) {
+    .edit-profile-container {
+        padding: 15px;
+    }
+    
+    .avatar-preview {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .avatar-emoji {
+        font-size: 45px;
+    }
+    
+    .avatar-grid {
+        gap: 10px;
+    }
+    
+    .avatar-option {
+        font-size: 25px;
+        padding: 8px;
+    }
+}
+
+/* Upload Image Section */
+.upload-section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.image-preview {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 15px auto;
+    display: block;
+    border: 3px solid #e01a8c;
+    box-shadow: 0 4px 15px rgba(224,26,140,0.3);
+}
+
+.upload-btn {
+    background: #e01a8c;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 12px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.upload-btn:hover {
+    background: #c01578;
+}
+
+.avatar-toggle {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 15px 0;
+}
+
+.toggle-btn {
+    background: #f0f0f0;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.toggle-btn.active {
+    background: #e01a8c;
+    color: white;
+}
+
+.hidden {
+    display: none;
+}

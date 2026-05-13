@@ -1,0 +1,553 @@
+/* ========================================
+   FIXORA - SHOPS PAGE STYLES
+   Consistent dengan semua pages lain
+   ======================================== */
+
+/* ========================================
+   SHOPS SECTION — WRAPPER STANDARD
+   Sama padding macam .block dalam inventra.css
+   ======================================== */
+
+.shops-section {
+    padding: 16px 20px;
+}
+
+/* ========================================
+   LOCATION STATUS
+   ======================================== */
+
+.location-status {
+    font-size: 13px;
+    border-radius: 14px;
+    padding: 12px 16px;
+    background: #f7f7f7;
+    color: #666;
+    text-align: center;
+}
+
+.status-success {
+    color: #2e7d32;
+    background: #e8f5e9;
+}
+
+.status-error {
+    color: #c62828;
+    background: #ffebee;
+}
+
+.status-loading {
+    color: #5a2a3a;
+    background: #f7d4e0;
+}
+
+.status-info {
+    color: #0066cc;
+    background: #e3f2fd;
+}
+
+/* ========================================
+   SEARCH AREA BOX
+   ======================================== */
+
+.search-area-box {
+    display: flex;
+    gap: 10px;
+}
+
+.search-area-box input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    font-size: 14px;
+    background: #f9f9f9;
+    font-family: inherit;
+    transition: all 0.2s;
+    color: #333;
+}
+
+.search-area-box input:focus {
+    outline: none;
+    border-color: #d49ab0;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(212, 154, 176, 0.1);
+}
+
+.search-area-box input::placeholder {
+    color: #bbb;
+}
+
+.search-area-box button {
+    background: linear-gradient(135deg, #d49ab0 0%, #c48a9e 100%);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 16px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    font-family: inherit;
+}
+
+.search-area-box button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(212, 154, 176, 0.4);
+}
+
+/* ========================================
+   RADIUS PILLS
+   ======================================== */
+
+.radius-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.radius-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #555;
+    white-space: nowrap;
+}
+
+.radius-pills {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.radius-pill {
+    padding: 6px 14px;
+    border-radius: 30px;
+    border: 1.5px solid #ddd;
+    background: white;
+    font-size: 12px;
+    font-weight: 600;
+    color: #888;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.radius-pill:hover {
+    border-color: #d49ab0;
+    color: #d49ab0;
+}
+
+.radius-pill.active {
+    background: linear-gradient(135deg, #d49ab0 0%, #c48a9e 100%);
+    border-color: transparent;
+    color: white;
+}
+
+/* ========================================
+   RESULTS COUNT
+   ======================================== */
+
+.results-count {
+    padding: 8px 20px;
+    font-size: 12px;
+    color: #aaa;
+    min-height: 10px;
+}
+
+/* ========================================
+   SHOPS LIST
+   ======================================== */
+
+.shops-list {
+    padding: 8px 20px 20px 20px;
+}
+
+/* ========================================
+   LOADING
+   ======================================== */
+
+.loading-shops {
+    text-align: center;
+    padding: 60px 20px;
+    color: #aaa;
+    font-size: 14px;
+}
+
+/* ========================================
+   SHOP CARD — SAMA MACAM .card GLOBAL
+   ======================================== */
+
+.shop-card {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    border-radius: 20px;
+    padding: 16px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    transition: all 0.3s ease;
+}
+
+.shop-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.shop-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    gap: 8px;
+}
+
+.shop-name {
+    font-weight: 700;
+    font-size: 15px;
+    color: #333;
+    flex: 1;
+}
+
+.shop-distance-badge {
+    background: #f7d4e0;
+    color: #5a2a3a;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.shop-address,
+.shop-contact,
+.shop-hours {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 5px;
+    line-height: 1.4;
+}
+
+.shop-footer {
+    margin-top: 12px;
+}
+
+.direction-btn {
+    background: linear-gradient(135deg, #d49ab0 0%, #c48a9e 100%);
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    width: 100%;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.direction-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(212, 154, 176, 0.4);
+}
+
+.direction-btn-mock {
+    background: #f0f0f0;
+    color: #aaa;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 30px;
+    cursor: default;
+    font-size: 13px;
+    font-weight: 600;
+    width: 100%;
+    font-family: inherit;
+}
+
+/* ========================================
+   RETRY BUTTON
+   ======================================== */
+
+.retry-btn {
+    background: linear-gradient(135deg, #d49ab0 0%, #c48a9e 100%);
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 30px;
+    margin-top: 12px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.retry-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(212, 154, 176, 0.4);
+}
+
+/* ========================================
+   NO SHOPS FOUND
+   ======================================== */
+
+.no-shops-found {
+    text-align: center;
+    padding: 50px 20px;
+    background: #fafafa;
+    border-radius: 20px;
+}
+
+.no-shops-icon {
+    font-size: 56px;
+    margin-bottom: 14px;
+}
+
+.no-shops-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.no-shops-message {
+    font-size: 13px;
+    color: #888;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+/* ========================================
+   INFO & ERROR MESSAGES
+   ======================================== */
+
+.info-message {
+    text-align: center;
+    padding: 16px;
+    color: #888;
+    font-size: 13px;
+    background: #f9f9f9;
+    border-radius: 14px;
+    margin-bottom: 12px;
+}
+
+.error-message {
+    text-align: center;
+    padding: 16px;
+    color: #c62828;
+    font-size: 13px;
+    background: #ffebee;
+    border-radius: 14px;
+}
+
+/* ========================================
+   LOADING SPINNER
+   ======================================== */
+
+.loading-spinner-container {
+    text-align: center;
+    padding: 50px 20px;
+    background: #fafafa;
+    border-radius: 20px;
+}
+
+.loading-spinner {
+    width: 44px;
+    height: 44px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #d49ab0;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 14px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: #d49ab0;
+    margin-bottom: 6px;
+}
+
+.loading-sub {
+    font-size: 12px;
+    color: #aaa;
+}
+
+.spinner-small {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #d49ab0;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
+/* ========================================
+   DARK MODE
+   ======================================== */
+
+body.dark-mode .location-status {
+    background: #2a2a2a;
+    color: #aaa;
+}
+
+body.dark-mode .status-success {
+    background: #1a3a1a;
+    color: #66bb6a;
+}
+
+body.dark-mode .status-error {
+    background: #3a1a1a;
+    color: #ef9a9a;
+}
+
+body.dark-mode .status-loading {
+    background: #3a1a2a;
+    color: #e8b4c8;
+}
+
+body.dark-mode .shops-section {
+    border-color: #2a2a2a !important;
+}
+
+body.dark-mode .search-area-box input {
+    background: #2a2a2a;
+    border-color: #3a3a3a;
+    color: white;
+}
+
+body.dark-mode .search-area-box input::placeholder {
+    color: #555;
+}
+
+body.dark-mode .radius-label {
+    color: #aaa;
+}
+
+body.dark-mode .radius-pill {
+    background: #2a2a2a;
+    border-color: #3a3a3a;
+    color: #888;
+}
+
+body.dark-mode .radius-pill.active {
+    background: linear-gradient(135deg, #5a2a3a 0%, #4a1a2a 100%);
+    border-color: transparent;
+    color: #e8b4c8;
+}
+
+body.dark-mode .results-count {
+    color: #666;
+}
+
+body.dark-mode .shop-card {
+    background: #2a2a2a;
+    border-color: #3a3a3a;
+}
+
+body.dark-mode .shop-name {
+    color: white;
+}
+
+body.dark-mode .shop-distance-badge {
+    background: #3a1a2a;
+    color: #e8b4c8;
+}
+
+body.dark-mode .shop-address,
+body.dark-mode .shop-contact,
+body.dark-mode .shop-hours {
+    color: #888;
+}
+
+body.dark-mode .loading-shops {
+    color: #666;
+}
+
+body.dark-mode .no-shops-found {
+    background: #2a2a2a;
+}
+
+body.dark-mode .no-shops-title {
+    color: white;
+}
+
+body.dark-mode .no-shops-message {
+    color: #888;
+}
+
+body.dark-mode .loading-spinner-container {
+    background: #2a2a2a;
+}
+
+body.dark-mode .info-message {
+    background: #2a2a2a;
+    color: #888;
+}
+
+body.dark-mode .direction-btn-mock {
+    background: #3a3a3a;
+    color: #666;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 480px) {
+    .shops-section {
+        padding: 14px 16px;
+    }
+
+    .shops-list {
+        padding: 8px 16px 16px 16px;
+    }
+
+    .shop-card {
+        padding: 14px;
+        border-radius: 16px;
+    }
+
+    .shop-name {
+        font-size: 14px;
+    }
+
+    .radius-pills {
+        gap: 5px;
+    }
+
+    .radius-pill {
+        padding: 5px 11px;
+        font-size: 11px;
+    }
+
+    .no-shops-found {
+        padding: 40px 14px;
+    }
+
+    .search-area-box button {
+        padding: 12px 14px;
+        font-size: 13px;
+    }
+}
+/* Force same width as other pages */
+@media (min-width: 501px) {
+    .app {
+        min-height: 100vh;
+    }
+}
+/* Fix — buang rounded corners supaya sama macam index page */
+@media (min-width: 501px) {
+    .app {
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        margin: 0 auto !important;
+    }
+}

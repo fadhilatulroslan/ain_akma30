@@ -1,0 +1,244 @@
+/* ========================================
+   FIXORA - ABOUT PAGE STYLES
+   ======================================== */
+
+/* Hero Section */
+.about-hero {
+    background: linear-gradient(135deg, #e01a8c 0%, #ff6b9d 100%);
+    margin: 20px;
+    padding: 35px 20px;
+    border-radius: 35px;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(224,26,140,0.2);
+}
+
+.about-hero::before {
+    content: "🔧";
+    position: absolute;
+    font-size: 100px;
+    opacity: 0.1;
+    bottom: -20px;
+    right: -20px;
+    transform: rotate(-15deg);
+}
+
+.about-hero::after {
+    content: "💻";
+    position: absolute;
+    font-size: 80px;
+    opacity: 0.08;
+    top: -20px;
+    left: -20px;
+    transform: rotate(10deg);
+}
+
+.about-hero-icon {
+    font-size: 55px;
+    margin-bottom: 12px;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.2));
+}
+
+.about-hero-title {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+}
+
+.about-hero-tagline {
+    font-size: 13px;
+    opacity: 0.9;
+    font-style: italic;
+}
+
+/* Description */
+.about-description {
+    background: white;
+    margin: 0 20px 20px 20px;
+    padding: 20px;
+    border-radius: 25px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #555;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+/* Features Grid */
+.about-features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin: 0 20px 20px 20px;
+}
+
+.feature-card {
+    background: white;
+    padding: 20px 12px;
+    border-radius: 25px;
+    text-align: center;
+    transition: all 0.2s;
+    border: 1px solid #f0f0f0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+.feature-card:hover {
+    transform: translateY(-3px);
+    border-color: #e01a8c;
+    box-shadow: 0 8px 20px rgba(224,26,140,0.1);
+}
+
+.feature-icon {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.feature-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.feature-desc {
+    font-size: 11px;
+    color: #888;
+}
+
+/* Stats Section */
+.about-stats {
+    display: flex;
+    justify-content: space-around;
+    margin: 0 20px 20px 20px;
+    gap: 12px;
+}
+
+.stat-item {
+    flex: 1;
+    background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
+    padding: 15px 10px;
+    border-radius: 20px;
+    text-align: center;
+    border: 1px solid #f0f0f0;
+}
+
+.stat-number {
+    font-size: 22px;
+    font-weight: 800;
+    color: #e01a8c;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 10px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Footer */
+.about-footer {
+    text-align: center;
+    margin: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 25px;
+}
+
+.version {
+    font-size: 12px;
+    color: #e01a8c;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.credit {
+    font-size: 11px;
+    color: #888;
+}
+
+/* ========================================
+   DARK MODE FOR ABOUT PAGE
+   ======================================== */
+
+body.dark-mode .about-description {
+    background: #2a2a2a;
+    color: #bbb;
+}
+
+body.dark-mode .feature-card {
+    background: #2a2a2a;
+    border-color: #3a3a3a;
+}
+
+body.dark-mode .feature-title {
+    color: white;
+}
+
+body.dark-mode .feature-desc {
+    color: #aaa;
+}
+
+body.dark-mode .stat-item {
+    background: #2a2a2a;
+    border-color: #3a3a3a;
+}
+
+body.dark-mode .stat-label {
+    color: #aaa;
+}
+
+body.dark-mode .about-footer {
+    background: #2a2a2a;
+}
+
+body.dark-mode .credit {
+    color: #aaa;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 480px) {
+    .about-hero {
+        margin: 15px;
+        padding: 25px 15px;
+    }
+    
+    .about-hero-title {
+        font-size: 28px;
+    }
+    
+    .about-description {
+        margin: 0 15px 15px 15px;
+    }
+    
+    .about-features {
+        margin: 0 15px 15px 15px;
+        gap: 12px;
+    }
+    
+    .feature-card {
+        padding: 15px 10px;
+    }
+    
+    .feature-icon {
+        font-size: 28px;
+    }
+    
+    .about-stats {
+        margin: 0 15px 15px 15px;
+    }
+    
+    .stat-number {
+        font-size: 18px;
+    }
+    
+    .about-footer {
+        margin: 15px;
+    }
+}

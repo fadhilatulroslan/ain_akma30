@@ -1,0 +1,405 @@
+/* ========================================
+   FIXORA - CONTACT PAGE STYLES
+   Size sama dengan Community Page
+   ======================================== */
+
+/* Container - Sama macam community-container */
+.contact-container {
+    padding: 0 16px 20px 16px;
+}
+
+/* Contact Card - Sama macam post-card */
+.contact-card {
+    background: white;
+    padding: 20px;
+    border-radius: 24px;
+    margin-bottom: 16px;
+    transition: all 0.35s ease;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.contact-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Contact Methods */
+.contact-methods {
+    margin: 0;
+}
+
+.contact-method {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: #f8f9fa;
+    padding: 15px 18px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.contact-method:hover {
+    background: #fef5f9;
+    transform: translateX(5px);
+}
+
+/* Gambar Icon */
+.contact-icon-img {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    border-radius: 12px;
+}
+
+/* Contact Details */
+.contact-details {
+    flex: 1;
+}
+
+.contact-label {
+    font-size: 11px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.contact-value {
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+}
+
+.contact-value a {
+    color: #e01a8c;
+    text-decoration: none;
+}
+
+.contact-value a:hover {
+    text-decoration: underline;
+}
+
+/* Form */
+.contact-form {
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.contact-input,
+.contact-textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    font-size: 14px;
+    font-family: inherit;
+    transition: all 0.2s;
+    background: #f9f9f9;
+}
+
+.contact-input:focus,
+.contact-textarea:focus {
+    outline: none;
+    border-color: #e01a8c;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(224,26,140,0.1);
+}
+
+.contact-textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Send Button - Sama macam #newPostBtn */
+.send-btn {
+    width: 100%;
+    padding: 14px 20px;
+    background: linear-gradient(135deg, #e01a8c 0%, #c01578 100%);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(224,26,140,0.3);
+}
+
+.send-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(224,26,140,0.4);
+}
+
+.send-btn:active {
+    transform: translateY(0);
+}
+
+/* Divider */
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+    color: #ccc;
+    font-size: 12px;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #eee;
+}
+
+.divider span {
+    margin: 0 15px;
+}
+
+/* ========================================
+   NOTIFICATION POPUP STYLES
+   ======================================== */
+
+.notification {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.notification-content {
+    background: white;
+    max-width: 300px;
+    width: 85%;
+    padding: 25px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.notification-icon {
+    font-size: 50px;
+    margin-bottom: 15px;
+}
+
+.notification-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.notification-message {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.notification-btn {
+    background: linear-gradient(135deg, #e01a8c 0%, #c01578 100%);
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.notification-btn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(224,26,140,0.3);
+}
+
+/* ========================================
+   ANIMATIONS - Sama macam community
+   ======================================== */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.contact-card {
+    animation: fadeInUp 0.4s ease forwards;
+}
+
+/* ========================================
+   DARK MODE - Sama macam community
+   ======================================== */
+
+body.dark-mode .contact-card {
+    background: #2a2a2a;
+    border-color: #3a3a3a;
+}
+
+body.dark-mode .contact-method {
+    background: #333;
+}
+
+body.dark-mode .contact-method:hover {
+    background: #3a3a3a;
+}
+
+body.dark-mode .contact-label {
+    color: #888;
+}
+
+body.dark-mode .contact-value {
+    color: #eee;
+}
+
+body.dark-mode .contact-input,
+body.dark-mode .contact-textarea {
+    background: #333;
+    border-color: #444;
+    color: white;
+}
+
+body.dark-mode .contact-input::placeholder,
+body.dark-mode .contact-textarea::placeholder {
+    color: #888;
+}
+
+body.dark-mode .divider::before,
+body.dark-mode .divider::after {
+    border-bottom-color: #3a3a3a;
+}
+
+body.dark-mode .divider span {
+    color: #666;
+}
+
+body.dark-mode .notification-content {
+    background: #2a2a2a;
+}
+
+body.dark-mode .notification-title {
+    color: white;
+}
+
+body.dark-mode .notification-message {
+    color: #bbb;
+}
+
+/* ========================================
+   RESPONSIVE - Sama macam community
+   ======================================== */
+
+@media (max-width: 480px) {
+    .contact-container {
+        padding: 0 12px 20px 12px;
+    }
+    
+    .contact-card {
+        padding: 16px;
+    }
+    
+    .contact-method {
+        padding: 12px 14px;
+        gap: 12px;
+    }
+    
+    .contact-img {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .contact-icon-img {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .contact-value {
+        font-size: 13px;
+    }
+    
+    .send-btn {
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+    
+    .notification-content {
+        width: 85%;
+        padding: 20px;
+    }
+    
+    .notification-title {
+        font-size: 18px;
+    }
+    
+    .notification-message {
+        font-size: 13px;
+    }
+}
+/* ========================================
+   FIX SIZING - SAMA MACAM PAGES LAIN
+   ======================================== */
+
+/* Pastikan content-container sama macam global */
+.content-container {
+    padding: 16px 20px 20px 20px;
+}
+
+/* Form group spacing */
+.form-group {
+    margin-bottom: 14px;
+}
+
+/* Card spacing dalam contact page */
+.content-container .card {
+    margin-bottom: 16px;
+    padding: 20px;
+}
+
+/* Contact method dalam card */
+.contact-method {
+    margin-bottom: 10px;
+}
+
+.contact-method:last-child {
+    margin-bottom: 0;
+}
