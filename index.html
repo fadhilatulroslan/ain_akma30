@@ -3,574 +3,573 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>Dual Universe • Choose Your Portal</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
+<title>Choose Your Universe ✨</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    cursor: none;
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+    --pink:    #e01a8c;
+    --pink-l:  #f7d4e0;
+    --pink-m:  #d49ab0;
+    --rose:    #e8b4c8;
+    --purple:  #7c3aed;
+    --purple-l:#ede9fe;
+    --purple-m:#c084fc;
+    --cream:   #fff8f5;
 }
 
+html, body {
+    width: 100%; min-height: 100vh;
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+}
+
+/* ── BACKGROUND ── */
 body {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #0a0a0f;
+    background: linear-gradient(135deg, #fff0f6 0%, #fce4ec 30%, #f3e8ff 70%, #fdf4ff 100%);
     position: relative;
-    overflow: hidden;
-    font-family: 'Instrument Sans', sans-serif;
 }
 
-/* Custom Cursor */
-.custom-cursor {
-    width: 32px;
-    height: 32px;
-    background: radial-gradient(circle, rgba(224,26,140,0.6), rgba(224,26,140,0));
+/* floating petals / blobs */
+.bg-blob {
+    position: fixed;
     border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    transition: transform 0.1s ease;
-    mix-blend-mode: screen;
-}
-
-.custom-cursor-dot {
-    width: 6px;
-    height: 6px;
-    background: #ff6b9d;
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 10000;
-}
-
-/* Particle Canvas */
-#particle-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    filter: blur(70px);
     pointer-events: none;
     z-index: 0;
+    animation: blobDrift 12s ease-in-out infinite;
+}
+.bb1 { width:420px;height:420px;background:rgba(224,26,140,.1);  top:-80px;  left:-80px;  animation-delay:0s; }
+.bb2 { width:350px;height:350px;background:rgba(124,58,237,.08); bottom:-60px;right:-60px; animation-delay:3s; }
+.bb3 { width:280px;height:280px;background:rgba(232,180,200,.15);top:40%;    left:30%;    animation-delay:6s; }
+
+@keyframes blobDrift {
+    0%,100% { transform:translate(0,0) scale(1); }
+    33%      { transform:translate(20px,-15px) scale(1.05); }
+    66%      { transform:translate(-15px,12px) scale(.96); }
 }
 
-/* Animated Background Portals */
-.portal-bg {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: 0;
-}
+/* ── CUSTOM CURSOR ── */
+.cur  { width:24px;height:24px;background:var(--pink);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;mix-blend-mode:multiply;transform:translate(-50%,-50%);transition:transform .15s ease,width .2s,height .2s; }
+.cur.big { width:55px;height:55px;opacity:.35; }
+.cur-dot { width:5px;height:5px;background:var(--pink);border-radius:50%;position:fixed;pointer-events:none;z-index:10000;transform:translate(-50%,-50%); }
 
-.portal-left {
-    position: absolute;
-    width: 60%;
-    height: 120%;
-    background: radial-gradient(circle at center, rgba(224,26,140,0.15), transparent 70%);
-    top: -10%;
-    left: -20%;
-    filter: blur(60px);
-    animation: pulseLeft 6s infinite alternate;
-}
-
-.portal-right {
-    position: absolute;
-    width: 60%;
-    height: 120%;
-    background: radial-gradient(circle at center, rgba(124,58,237,0.15), transparent 70%);
-    top: -10%;
-    right: -20%;
-    filter: blur(60px);
-    animation: pulseRight 6s infinite alternate;
-}
-
-@keyframes pulseLeft {
-    0% { transform: scale(1); opacity: 0.5; }
-    100% { transform: scale(1.3); opacity: 0.8; }
-}
-
-@keyframes pulseRight {
-    0% { transform: scale(1); opacity: 0.5; }
-    100% { transform: scale(1.3); opacity: 0.8; }
-}
-
-.container {
+/* ── WRAPPER ── */
+.wrapper {
     position: relative;
     z-index: 10;
-    width: 100%;
-    max-width: 650px;
-    padding: 20px;
-}
-
-/* Portal Card */
-.portal-card {
-    background: rgba(10, 10, 20, 0.6);
-    backdrop-filter: blur(20px);
-    border-radius: 48px;
-    padding: 40px 28px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    text-align: center;
-}
-
-.title h1 {
-    font-family: 'Bebas Neue', cursive;
-    font-size: 42px;
-    font-weight: 400;
-    background: linear-gradient(135deg, #ff6b9d, #c084fc);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    letter-spacing: 2px;
-    margin-bottom: 8px;
-}
-
-.title p {
-    font-size: 14px;
-    color: #94a3b8;
-    letter-spacing: 1px;
-}
-
-/* Dual Universe Grid */
-.dual-grid {
+    min-height: 100vh;
     display: flex;
-    gap: 20px;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    margin: 35px 0 30px;
+    padding: 40px 20px 60px;
 }
 
-/* Portal Cards */
+/* ── TOP HEADER ── */
+.header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.header-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    border: 1px solid rgba(224,26,140,.2);
+    color: var(--pink);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 6px 18px;
+    border-radius: 30px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 20px rgba(224,26,140,.08);
+}
+
+.sparkle { animation: spin 4s linear infinite; display:inline-block; }
+@keyframes spin { to { transform:rotate(360deg); } }
+
+.header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 6vw, 60px);
+    font-weight: 900;
+    color: #2d1b25;
+    line-height: 1.1;
+    margin-bottom: 12px;
+}
+
+.header h1 em {
+    font-style: italic;
+    background: linear-gradient(135deg, var(--pink), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.header p {
+    font-size: 15px;
+    color: #9a7a88;
+    font-weight: 300;
+    letter-spacing: 0.3px;
+}
+
+/* ── PORTAL GRID ── */
+.portal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    width: 100%;
+    max-width: 760px;
+}
+
+/* ── PORTAL CARD ── */
 .portal {
-    flex: 1;
-    min-width: 170px;
-    background: rgba(15, 15, 25, 0.6);
-    backdrop-filter: blur(12px);
-    border-radius: 35px;
-    padding: 25px 16px;
+    background: white;
+    border-radius: 36px;
+    padding: 44px 32px 36px;
+    text-align: center;
     cursor: pointer;
-    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all .45s cubic-bezier(.175,.885,.32,1.275);
     position: relative;
     overflow: hidden;
+    border: 1.5px solid rgba(232,180,200,.3);
+    box-shadow: 0 8px 40px rgba(0,0,0,.06);
 }
 
-/* Portal glow effect */
+/* shimmer sweep on hover */
 .portal::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    transition: left 0.6s;
+    top: 0; left: -100%; width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.5), transparent);
+    transition: left .6s;
+    pointer-events: none;
 }
+.portal:hover::before { left: 110%; }
 
-.portal:hover::before {
-    left: 100%;
-}
-
-/* Akma Portal */
-.portal.akma {
-    border-image: none;
-    box-shadow: 0 0 20px rgba(224, 26, 140, 0.2);
-}
-
-.portal.akma:hover {
-    transform: translateY(-15px) scale(1.02);
-    background: rgba(224, 26, 140, 0.15);
-    border-color: #e01a8c;
-    box-shadow: 0 30px 60px rgba(224, 26, 140, 0.4);
-}
-
-/* Assignify Portal */
-.portal.assignify {
-    border-image: none;
-    box-shadow: 0 0 20px rgba(124, 58, 237, 0.2);
-}
-
-.portal.assignify:hover {
-    transform: translateY(-15px) scale(1.02);
-    background: rgba(124, 58, 237, 0.15);
-    border-color: #7c3aed;
-    box-shadow: 0 30px 60px rgba(124, 58, 237, 0.4);
-}
-
-/* Avatar */
-.portal-avatar {
-    width: 100px;
-    height: 100px;
-    margin: 0 auto 16px;
+/* background glow blob inside card */
+.portal-glow {
+    position: absolute;
+    width: 200px; height: 200px;
     border-radius: 50%;
+    filter: blur(50px);
+    opacity: 0;
+    transition: opacity .4s;
+    pointer-events: none;
+    top: -40px; left: 50%;
+    transform: translateX(-50%);
+}
+
+.portal:hover .portal-glow { opacity: .35; }
+.fixora-card  .portal-glow { background: radial-gradient(circle, #f7d4e0, #e01a8c); }
+.assignify-card .portal-glow { background: radial-gradient(circle, #ede9fe, #7c3aed); }
+
+/* hover lift */
+.fixora-card:hover {
+    transform: translateY(-14px) scale(1.02);
+    box-shadow: 0 30px 70px rgba(224,26,140,.18);
+    border-color: rgba(224,26,140,.4);
+}
+.assignify-card:hover {
+    transform: translateY(-14px) scale(1.02);
+    box-shadow: 0 30px 70px rgba(124,58,237,.15);
+    border-color: rgba(124,58,237,.35);
+}
+
+/* active press */
+.portal:active { transform: scale(.97) !important; }
+
+/* ── LOGO WRAPPER ── */
+.logo-wrap {
+    width: 120px; height: 120px;
+    margin: 0 auto 24px;
+    position: relative;
+    z-index: 2;
+}
+
+.logo-ring {
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    border: 2.5px solid transparent;
+    animation: ringRotate 5s linear infinite;
+}
+
+.fixora-card   .logo-ring { border-color: rgba(224,26,140,.25) rgba(224,26,140,.05) rgba(224,26,140,.25) rgba(224,26,140,.05); }
+.assignify-card .logo-ring { border-color: rgba(124,58,237,.22) rgba(124,58,237,.05) rgba(124,58,237,.22) rgba(124,58,237,.05); }
+
+@keyframes ringRotate { to { transform: rotate(360deg); } }
+
+.logo-img-wrap {
+    width: 120px; height: 120px;
+    border-radius: 32px;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
-    transition: all 0.3s;
+    box-shadow: 0 10px 40px rgba(0,0,0,.1);
+    transition: transform .3s;
     position: relative;
+    z-index: 1;
 }
 
-.portal:hover .portal-avatar {
-    transform: scale(1.05);
-}
+.fixora-card   .logo-img-wrap { background: linear-gradient(135deg, #fce4ec, #f8bbd0); }
+.assignify-card .logo-img-wrap { background: linear-gradient(135deg, #f3e8ff, #e9d5ff); }
 
-.akma .portal-avatar {
-    background: radial-gradient(circle, #e01a8c, #ff6b9d);
-    box-shadow: 0 0 20px rgba(224, 26, 140, 0.5);
-}
+.portal:hover .logo-img-wrap { transform: scale(1.06) rotate(-2deg); }
 
-.assignify .portal-avatar {
-    background: radial-gradient(circle, #7c3aed, #c084fc);
-    box-shadow: 0 0 20px rgba(124, 58, 237, 0.5);
-}
-
-.portal-avatar img {
-    width: 100%;
-    height: 100%;
+.logo-img-wrap img {
+    width: 100%; height: 100%;
     object-fit: cover;
 }
 
-/* Assignify - gambar asli */
-.assignify .portal-avatar img {
-    filter: none;
-    object-fit: cover;
-}
-
-/* Portal Name */
-.portal-name {
-    font-family: 'Bebas Neue', cursive;
-    font-size: 24px;
-    font-weight: 400;
+/* ── APP NAME ── */
+.app-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    font-weight: 900;
     margin-bottom: 6px;
+    position: relative;
+    z-index: 2;
 }
 
-.akma .portal-name {
-    color: #ff6b9d;
-    text-shadow: 0 0 10px rgba(224, 26, 140, 0.5);
-}
+.fixora-card   .app-name { color: #c0145e; }
+.assignify-card .app-name { color: #5b21b6; }
 
-.assignify .portal-name {
-    color: #c084fc;
-    text-shadow: 0 0 10px rgba(124, 58, 237, 0.5);
-}
-
-/* Role Badge */
-.portal-role {
-    font-size: 9px;
+/* ── OWNER BADGE ── */
+.owner-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    padding: 4px 12px;
+    letter-spacing: 1.5px;
+    padding: 4px 14px;
     border-radius: 30px;
-    display: inline-block;
-    margin-bottom: 10px;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 2;
 }
 
-.akma .portal-role {
-    background: rgba(224, 26, 140, 0.2);
-    color: #ff6b9d;
+.fixora-card   .owner-badge { background: #fce4ec; color: #c0145e; }
+.assignify-card .owner-badge { background: #f3e8ff; color: #5b21b6; }
+
+/* ── APP DESCRIPTION ── */
+.app-desc {
+    font-size: 13px;
+    color: #9a7a88;
+    line-height: 1.65;
+    font-weight: 300;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 2;
 }
 
-.assignify .portal-role {
-    background: rgba(124, 58, 237, 0.2);
-    color: #c084fc;
+/* ── FEATURE PILLS ── */
+.feat-pills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 28px;
+    position: relative;
+    z-index: 2;
 }
 
-/* Description */
-.portal-desc {
+.feat-pill {
     font-size: 11px;
-    color: #94a3b8;
-    line-height: 1.4;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 20px;
 }
 
-/* Footer */
-.portal-footer {
-    margin-top: 25px;
-    padding-top: 18px;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+.fixora-card   .feat-pill { background: #fff0f6; color: #c0145e; border: 1px solid #f7d4e0; }
+.assignify-card .feat-pill { background: #f5f3ff; color: #5b21b6; border: 1px solid #ddd6fe; }
+
+/* ── ENTER BUTTON ── */
+.enter-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 14px 24px;
+    border-radius: 50px;
+    border: none;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: all .3s;
+    position: relative;
+    z-index: 2;
+    letter-spacing: 0.3px;
 }
 
-.portal-footer p {
-    font-size: 10px;
-    color: #64748b;
-    letter-spacing: 0.5px;
+.fixora-card   .enter-btn { background: linear-gradient(135deg, #e01a8c, #c0145e); color: white; box-shadow: 0 6px 24px rgba(224,26,140,.35); }
+.assignify-card .enter-btn { background: linear-gradient(135deg, #7c3aed, #5b21b6); color: white; box-shadow: 0 6px 24px rgba(124,58,237,.3); }
+
+.fixora-card   .enter-btn:hover { box-shadow: 0 10px 35px rgba(224,26,140,.5); transform: translateY(-2px); }
+.assignify-card .enter-btn:hover { box-shadow: 0 10px 35px rgba(124,58,237,.45); transform: translateY(-2px); }
+
+.btn-arrow { transition: transform .2s; }
+.portal:hover .btn-arrow { transform: translateX(4px); }
+
+/* ── DECORATIVE FLOATING ELEMENTS ── */
+.deco {
+    position: fixed;
+    font-size: 22px;
+    pointer-events: none;
+    z-index: 5;
+    opacity: .5;
+    animation: decoFloat 6s ease-in-out infinite;
+}
+.d1 { top:8%;  left:5%;  animation-delay:0s; }
+.d2 { top:15%; right:8%; animation-delay:1s;  font-size:18px; }
+.d3 { bottom:20%; left:8%;  animation-delay:2s; }
+.d4 { bottom:12%; right:6%; animation-delay:1.5s; font-size:16px; }
+.d5 { top:45%; left:2%;  animation-delay:3s;  font-size:16px; }
+.d6 { top:55%; right:3%; animation-delay:2.5s; }
+
+@keyframes decoFloat {
+    0%,100% { transform:translateY(0) rotate(0deg); }
+    50%      { transform:translateY(-14px) rotate(8deg); }
 }
 
-/* Entrance Animation */
+/* ── DIVIDER TEXT ── */
+.or-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #c8a0b0;
+    font-size: 13px;
+    font-weight: 500;
+    margin: 0;
+}
+.or-divider::before,
+.or-divider::after {
+    content: '';
+    height: 1px;
+    width: 50px;
+    background: rgba(200,160,176,.3);
+}
+
+/* ── FOOTER STRIP ── */
+.footer-strip {
+    margin-top: 48px;
+    text-align: center;
+    color: #c8a0b0;
+    font-size: 12px;
+    font-weight: 400;
+    position: relative;
+    z-index: 10;
+}
+
+/* ── ENTRY ANIMATION ── */
 .portal {
     opacity: 0;
-    animation: portalEntrance 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    animation: cardIn .7s cubic-bezier(.34,1.56,.64,1) forwards;
+}
+.fixora-card   { animation-delay: .1s; }
+.assignify-card { animation-delay: .25s; }
+
+@keyframes cardIn {
+    from { opacity:0; transform:translateY(40px) scale(.92); }
+    to   { opacity:1; transform:translateY(0)    scale(1); }
 }
 
-.akma { animation-delay: 0.1s; }
-.assignify { animation-delay: 0.2s; }
-
-@keyframes portalEntrance {
-    0% {
-        opacity: 0;
-        transform: scale(0.8) rotateY(90deg);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1) rotateY(0deg);
-    }
+.header { opacity:0; animation: fadeUp .6s ease forwards; }
+@keyframes fadeUp {
+    from { opacity:0; transform:translateY(20px); }
+    to   { opacity:1; transform:translateY(0); }
 }
 
-/* Circuit lines animation for Akma */
-.akma::after {
-    content: '';
+/* ── CLICK RIPPLE ── */
+.ripple {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 20px,
-        rgba(224, 26, 140, 0.05) 20px,
-        rgba(224, 26, 140, 0.05) 40px
-    );
+    border-radius: 50%;
+    transform: scale(0);
+    animation: rippleOut .6s linear;
     pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.3s;
+}
+.fixora-card   .ripple { background: rgba(224,26,140,.15); }
+.assignify-card .ripple { background: rgba(124,58,237,.12); }
+
+@keyframes rippleOut {
+    to { transform:scale(4); opacity:0; }
 }
 
-.akma:hover::after {
-    opacity: 1;
-}
-
-/* Aurora for Assignify */
-.assignify::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(ellipse at 30% 40%, rgba(124, 58, 237, 0.1), transparent);
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-.assignify:hover::after {
-    opacity: 1;
-}
-
-/* Responsive */
+/* ── RESPONSIVE ── */
 @media (max-width: 600px) {
-    .dual-grid {
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
+    .portal-grid {
+        grid-template-columns: 1fr;
+        max-width: 360px;
     }
-    
-    .portal {
-        width: 100%;
-        max-width: 260px;
-    }
-    
-    .container {
-        max-width: 100%;
-        padding: 15px;
-    }
-    
-    .portal-card {
-        padding: 30px 20px;
-    }
-    
-    .title h1 {
-        font-size: 32px;
-    }
+    .or-divider { display:none; }
+    .header h1 { font-size: 34px; }
 }
 </style>
 </head>
 <body>
 
-<!-- Custom Cursor -->
-<div class="custom-cursor"></div>
-<div class="custom-cursor-dot"></div>
+<!-- Custom cursor -->
+<div class="cur" id="cur"></div>
+<div class="cur-dot" id="curDot"></div>
 
-<!-- Particle Canvas -->
-<canvas id="particle-canvas"></canvas>
+<!-- Background blobs -->
+<div class="bg-blob bb1"></div>
+<div class="bg-blob bb2"></div>
+<div class="bg-blob bb3"></div>
 
-<!-- Animated Portal Backgrounds -->
-<div class="portal-bg">
-    <div class="portal-left"></div>
-    <div class="portal-right"></div>
-</div>
+<!-- Decorative floating emojis -->
+<div class="deco d1">🌸</div>
+<div class="deco d2">✨</div>
+<div class="deco d3">💕</div>
+<div class="deco d4">🌷</div>
+<div class="deco d5">⭐</div>
+<div class="deco d6">🦋</div>
 
-<div class="container">
-    <div class="portal-card">
-        <div class="title">
-            <h1>✦ DUAL UNIVERSE ✦</h1>
-            <p>choose your portal</p>
+<div class="wrapper">
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="header-pill">
+            <span class="sparkle">✦</span>
+            Choose Your Universe
+            <span class="sparkle">✦</span>
         </div>
+        <h1>Two worlds,<br><em>one portal.</em></h1>
+        <p>Pick your app and step into your universe 🌸</p>
+    </div>
 
-        <div class="dual-grid">
-            <!-- AKMA PORTAL -->
-            <div class="portal akma" data-user="akma">
-                <div class="portal-avatar">
+    <!-- PORTAL GRID -->
+    <div class="portal-grid">
+
+        <!-- ── AKMA — FIXORA ── -->
+        <div class="portal fixora-card" id="fixoraPortal">
+            <div class="portal-glow"></div>
+
+            <div class="logo-wrap">
+                <div class="logo-ring"></div>
+                <div class="logo-img-wrap">
                     <img src="images/Fixora2.png" alt="Fixora">
                 </div>
-                <div class="portal-name">AKMA</div>
-                <div class="portal-role">⚡ FIXORA</div>
-                <div class="portal-desc">Laptop repair • Diagnostics • Tech support</div>
             </div>
 
-            <!-- AIN / ASSIGNIFY PORTAL -->
-            <div class="portal assignify" data-user="assignify">
-                <div class="portal-avatar">
+            <div class="app-name">Fixora</div>
+            <div class="owner-badge">💻 Akma's App</div>
+
+            <p class="app-desc">Your pocket laptop doctor. Diagnose, fix, and find repair shops — all in one place.</p>
+
+            <div class="feat-pills">
+                <span class="feat-pill">🤖 AI Diagnose</span>
+                <span class="feat-pill">📍 Find Shops</span>
+                <span class="feat-pill">💡 Tips</span>
+                <span class="feat-pill">🎬 Tutorials</span>
+            </div>
+
+            <button class="enter-btn">
+                Enter Fixora <span class="btn-arrow">→</span>
+            </button>
+        </div>
+
+        <!-- ── AIN — ASSIGNIFY ── -->
+        <div class="portal assignify-card" id="assignifyPortal">
+            <div class="portal-glow"></div>
+
+            <div class="logo-wrap">
+                <div class="logo-ring"></div>
+                <div class="logo-img-wrap">
                     <img src="ain.jpeg" alt="Assignify">
                 </div>
-                <div class="portal-name">AIN</div>
-                <div class="portal-role">📋 ASSIGNIFY</div>
-                <div class="portal-desc">Task tracking • Deadline alerts • Smart reminders</div>
             </div>
+
+            <div class="app-name">Assignify</div>
+            <div class="owner-badge">📚 Ain's App</div>
+
+            <p class="app-desc">Never miss a deadline again. Smart assignment reminders, deadline alerts & task tracking.</p>
+
+            <div class="feat-pills">
+                <span class="feat-pill">🔔 Reminders</span>
+                <span class="feat-pill">📅 Deadlines</span>
+                <span class="feat-pill">✅ Tasks</span>
+                <span class="feat-pill">📊 Progress</span>
+            </div>
+
+            <button class="enter-btn">
+                Enter Assignify <span class="btn-arrow">→</span>
+            </button>
         </div>
 
-        <div class="portal-footer">
-            <p>⚡ step into your universe • immersive experience ⚡</p>
-        </div>
     </div>
+
+    <div class="footer-strip">
+        Made with 💕 by Akma &amp; Ain &nbsp;·&nbsp; Two apps, one dream ✨
+    </div>
+
 </div>
 
 <script>
-$(document).ready(function(){
-    
-    // Custom Cursor
-    const cursor = $('.custom-cursor');
-    const cursorDot = $('.custom-cursor-dot');
-    
-    $(document).on('mousemove', function(e) {
-        cursor.css({
-            left: e.clientX - 16,
-            top: e.clientY - 16
-        });
-        cursorDot.css({
-            left: e.clientX - 3,
-            top: e.clientY - 3
-        });
+// ── Custom cursor ──
+const cur    = document.getElementById('cur');
+const curDot = document.getElementById('curDot');
+
+document.addEventListener('mousemove', e => {
+    cur.style.left    = e.clientX + 'px';
+    cur.style.top     = e.clientY + 'px';
+    curDot.style.left = e.clientX + 'px';
+    curDot.style.top  = e.clientY + 'px';
+});
+
+document.querySelectorAll('.portal, button, a').forEach(el => {
+    el.addEventListener('mouseenter', () => cur.classList.add('big'));
+    el.addEventListener('mouseleave', () => cur.classList.remove('big'));
+});
+
+// ── Ripple on click ──
+document.querySelectorAll('.portal').forEach(portal => {
+    portal.addEventListener('click', function(e) {
+        const rect   = this.getBoundingClientRect();
+        const size   = Math.max(rect.width, rect.height);
+        const x      = e.clientX - rect.left - size / 2;
+        const y      = e.clientY - rect.top  - size / 2;
+
+        const ripple = document.createElement('span');
+        ripple.classList.add('ripple');
+        ripple.style.cssText = `width:${size}px;height:${size}px;left:${x}px;top:${y}px`;
+        this.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 700);
     });
-    
-    $('a, button, .portal').on('mouseenter', function() {
-        cursor.css('transform', 'scale(1.5)');
-        cursorDot.css('transform', 'scale(1.5)');
-    }).on('mouseleave', function() {
-        cursor.css('transform', 'scale(1)');
-        cursorDot.css('transform', 'scale(1)');
-    });
-    
-    // Particle Storm
-    const canvas = document.getElementById('particle-canvas');
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-    let particleCount = 60;
-    
-    function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-    
-    function createParticles() {
-        particles = [];
-        for (let i = 0; i < particleCount; i++) {
-            particles.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                radius: Math.random() * 2 + 1,
-                vx: (Math.random() - 0.5) * 0.5,
-                vy: (Math.random() - 0.5) * 0.5,
-                alpha: Math.random() * 0.4 + 0.1,
-                color: Math.random() > 0.5 ? '#e01a8c' : '#7c3aed'
-            });
-        }
-    }
-    
-    function drawParticles() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        for (let p of particles) {
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-            ctx.fillStyle = p.color;
-            ctx.globalAlpha = p.alpha;
-            ctx.fill();
-            
-            p.x += p.vx;
-            p.y += p.vy;
-            
-            if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-            if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-            
-            p.x = Math.max(0, Math.min(canvas.width, p.x));
-            p.y = Math.max(0, Math.min(canvas.height, p.y));
-        }
-        
-        requestAnimationFrame(drawParticles);
-    }
-    
-    resizeCanvas();
-    createParticles();
-    drawParticles();
-    
-    window.addEventListener('resize', function() {
-        resizeCanvas();
-        createParticles();
-    });
-    
-    // ========================================
-    // PORTAL SELECTION - WITH portalChosen SET
-    // ========================================
-    $('.portal').on('click', function() {
-        let user = $(this).data('user');
-        let $portal = $(this);
-        
-        $portal.css('transform', 'scale(0.95)');
-        
-        setTimeout(() => {
-            if (user === 'akma') {
-                // SET PORTAL CHOSEN BEFORE REDIRECT
-                localStorage.setItem('portalChosen', 'true');
-                localStorage.setItem('selectedUser', 'akma');
-                window.location.href = 'login.html';
-} else {
-    // AIN PORTAL - Redirect to signin page
+});
+
+// ── Portal navigation ──
+document.getElementById('fixoraPortal').addEventListener('click', function() {
+    localStorage.setItem('portalChosen', 'true');
+    localStorage.setItem('selectedUser', 'akma');
+
+    this.style.transition = 'all .3s';
+    this.style.transform  = 'scale(.96)';
+
+    setTimeout(() => {
+        window.location.href = 'login.html';
+    }, 320);
+});
+
+document.getElementById('assignifyPortal').addEventListener('click', function() {
     localStorage.setItem('portalChosen', 'true');
     localStorage.setItem('selectedUser', 'ain');
-    window.location.href = 'signin.html';
-}
-        }, 200);
-    });
-    
-    // Hover particle effect
-    $('.portal').on('mouseenter', function() {
-        for (let i = 0; i < 8; i++) {
-            particles.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                radius: Math.random() * 3 + 1,
-                vx: (Math.random() - 0.5) * 1.5,
-                vy: (Math.random() - 0.5) * 1.5,
-                alpha: 0.5,
-                color: $(this).hasClass('akma') ? '#e01a8c' : '#7c3aed'
-            });
-        }
-        
-        setTimeout(() => {
-            particles = particles.slice(0, particleCount);
-        }, 2000);
-    });
-    
+
+    this.style.transition = 'all .3s';
+    this.style.transform  = 'scale(.96)';
+
+    setTimeout(() => {
+        window.location.href = 'signin.html';
+    }, 320);
 });
 </script>
 
