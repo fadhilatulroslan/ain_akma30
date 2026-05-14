@@ -195,7 +195,7 @@ body::after{
 .half-a .avw{background:rgba(255,255,255,.65);border-color:rgba(124,58,237,.2);}
 .half:hover .avw{border-color:transparent;transform:scale(1.07);}
 .avw img{transition:transform .5s var(--ease1);}
-.half-f .avw img{width:58%;height:58%;object-fit:contain;filter:brightness(0) invert(1);opacity:.92;}
+.half-f .avw img{width:58%;height:58%;object-fit:contain;opacity:.92;}
 .half-a .avw img{width:100%;height:100%;object-fit:cover;}
 .half:hover .avw img{transform:scale(1.09);}
 
@@ -353,7 +353,7 @@ body::after{
 .bc{font-size:11px;color:rgba(255,255,255,.18);font-family:var(--ff-m);letter-spacing:1px;}
 
 /* ════════════════════════════════════════
-   ABOUT DRAWER
+   ABOUT DRAWER (KOSONG - READY FOR NEW PAGE)
 ════════════════════════════════════════ */
 #aov{
   position:fixed;inset:0;z-index:200;
@@ -393,56 +393,31 @@ body::after{
 }
 .dclose:hover{background:rgba(255,255,255,.13);color:#fff;}
 
-.dey{
-  font-family:var(--ff-m);font-size:10px;letter-spacing:3px;
-  text-transform:uppercase;color:var(--fp);margin-bottom:14px;
-  display:flex;align-items:center;gap:8px;
+/* KOSONGKAN CONTENT ABOUT US - READY FOR NEW PAGE */
+.dey, .dtitle, .dsub, .acards, .acollab {
+  display: none;
 }
-.dey::before{content:'';width:24px;height:1px;background:var(--fp);}
 
-.dtitle{
-  font-family:var(--ff-s);
-  font-size:clamp(28px,4vw,50px);
-  font-style:italic;font-weight:400;
-  color:#fff;margin-bottom:8px;line-height:1.1;
+/* Gantikan dengan loading/placeholder */
+.adrawer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
 }
-.dtitle span{
-  background:linear-gradient(135deg,var(--fp),var(--av));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal;
+
+.adrawer::after {
+  content: "✨ Coming Soon ✨";
+  font-family: var(--ff-b);
+  font-size: 24px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #e01a8c, #7c3aed);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-align: center;
+  padding: 40px;
 }
-.dsub{font-size:15px;color:rgba(255,255,255,.42);margin-bottom:36px;line-height:1.65;max-width:500px;font-weight:300;}
-
-.acards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:30px;}
-
-.acard{
-  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);
-  border-radius:22px;padding:22px 20px;position:relative;overflow:hidden;transition:all .3s;
-}
-.acard:hover{border-color:rgba(255,255,255,.14);transform:translateY(-3px);}
-.acard::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;}
-.acf::before{background:linear-gradient(135deg,rgba(224,26,140,.09),transparent);}
-.aca::before{background:linear-gradient(135deg,rgba(124,58,237,.09),transparent);}
-
-.ach{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
-.aci{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;}
-.acf .aci{background:rgba(224,26,140,.15);}
-.aca .aci{background:rgba(124,58,237,.15);}
-.acn{font-family:var(--ff-d);font-size:22px;letter-spacing:1px;color:#fff;}
-.acb{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;}
-.acf .acb{color:var(--fp2);}
-.aca .acb{color:var(--av);}
-.acd{font-size:12px;color:rgba(255,255,255,.38);line-height:1.6;margin-bottom:14px;}
-.actags{display:flex;gap:5px;flex-wrap:wrap;}
-.actag{font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:3px 9px;border-radius:20px;}
-.acf .actag{background:rgba(224,26,140,.12);color:var(--fp2);}
-.aca .actag{background:rgba(124,58,237,.12);color:var(--av);}
-
-.acollab{
-  text-align:center;padding:18px;
-  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);
-  border-radius:18px;font-size:13px;color:rgba(255,255,255,.33);line-height:1.75;
-}
-.acollab strong{color:rgba(255,255,255,.62);font-weight:600;}
 
 /* ════════════════════════════════════════
    FLASH
@@ -485,7 +460,6 @@ body::after{
   .topbar{padding:14px 18px;}
   #clock{display:none;}
   .adrawer{padding:36px 22px 48px;}
-  .acards{grid-template-columns:1fr;}
   #cur,#curR{display:none;}
   body{cursor:auto;}
   .ebtn,.abtn,.dclose{cursor:pointer;}
@@ -527,8 +501,7 @@ body::after{
           <circle class="avd" cx="70" cy="70" r="62"/>
         </svg>
         <div class="avw">
-          <img src="Fixora2.png" alt="Fixora"
-            onerror="this.style.display='none';this.parentElement.innerHTML+='<span style=\'font-size:46px\'>🔧</span>'">
+          <img src="images/Fixora2.png" alt="Fixora">
         </div>
         <div class="orb1"></div>
         <div class="orb2"></div>
@@ -543,7 +516,6 @@ body::after{
         <span class="fp">📺 Tutorials</span>
         <span class="fp">📍 Shops</span>
         <span class="fp">💬 Community</span>
-        <span class="fp">🏆 XP &amp; Badges</span>
       </div>
       <button class="ebtn" id="bF">Enter Fixora <span class="barrow">→</span></button>
     </div>
@@ -567,8 +539,7 @@ body::after{
           <circle class="avd" cx="70" cy="70" r="62"/>
         </svg>
         <div class="avw">
-          <img src="ain.jpeg" alt="Ain"
-            onerror="this.style.display='none';this.parentElement.innerHTML+='<span style=\'font-size:46px\'>📚</span>'">
+          <img src="ain.jpeg" alt="Ain">
         </div>
         <div class="orb1"></div>
         <div class="orb2"></div>
@@ -597,57 +568,12 @@ body::after{
   <span class="bc">Akma &amp; Ain · Two apps, one dream ✦</span>
 </div>
 
-<!-- ABOUT DRAWER -->
+<!-- ABOUT DRAWER (KOSONG - READY FOR NEW PAGE) -->
 <div id="aov">
   <div class="adrawer">
     <div class="dpill"></div>
     <div class="dclose" id="dclose">✕</div>
-    <div class="dey">About This Project</div>
-    <h2 class="dtitle">Made with passion,<br><span>built for real life.</span></h2>
-    <p class="dsub">Two students. Two real problems. One platform that brings their solutions together — because the best apps solve problems you actually live through.</p>
-
-    <div class="acards">
-      <div class="acard acf">
-        <div class="ach">
-          <div class="aci">🔧</div>
-          <div>
-            <div class="acn">FIXORA</div>
-            <div class="acb">By Akma</div>
-          </div>
-        </div>
-        <p class="acd">A complete laptop care companion — from AI-powered diagnosis to finding the nearest repair shop. Built for students who can't afford to let their laptop die mid-semester.</p>
-        <div class="actags">
-          <span class="actag">AI Powered</span>
-          <span class="actag">Community</span>
-          <span class="actag">Gamified XP</span>
-          <span class="actag">Maps</span>
-          <span class="actag">Dark Mode</span>
-        </div>
-      </div>
-
-      <div class="acard aca">
-        <div class="ach">
-          <div class="aci">📚</div>
-          <div>
-            <div class="acn">ASSIGNIFY</div>
-            <div class="acb">By Ain</div>
-          </div>
-        </div>
-        <p class="acd">A smart assignment reminder system built for students drowning in deadlines. Tracks submissions, sends alerts, and keeps your academic life in perfect order.</p>
-        <div class="actags">
-          <span class="actag">Smart Alerts</span>
-          <span class="actag">Deadline Track</span>
-          <span class="actag">Study Plan</span>
-          <span class="actag">Progress</span>
-          <span class="actag">Calendar</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="acollab">
-      <strong>Akma &amp; Ain</strong> — final year students who built these apps to solve real problems they face every single day.<br>
-      This portal brings both worlds together. <strong>Pick your universe. Start your journey.</strong> ✦
-    </div>
+    <!-- Kosong - siap untuk page baru nanti -->
   </div>
 </div>
 
