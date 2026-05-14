@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Group Members</title>
+
+  <link rel="stylesheet" href="group-select.css">
+
+</head>
+<body>
+
+  <div class="container">
+
+    <h1>
+      Select Members 👥
+    </h1>
+
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Search friends..."
+    >
+
+    <div class="title">
+      Frequent Collaborators
+    </div>
+
+    <div
+      id="friendList"
+      class="friend-list"
+    ></div>
+
+    <div class="title">
+      Selected Members
+    </div>
+
+    <div
+      id="selectedList"
+      class="selected-list"
+    ></div>
+
+    <button onclick="confirmGroup()">
+      Confirm Group 🚀
+    </button>
+
+  </div>
+<script>
+  let selectedMembers = [];
+</script>
+  <script src="group-select.js"></script>
+
+</body>
+</html>

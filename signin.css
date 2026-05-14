@@ -1,0 +1,125 @@
+:root{
+  --bg:#FDF4FF;
+  --card:#FFFFFF;
+  --primary:#C84B9E;
+  --secondary:#7C3AED;
+  --text:#1E1B2E;
+  --subtext:#6B7280;
+  --border:#E9D5F5;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Nunito',sans-serif;
+  background:var(--bg);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+  padding:20px;
+}
+
+.login-container{
+  width:100%;
+  max-width:380px;
+  background:var(--card);
+  border-radius:24px;
+  padding:40px 28px;
+  box-shadow:0 4px 20px rgba(200,75,158,0.15);
+  text-align:center;
+}
+
+.owl{
+  font-size:72px;
+  margin-bottom:10px;
+}
+
+.title{
+  font-size:34px;
+  font-weight:900;
+}
+
+.gradient-text{
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+
+  -webkit-background-clip:text;
+  background-clip:text;
+
+  -webkit-text-fill-color:transparent;
+}
+
+.subtitle{
+  color:var(--subtext);
+  font-size:14px;
+  margin-top:8px;
+  margin-bottom:28px;
+}
+
+.input-field{
+  width:100%;
+  padding:14px 16px;
+  border-radius:14px;
+  border:1.5px solid var(--border);
+  margin-bottom:14px;
+  font-size:15px;
+  font-family:inherit;
+  outline:none;
+}
+
+.input-field:focus{
+  border-color:var(--primary);
+}
+
+.btn-login{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:50px;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  color:white;
+  font-size:16px;
+  font-weight:800;
+  cursor:pointer;
+}
+.bottom-text{
+  margin-top:18px;
+  font-size:14px;
+  color:var(--subtext);
+}
+
+.bottom-text a{
+  color:var(--primary);
+  text-decoration:none;
+  font-weight:800;
+}
+
+.bottom-text a:hover{
+  text-decoration:underline;
+}
+.login-container a{
+  color:var(--primary);
+  text-decoration:none;
+  font-weight:800;
+}
+
+.login-container a:hover{
+  text-decoration:underline;
+}
+
+.dark-mode{
+  background:#121212;
+  color:white;
+}
+
+.dark-mode .welcome-container{
+  background:#1E1E1E;
+}
+
+.dark-mode p{
+  color:#CFCFCF;
+}

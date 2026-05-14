@@ -1,0 +1,150 @@
+:root{
+  --bg:#FDF4FF;
+  --card:#FFFFFF;
+  --primary:#C84B9E;
+  --secondary:#7C3AED;
+  --text:#1E1B2E;
+  --subtext:#6B7280;
+  --border:#E9D5F5;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Nunito',sans-serif;
+  background:var(--bg);
+  min-height:100vh;
+  padding:20px;
+  padding-bottom:100px;
+  transition:0.3s;
+}
+
+.container{
+  width:100%;
+  max-width:430px;
+  margin:auto;
+  background:var(--card);
+  padding:28px 22px;
+  border-radius:28px;
+  box-shadow:0 4px 20px rgba(200,75,158,0.15);
+}
+
+.gradient-text{
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--secondary)
+  );
+
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+
+  font-size:32px;
+  font-weight:900;
+}
+
+.subtitle{
+  color:var(--subtext);
+  margin-top:8px;
+  margin-bottom:24px;
+}
+
+.input-field{
+  width:100%;
+  padding:14px 16px;
+  border-radius:14px;
+  border:1.5px solid var(--border);
+  margin-bottom:14px;
+  font-size:15px;
+  outline:none;
+}
+
+.input-field:focus{
+  border-color:var(--primary);
+}
+
+.btn-save{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:50px;
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--secondary)
+  );
+
+  color:white;
+  font-size:16px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:white;
+  padding:12px 18px;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  border-top:1px solid #eee;
+}
+
+.bottom-nav img{
+  width:26px;
+  height:26px;
+}
+
+.add-btn{
+  width:55px;
+  height:55px;
+  border-radius:50%;
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--secondary)
+  );
+
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  text-decoration:none;
+  margin-top:-35px;
+}
+
+/* DARK MODE */
+
+.dark-mode{
+  background:#121212;
+  color:white;
+}
+
+.dark-mode .container{
+  background:#1E1E1E;
+}
+
+.dark-mode .input-field{
+  background:#2A2A2A;
+  color:white;
+  border:1px solid #444;
+}
+
+.dark-mode .subtitle{
+  color:#CFCFCF;
+}
+
+.dark-mode .bottom-nav{
+  background:#1E1E1E;
+}

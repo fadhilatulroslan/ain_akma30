@@ -1,0 +1,130 @@
+:root{
+  --bg:#FDF4FF;
+  --card:#FFFFFF;
+  --primary:#C84B9E;
+  --secondary:#7C3AED;
+  --border:#E9D5F5;
+  --text:#1E1B2E;
+  --subtext:#6B7280;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Nunito',sans-serif;
+  background:var(--bg);
+  padding:20px;
+}
+
+.container{
+  max-width:430px;
+  margin:auto;
+}
+
+h1{
+  font-size:32px;
+  font-weight:900;
+}
+
+.subtitle{
+  margin-top:6px;
+  margin-bottom:24px;
+  color:var(--subtext);
+}
+
+.tone-list{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.tone{
+  background:white;
+  border-radius:18px;
+  padding:14px;
+
+  border:1px solid var(--border);
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  cursor:pointer;
+
+  transition:0.2s;
+}
+
+.tone:hover{
+  transform:scale(1.02);
+}
+
+.tone.active{
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--secondary)
+  );
+
+  color:white;
+}
+
+.left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.tone-icon{
+  width:45px;
+  height:45px;
+  border-radius:14px;
+  object-fit:cover;
+}
+
+.tone-name{
+  font-size:16px;
+  font-weight:800;
+}
+
+.preview{
+  font-size:13px;
+  opacity:0.8;
+}
+
+button{
+  width:100%;
+  margin-top:24px;
+
+  border:none;
+  border-radius:18px;
+
+  padding:15px;
+
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--secondary)
+  );
+
+  color:white;
+
+  font-size:16px;
+  font-weight:800;
+
+  cursor:pointer;
+}
+
+.back{
+  text-align:center;
+  margin-top:16px;
+
+  color:var(--secondary);
+
+  font-weight:700;
+
+  cursor:pointer;
+}

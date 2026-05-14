@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Assignify 🦉</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div id="app">
+
+    <!-- ══════════════════════════════════════════
+         SPLASH SCREEN
+    ══════════════════════════════════════════ -->
+    <div id="screen-splash" class="screen active center-screen">
+      <div class="owl-bounce" style="font-size:80px;">🦉</div>
+      <div class="app-title gradient-text">Assignify</div>
+      <div class="app-tagline">Your little owl for big deadlines</div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         WELCOME SCREEN
+    ══════════════════════════════════════════ -->
+    <div id="screen-welcome" class="screen center-screen" style="padding:32px;">
+      <div style="font-size:72px; margin-bottom:8px;">🦉</div>
+      <div class="app-title gradient-text" style="font-size:28px; margin-bottom:4px;">Welcome to Assignify!</div>
+      <p class="subtext" style="text-align:center; margin-bottom:32px;">Your smart assistant for managing assignments and deadlines effortlessly.</p>
+      <button class="btn-primary" onclick="goTo('screen-onboard')">Get Started 🚀</button>
+      <div style="height:12px;"></div>
+      <button class="btn-secondary" onclick="goTo('screen-main')">Skip for now</button>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         ONBOARDING SCREEN
+    ══════════════════════════════════════════ -->
+    <div id="screen-onboard" class="screen" style="padding:28px; overflow-y:auto;">
+      <div style="text-align:center; margin-bottom:24px;">
+        <div style="font-size:52px;">⏰</div>
+        <div class="section-title" style="font-size:22px; margin-top:8px;">Personalise Your Experience</div>
+        <p class="subtext" style="font-size:13px; margin-top:4px;">Set your preferences below</p>
+      </div>
+
+      <!-- Reminder Frequency -->
+      <div class="label-sm">Reminder Frequency</div>
+      <div id="reminder-options" class="option-list">
+        <div class="option-item active" data-group="reminder" data-value="1 hour before" onclick="selectOption(this,'reminder')">
+          <div class="radio-dot active"></div> 1 Hour Before
+        </div>
+        <div class="option-item" data-group="reminder" data-value="1 day before" onclick="selectOption(this,'reminder')">
+          <div class="radio-dot"></div> 1 Day Before
+        </div>
+        <div class="option-item" data-group="reminder" data-value="Daily reminders" onclick="selectOption(this,'reminder')">
+          <div class="radio-dot"></div> Daily Reminders
+        </div>
+      </div>
+
+      <!-- Study Style -->
+      <div class="label-sm" style="margin-top:16px;">Study Style</div>
+      <div class="grid-2" id="style-options">
+        <div class="tile active" data-group="style" data-value="Visual" onclick="selectTile(this,'style')">📖<br/><span>Visual</span></div>
+        <div class="tile" data-group="style" data-value="Audio" onclick="selectTile(this,'style')">🎧<br/><span>Audio</span></div>
+        <div class="tile" data-group="style" data-value="Writing" onclick="selectTile(this,'style')">✍️<br/><span>Writing</span></div>
+        <div class="tile" data-group="style" data-value="Group" onclick="selectTile(this,'style')">🤝<br/><span>Group</span></div>
+      </div>
+
+      <!-- Theme -->
+      <div class="label-sm" style="margin-top:16px;">Theme</div>
+      <div class="flex-3" id="theme-options">
+        <div class="tile active" data-value="light" onclick="setTheme('light')">☀️<br/><span style="font-size:11px;">Light</span></div>
+        <div class="tile" data-value="dark" onclick="setTheme('dark')">🌙<br/><span style="font-size:11px;">Dark</span></div>
+        <div class="tile" data-value="pastel" onclick="setTheme('pastel')">🌸<br/><span style="font-size:11px;">Pastel</span></div>
+      </div>
+
+      <button class="btn-primary" style="margin-top:24px;" onclick="goTo('screen-main')">Let's Go! 🦉</button>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         MAIN APP (with bottom nav)
+    ══════════════════════════════════════════ -->
+    <div id="screen-main" class="screen">
+
+      <!-- Tab: HOME -->
+      <div id="tab-home" class="tab-content active" style="overflow-y:auto; height:100vh; padding-bottom:80px;">
+        <div class="page-header">
+          <div>
+            <div class="subtext" style="font-weight:600;">Good day! 🌟</div>
+            <div class="page-title">Your Assignments</div>
+          </div>
+          <div style="font-size:36px;">🦉</div>
+        </div>
+        <!-- Stats -->
+        <div class="stats-row" id="stats-row"></div>
+        <!-- Assignment Lists -->
+        <div style="padding:0 20px;">
+          <div class="section-title" id="pending-label">📌 In Progress</div>
+          <div id="list-pending"></div>
+          <div class="section-title" id="done-label" style="margin-top:8px;">✅ Completed</div>
+          <div id="list-done"></div>
+        </div>
+      </div>
+
+      <!-- Tab: CALENDAR -->
+      <div id="tab-calendar" class="tab-content" style="overflow-y:auto; height:100vh; padding-bottom:80px;">
+        <div class="page-header">
+          <div>
+            <div class="page-title">📅 Calendar</div>
+            <div class="subtext" style="font-size:14px; margin-top:2px;">May 2026</div>
+          </div>
+        </div>
+        <div style="padding:0 20px;">
+          <div class="card">
+            <div class="cal-weekdays"></div>
+            <div id="cal-grid" class="cal-grid"></div>
+          </div>
+          <div class="section-title" style="margin:16px 0 10px;">Deadlines This Month</div>
+          <div id="cal-assignments"></div>
+          <div class="card ai-banner" onclick="switchTab('ai')" style="cursor:pointer; text-align:center; margin-top:8px;">
+            <div style="font-size:40px;">🦉</div>
+            <div style="font-weight:800; font-size:15px;" class="primary-text">Ask AI Assistant</div>
+            <div class="subtext" style="font-size:12px; margin-top:2px;">Get study tips &amp; guidance</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: AI -->
+      <div id="tab-ai" class="tab-content" style="display:flex; flex-direction:column; height:100vh;">
+        <div class="page-header" style="flex-shrink:0;">
+          <div>
+            <div class="page-title">🦉 AI Assistant</div>
+            <div class="subtext" style="font-size:13px; margin-top:2px;">Your smart study companion</div>
+          </div>
+        </div>
+        <div id="ai-messages" style="flex:1; overflow-y:auto; padding:16px 20px 140px;">
+          <div id="ai-empty" style="text-align:center; padding:32px 20px;">
+            <div style="font-size:60px;">🦉</div>
+            <div style="font-weight:800; font-size:17px; margin-top:10px;" class="text-main">Hi! I'm your study owl!</div>
+            <div class="subtext" style="font-size:14px; margin-top:6px;">Ask me about study tips, how to break down assignments, or for motivation!</div>
+            <div class="chip-row" style="margin-top:16px;">
+              <div class="chip" onclick="setAiInput('How to manage deadlines?')">How to manage deadlines?</div>
+              <div class="chip" onclick="setAiInput('Give me study tips')">Give me study tips</div>
+              <div class="chip" onclick="setAiInput('Help me start my assignment')">Help me start my assignment</div>
+              <div class="chip" onclick="setAiInput('Motivate me! 💪')">Motivate me! 💪</div>
+            </div>
+          </div>
+        </div>
+        <div class="ai-input-bar">
+          <input id="ai-input" class="input-field" placeholder="Ask your owl..." onkeydown="if(event.key==='Enter') sendAI()" />
+          <button class="btn-send" onclick="sendAI()">🚀</button>
+        </div>
+      </div>
+
+      <!-- Tab: PROFILE -->
+      <div id="tab-profile" class="tab-content" style="overflow-y:auto; height:100vh; padding-bottom:80px;">
+        <div class="page-header">
+          <div style="display:flex; align-items:center; gap:14px;">
+            <div class="avatar-lg">🦉</div>
+            <div>
+              <div style="font-size:20px; font-weight:900;" class="text-main">Nur Ain Solehah</div>
+              <div class="subtext" style="font-size:13px;">Diploma Student · DFD</div>
+            </div>
+          </div>
+        </div>
+        <div style="padding:0 20px 80px;">
+          <div class="label-sm">Theme</div>
+          <div class="flex-3" id="profile-theme-options" style="margin-bottom:20px;">
+            <div class="tile active" data-value="light" onclick="setTheme('light')">☀️<br/><span style="font-size:11px;">Light</span></div>
+            <div class="tile" data-value="dark" onclick="setTheme('dark')">🌙<br/><span style="font-size:11px;">Dark</span></div>
+            <div class="tile" data-value="pastel" onclick="setTheme('pastel')">🌸<br/><span style="font-size:11px;">Pastel</span></div>
+          </div>
+
+          <div class="label-sm">Settings</div>
+          <div class="card setting-row">
+            <div class="setting-icon">🔔</div>
+            <div class="setting-label"><strong>Push Notifications</strong></div>
+            <div id="notif-toggle" class="toggle active" onclick="toggleNotif()"><div class="toggle-knob"></div></div>
+          </div>
+          <div class="card setting-row">
+            <div class="setting-icon">🎵</div>
+            <div class="setting-label"><strong>Alarm Tone</strong><br/><span class="subtext" style="font-size:12px;">Default Owl Hoot</span></div>
+            <span class="subtext">›</span>
+          </div>
+          <div class="card setting-row">
+            <div class="setting-icon">🌍</div>
+            <div class="setting-label"><strong>Language</strong><br/><span class="subtext" style="font-size:12px;">English</span></div>
+            <span class="subtext">›</span>
+          </div>
+          <div class="card setting-row">
+            <div class="setting-icon">⭐</div>
+            <div class="setting-label"><strong>Study Style</strong><br/><span class="subtext" id="profile-style" style="font-size:12px;">Visual</span></div>
+            <span class="subtext">›</span>
+          </div>
+
+          <div class="label-sm" style="margin-top:8px;">Account</div>
+          <div class="card setting-row"><div class="setting-icon">🔒</div><div class="setting-label"><strong>Privacy Settings</strong></div><span class="subtext">›</span></div>
+          <div class="card setting-row"><div class="setting-icon">❓</div><div class="setting-label"><strong>Help &amp; Support</strong></div><span class="subtext">›</span></div>
+          <div class="card setting-row danger-row"><div class="setting-icon danger-icon">🚪</div><div class="setting-label danger-text"><strong>Log Out</strong></div></div>
+        </div>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <nav class="bottom-nav" id="bottom-nav">
+        <button class="nav-btn active" data-tab="home" onclick="switchTab('home')">
+          <span>🏠</span><span>Home</span>
+        </button>
+        <button class="nav-btn" data-tab="calendar" onclick="switchTab('calendar')">
+          <span>📅</span><span>Calendar</span>
+        </button>
+        <button class="nav-btn-add" onclick="showAddForm()">+</button>
+        <button class="nav-btn" data-tab="ai" onclick="switchTab('ai')">
+          <span>🦉</span><span>AI Owl</span>
+        </button>
+        <button class="nav-btn" data-tab="profile" onclick="switchTab('profile')">
+          <span>👤</span><span>Profile</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         ADD ASSIGNMENT SCREEN
+    ══════════════════════════════════════════ -->
+    <div id="screen-add" class="screen" style="overflow-y:auto;">
+      <div class="page-header" style="display:flex; align-items:center; gap:12px;">
+        <button class="btn-back" onclick="goTo('screen-main')">←</button>
+        <div class="page-title">New Assignment</div>
+      </div>
+      <div style="padding:20px 20px 100px;">
+        <div class="label-sm">Assignment Title</div>
+        <input id="add-title" class="input-field" placeholder="Enter assignment title" style="margin-bottom:16px;" />
+
+        <div class="label-sm">Subject</div>
+        <input id="add-subject" class="input-field" placeholder="Enter subject" style="margin-bottom:16px;" />
+
+        <div class="label-sm">Due Date</div>
+        <input id="add-date" type="date" class="input-field" style="margin-bottom:16px;" />
+
+        <div class="label-sm">Assignment Type</div>
+        <div class="flex-2" style="margin-bottom:16px;">
+          <div class="tile active" id="type-individual" onclick="selectType('individual')">👤 Individual</div>
+          <div class="tile" id="type-group" onclick="selectType('group')">👥 Group</div>
+        </div>
+
+        <div class="label-sm">Reminder Setting</div>
+        <select id="add-reminder" class="input-field" style="margin-bottom:24px;">
+          <option>1 hour before</option>
+          <option>2 hours before</option>
+          <option selected>1 day before</option>
+          <option>Daily reminders</option>
+        </select>
+
+        <button class="btn-primary" onclick="submitAssignment()">Add Assignment ✓</button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         DETAIL SCREEN
+    ══════════════════════════════════════════ -->
+    <div id="screen-detail" class="screen" style="overflow-y:auto;">
+      <div class="page-header detail-header">
+        <button class="btn-back" onclick="closeDetail()">←</button>
+        <div id="detail-type-badge" class="badge-type"></div>
+        <div id="detail-title" class="page-title" style="margin-top:4px;"></div>
+        <div id="detail-subject" class="subtext" style="font-size:13px; margin-top:2px;"></div>
+        <div style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap;">
+          <span id="detail-due" class="badge-warn"></span>
+          <span id="detail-days" class="badge-info"></span>
+        </div>
+      </div>
+      <div style="padding:20px 20px 100px;">
+        <div id="detail-quote" class="quote-box"></div>
+
+        <div class="card">
+          <div class="label-sm">Assignment Progress</div>
+          <div style="display:flex; align-items:center; gap:12px; margin-top:8px;">
+            <div class="progress-track" style="flex:1;">
+              <div id="detail-progress-bar" class="progress-fill"></div>
+            </div>
+            <span id="detail-progress-pct" class="primary-text" style="font-weight:900; font-size:16px; min-width:42px;"></span>
+          </div>
+          <input type="range" id="detail-slider" min="0" max="100" class="slider" style="margin-top:14px;" oninput="updateProgress(this.value)" onchange="commitProgress(this.value)" />
+          <div class="subtext" style="font-size:11px; text-align:center; margin-top:4px;">Drag to update progress</div>
+        </div>
+
+        <div class="card">
+          <div class="label-sm">Reminders</div>
+          <div class="setting-row" style="padding:8px 0;">
+            <span style="font-size:14px;" class="text-main">1 Day Before</span>
+            <div id="rem-toggle-1" class="toggle active" onclick="this.classList.toggle('active')"><div class="toggle-knob"></div></div>
+          </div>
+          <div class="setting-row" style="padding:8px 0;">
+            <span style="font-size:14px;" class="text-main">2 Hours Before</span>
+            <div id="rem-toggle-2" class="toggle" onclick="this.classList.toggle('active')"><div class="toggle-knob"></div></div>
+          </div>
+        </div>
+
+        <div id="detail-collab-section" style="display:none;">
+          <div class="card">
+            <div class="label-sm" id="detail-collab-title">Collaborators</div>
+            <div id="detail-collab-list"></div>
+            <div id="detail-files-section" style="display:none; margin-top:10px; border-top:1px solid var(--border); padding-top:10px;">
+              <div class="label-sm">Files</div>
+              <div id="detail-files-list"></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="detail-welldone-btn" style="display:none; margin-top:8px;">
+          <button class="btn-primary" onclick="showWellDone()">🎉 View Completion</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         WELL DONE SCREEN
+    ══════════════════════════════════════════ -->
+    <div id="screen-welldone" class="screen center-screen gradient-bg" style="padding:32px;">
+      <div class="owl-bounce" style="font-size:80px;">🦉</div>
+      <div style="font-size:36px; font-weight:900; margin-top:16px; text-align:center;" class="primary-text">Well Done!</div>
+      <p style="text-align:center; font-style:italic; margin:12px 0 8px;" class="subtext">"Great progress is still progress!"</p>
+      <div class="card" style="text-align:center; width:100%; margin-top:16px;">
+        <div id="wd-title" style="font-weight:800; font-size:17px;" class="text-main"></div>
+        <div id="wd-subject" class="subtext" style="font-size:13px;"></div>
+        <div style="margin-top:12px; background:linear-gradient(90deg,#10B981,#34D399); border-radius:10px; height:10px; width:100%;"></div>
+        <div style="color:#10B981; font-weight:800; margin-top:6px;">100% Complete ✓</div>
+      </div>
+      <button class="btn-primary" style="margin-top:24px;" onclick="backFromWellDone()">Back to Home</button>
+    </div>
+
+  </div><!-- end #app -->
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+:root{
+  --bg:#FDF4FF;
+  --card:#FFFFFF;
+  --primary:#C84B9E;
+  --secondary:#7C3AED;
+  --border:#E9D5F5;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Nunito',sans-serif;
+  background:var(--bg);
+  padding:20px;
+}
+
+.container{
+  max-width:430px;
+  margin:auto;
+}
+
+h1{
+  margin-bottom:20px;
+}
+
+#searchInput{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:14px;
+  margin-bottom:25px;
+  outline:none;
+}
+
+.title{
+  font-weight:800;
+  margin-bottom:15px;
+}
+
+.friend-list{
+  display:flex;
+  gap:14px;
+  overflow-x:auto;
+  margin-bottom:30px;
+}
+
+.friend-card{
+  text-align:center;
+  cursor:pointer;
+}
+
+.friend-img{
+  width:65px;
+  height:65px;
+  border-radius:50%;
+
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--secondary)
+  );
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  color:white;
+  font-size:24px;
+}
+
+.friend-name{
+  margin-top:8px;
+  font-size:13px;
+}
+
+.selected-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:30px;
+}
+
+.selected-chip{
+  background:#E9D5F5;
+  color:var(--secondary);
+  padding:10px 14px;
+  border-radius:30px;
+  font-size:14px;
+  font-weight:700;
+}
+
+button{
+  width:100%;
+  padding:16px;
+  border:none;
+  border-radius:50px;
+
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--secondary)
+  );
+
+  color:white;
+  font-size:16px;
+  font-weight:800;
+}

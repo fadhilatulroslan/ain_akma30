@@ -1,261 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Fixora • Home</title>
 
-<link rel="stylesheet" href="css/inventra.css">
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 
-<script>
-    // ========================================
-    // REDIRECT PRIORITY: PORTAL → LOGIN → HOME
-    // ========================================
-    
-    // FIRST: Check if user has chosen portal
-    if (!localStorage.getItem('portalChosen')) {
-        window.location.href = 'choose.html';
-        return;  // IMPORTANT: stop here
-    }
-    
-    // SECOND: Check if user is logged in
-    if (localStorage.getItem('isLoggedIn') !== 'true') {
-        window.location.href = 'login.html';
-        return;  // IMPORTANT: stop here
-    }
-</script>
+  <title>Assignify – Home</title>
+
+  <link rel="stylesheet" href="home.css"/>
+
+  <script src="jquery-4.0.0.js"></script>
 
 </head>
+
 <body>
 
-<div class="app">
+  <div class="page-wrapper">
 
-    <div class="top">
-        <div class="logo-badge">
-            <img src="images/first.jpg" alt="Fixora Logo" style="width: 28px; height: 28px; object-fit: cover; border-radius: 8px;">
-        </div>
-        <h1>Fixora.</h1>
-        <p>keep your laptop alive</p>
-    </div>
+    <!-- Header -->
+    <div class="page-header">
 
-    <!-- WELCOME CARD WITH AVATAR -->
-    <div class="welcome-card" id="welcomeCard">
-        <div class="welcome-avatar" id="welcomeAvatar">
-            <img src="images/robot.gif" alt="Avatar" class="welcome-avatar-img">
+      <div>
+        <div class="subtext">
+          Good day! 🌟
         </div>
-        <div class="welcome-text" id="welcomeText">👋 Hey there, laptop warrior!</div>
-        <div class="welcome-sub">Ready to fix your laptop like a pro?</div>
-    </div>
 
-    <!-- AI DIAGNOSE CARD -->
-    <div class="ai-diagnose-card" onclick="window.location.href='diagnose.html'">
-        <div class="ai-card-icon">
-            <img src="images/robot.gif" alt="AI Robot" class="ai-robot-gif">
+        <div class="page-title">
+          Your Assignments
         </div>
-        <div class="ai-card-content">
-            <div class="ai-card-title">AI Laptop Diagnose</div>
-            <div class="ai-card-desc">Snap a photo • Describe problem • Get AI diagnosis</div>
-        </div>
-        <div class="ai-card-arrow">→</div>
-    </div>
+      </div>
 
-    <!-- VIDEO SEARCH -->
-    <div class="video-search-section">
-        <div class="search-box">
-            <input type="text" id="videoSearch" placeholder="🔍 Search laptop tips on YouTube...">
-            <button id="searchVideoBtn">Search</button>
-        </div>
-    </div>
+     <div class="header-right">
 
-    <!-- VIDEOS SECTION -->
-    <div class="block">
-        <div class="block-title">
-            <span class="pulse">🎬</span>
-            <h3>videos for you</h3>
-            <a href="videos.html" class="see-link">see all →</a>
-        </div>
-        <div id="videoResults"></div>
-    </div>
+  <button
+    class="mail-btn"
+    onclick="window.location.href='notifications.html'"
+  >
 
-    <!-- TIPS SECTION -->
-    <div class="block">
-        <div class="block-title">
-            <span>💡</span>
-            <h3>tips from real users</h3>
-            <a href="tips.html" class="see-link">see all →</a>
-        </div>
-        <div id="tipContainer"></div>
-    </div>
 
-    <!-- QUICK LINKS -->
-    <div class="quick-links-section">
-        <div class="block-title">
-            <span>🔗</span>
-            <h3>quick links</h3>
-        </div>
-        <div class="quick-links-grid">
-            <a href="saved.html" class="quick-link">
-                <img src="images/bm.jpg" alt="Saved" style="width: 28px; height: 28px;">
-                <span>Saved</span>
-            </a>
-            <a href="about.html" class="quick-link">
-                <img src="images/about.jpg" alt="About" style="width: 28px; height: 28px;">
-                <span>About</span>
-            </a>
-            <a href="faq.html" class="quick-link">
-                <img src="images/faq.jpg" alt="FAQ" style="width: 28px; height: 28px;">
-                <span>FAQ</span>
-            </a>
-            <a href="contact.html" class="quick-link">
-                <img src="images/contact.jpg" alt="Contact" style="width: 28px; height: 28px;">
-                <span>Contact</span>
-            </a>
-            <a href="setting.html" class="quick-link">
-                <img src="images/1.jpg" alt="Settings" style="width: 28px; height: 28px;">
-                <span>Settings</span>
-            </a>
-        </div>
-    </div>
+   <img src="mail.jpg">
 
-    <!-- BOTTOM NAVIGATION -->
-    <div class="bottom-nav">
-        <a href="home.html" class="nav active">
-            <span class="nav-icon">🏠</span>
-            <span>home</span>
-        </a>
-        <a href="shops.html" class="nav">
-            <span class="nav-icon">📍</span>
-            <span>shops</span>
-        </a>
-        <a href="community.html" class="nav">
-            <span class="nav-icon">💬</span>
-            <span>community</span>
-        </a>
-        <a href="profile.html" class="nav">
-            <span class="nav-icon">👤</span>
-            <span>profile</span>
-        </a>
-    </div>
+    <span class="notif-dot"></span>
+
+  </button>
 
 </div>
 
-<script src="js/main.js"></script>
+    </div>
 
-<script>
-    // ========================================
-    // DISPLAY USERNAME & AVATAR
-    // ========================================
-    let savedName = localStorage.getItem('inventraUsername');
-    if (savedName) {
-        $('#welcomeText').html(`👋 Hey there, ${savedName}!`);
-    }
-    
-    function setUserAvatar() {
-        let avatarType = localStorage.getItem('avatarType');
-        let userImage = localStorage.getItem('userImage');
-        
-        if (avatarType === 'image' && userImage && userImage !== 'null') {
-            $('#welcomeAvatar').html(`<img src="${userImage}" class="welcome-avatar-img" onerror="this.src='images/robot.gif'">`);
-        } else {
-            $('#welcomeAvatar').html(`<img src="images/robot.gif" alt="Avatar" class="welcome-avatar-img">`);
-        }
-    }
-    
-    setUserAvatar();
-    
-    // ========================================
-    // DISPLAY TIPS ON HOME
-    // ========================================
-    function displayTipsOnHome() {
-        let savedTips = JSON.parse(localStorage.getItem('userTips') || '[]');
-        let defaultTips = [
-            { title: "🔋 Battery be cryin'?", desc: "Close those 50 Chrome tabs. Lower brightness to 50%. Your battery will thank u.", author: "proven by 1,234 users" },
-            { title: "🧹 Laptop hot like sauna?", desc: "Elevate that thang. Put on a stand or a book. Airflow is everything.", author: "shared by 892 users" },
-            { title: "💾 Storage on life support?", desc: "Run Disk Cleanup. Delete temp files. Periodt.", author: "helpful for 2,156 people" }
-        ];
-        
-        let allTips = [...defaultTips, ...savedTips.slice(0, 3)];
-        let html = '';
-        
-        for (let tip of allTips.slice(0, 4)) {
-            html += `
-                <div class="tip-item">
-                    <div class="tip-title">${tip.title}</div>
-                    <div class="tip-desc">${tip.desc}</div>
-                    <div class="tip-by">— ${tip.author}</div>
-                </div>
-            `;
-        }
-        
-        $('#tipContainer').html(html);
-    }
-    
-    displayTipsOnHome();
-    
-    // ========================================
-    // YOUTUBE VIDEOS - HORIZONTAL SCROLL
-    // ========================================
-    const videoLibrary = [
-        { id: 'fan', title: 'Clean laptop fan', icon: '🧹', embed: '<iframe width="100%" height="180" src="https://www.youtube.com/embed/J1KlRklVGMk" frameborder="0" allowfullscreen></iframe>' },
-        { id: 'battery', title: 'Extend battery life', icon: '🔋', embed: '<iframe width="100%" height="180" src="https://www.youtube.com/embed/kTFnGwW2e_Y" frameborder="0" allowfullscreen></iframe>' },
-        { id: 'virus', title: 'Remove virus', icon: '🦠', embed: '<iframe width="100%" height="180" src="https://www.youtube.com/embed/SfdzO0o9604" frameborder="0" allowfullscreen></iframe>' },
-        { id: 'ram', title: 'Upgrade RAM', icon: '💾', embed: '<iframe width="100%" height="180" src="https://www.youtube.com/embed/zt7sSPhN7UA" frameborder="0" allowfullscreen></iframe>' },
-        { id: 'overheating', title: 'Fix overheating', icon: '🌡️', embed: '<iframe width="100%" height="180" src="https://www.youtube.com/embed/FmSAk9qU8dM" frameborder="0" allowfullscreen></iframe>' },
-        { id: 'slow', title: 'Speed up laptop', icon: '🐌', embed: '<iframe width="100%" height="180" src="https://www.youtube.com/embed/3CHk0lBidac" frameborder="0" allowfullscreen></iframe>' }
-    ];
-    
-    if ($('#videoResults').length > 0) {
-        let videoHtml = `
-            <div class="video-horizontal-scroll">
-                <div class="video-scroll-container">
-        `;
-        
-        for (let video of videoLibrary) {
-            videoHtml += `
-                <div class="video-scroll-card" data-video="${video.id}">
-                    <div class="video-scroll-thumb">${video.icon}</div>
-                    <div class="video-scroll-title">${video.title}</div>
-                </div>
-            `;
-        }
-        
-        videoHtml += `
-                </div>
-            </div>
-            <div class="current-video" id="currentVideoDisplay">
-                <div class="video-placeholder">🎬 Click any topic above to watch tutorial</div>
-            </div>
-        `;
-        
-        $('#videoResults').html(videoHtml);
-        
-        $('.video-scroll-card').on('click', function() {
-            let videoId = $(this).data('video');
-            let video = videoLibrary.find(v => v.id === videoId);
-            if (video) {
-                $('#currentVideoDisplay').html(`
-                    <div class="video-title">📺 ${video.title}</div>
-                    ${video.embed}
-                `);
-            }
-        });
-        
-        $('#searchVideoBtn').on('click', function() {
-            let query = $('#videoSearch').val();
-            if (query.trim()) {
-                window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`, '_blank');
-            } else {
-                alert('Enter a search term');
-            }
-        });
-        
-        $('#videoSearch').on('keypress', function(e) {
-            if (e.which === 13) $('#searchVideoBtn').click();
-        });
-    }
-    
-</script>
+    <!-- Stats -->
+    <div class="stats-row">
+
+      <div class="stat-card">
+        <div class="stat-num pending-num">0</div>
+        <div class="stat-lbl">Pending</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-num done-num">0</div>
+        <div class="stat-lbl">Done</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-num total-num">0</div>
+        <div class="stat-lbl">Total</div>
+      </div>
+
+    </div>
+
+    <!-- Pending -->
+    <div class="list-area">
+
+      <div class="section-title">
+        📌 In Progress
+      </div>
+
+      <div id="pending-list"></div>
+
+      <!-- Completed -->
+      <div class="section-title completed-title">
+        ✅ Completed
+      </div>
+
+      <div id="completed-list"></div>
+
+    </div>
+
+  </div>
+
+  <!-- Bottom Nav -->
+  <nav class="bottom-nav">
+
+    <button class="nav-btn active">
+      <img src="home.jpg">
+      <span>Home</span>
+    </button>
+
+    <button class="nav-btn" onclick="window.location.href='calendar.html'">
+      <img src="calendar.png">
+      <span>Calendar</span>
+    </button>
+
+   <button class="nav-btn" onclick="window.location.href='add-assignment.html'">
+      <img src="add.png">
+      <span>ADD</span>
+    </button>
+
+    <button class="nav-btn" onclick="window.location.href='ai-owl.html'">
+  <img src="owlai.png">
+  <span>AI Owl</span>
+</button>
+
+    <button
+      class="nav-btn"
+      onclick="window.location.href='profile.html'"
+    >
+      <img src="profile.png">
+      <span>Profile</span>
+    </button>
+
+  <!-- MUSIC BUTTON -->
+  <button id="musicToggleBtnHeader" onclick="toggleMusic()">
+    🔊
+  </button>
+  </nav>
+
+  <script src="theme.js"></script>
+  <script src="home.js"></script>
 
 </body>
 </html>

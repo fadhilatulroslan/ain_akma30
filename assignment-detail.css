@@ -1,0 +1,40 @@
+body{
+  font-family: Arial;
+  background:#FDF4FF;
+  padding:20px;
+}
+
+.container{
+  max-width:500px;
+  margin:auto;
+}
+
+.member-card{
+  background:white;
+  padding:15px;
+  margin-bottom:10px;
+  border-radius:12px;
+  border:1px solid #ddd;
+}
+
+input{
+  width:100%;
+  padding:10px;
+  margin-top:8px;
+}
+
+button{
+  padding:10px;
+  margin-top:10px;
+  border:none;
+  border-radius:10px;
+  background:#7C3AED;
+  color:white;
+  cursor:pointer;
+}
+
+.delete-btn{
+  background:red;
+  width:100%;
+  margin-top:20px;
+}

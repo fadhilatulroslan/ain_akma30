@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Assignify Calendar</title>
+
+  <link rel="stylesheet" href="calendar.css">
+
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- HEADER -->
+
+    <div class="top-bar">
+
+      <h1>
+        📅 Calendar
+      </h1>
+
+      <div class="month-controls">
+
+        <button onclick="prevMonth()">
+          ←
+        </button>
+
+        <h2 id="monthYear"></h2>
+
+        <button onclick="nextMonth()">
+          →
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- DAYS -->
+
+    <div class="days-row">
+
+      <div>Sun</div>
+      <div>Mon</div>
+      <div>Tue</div>
+      <div>Wed</div>
+      <div>Thu</div>
+      <div>Fri</div>
+      <div>Sat</div>
+
+    </div>
+
+    <!-- CALENDAR -->
+
+    <div id="calendarGrid" class="calendar-grid"></div>
+
+    <!-- UPCOMING -->
+
+    <div class="upcoming-title">
+      Upcoming Assignments
+    </div>
+
+    <div id="upcomingList"></div>
+
+  </div>
+
+  <script src="calendar.js"></script>
+
+</body>
+</html>

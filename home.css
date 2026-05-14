@@ -1,0 +1,305 @@
+:root{
+  --bg:#FDF4FF;
+  --card:#FFFFFF;
+  --primary:#C84B9E;
+  --secondary:#7C3AED;
+  --text:#1E1B2E;
+  --subtext:#6B7280;
+  --border:#E9D5F5;
+  --success:#10B981;
+  --danger:#EF4444;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Nunito',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+.page-wrapper{
+  width:100%;
+  max-width:430px;
+  margin:auto;
+  min-height:100vh;
+  padding-bottom:110px;
+}
+
+/* HEADER */
+
+.page-header{
+  padding:28px 20px 18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.subtext{
+  color:var(--subtext);
+  font-size:14px;
+  font-weight:700;
+}
+
+.page-title{
+  font-size:30px;
+  font-weight:900;
+}
+
+.owl-icon{
+  font-size:38px;
+}
+
+/* STATS */
+
+.stats-row{
+  display:flex;
+  gap:10px;
+  padding:0 20px;
+  margin-bottom:22px;
+}
+
+.stat-card{
+  flex:1;
+  background:var(--card);
+  border-radius:18px;
+  padding:14px;
+  text-align:center;
+  border:1.5px solid var(--border);
+}
+
+.stat-num{
+  font-size:24px;
+  font-weight:900;
+}
+
+.pending-num{
+  color:var(--primary);
+}
+
+.done-num{
+  color:var(--success);
+}
+
+.total-num{
+  color:var(--secondary);
+}
+
+.stat-lbl{
+  font-size:12px;
+  color:var(--subtext);
+  margin-top:3px;
+}
+
+/* LIST */
+
+.list-area{
+  padding:0 20px;
+}
+
+.section-title{
+  font-size:18px;
+  font-weight:800;
+  margin-bottom:12px;
+}
+
+.completed-title{
+  margin-top:18px;
+}
+
+/* CARD */
+
+.asgn-card{
+  background:var(--card);
+  border-radius:22px;
+  padding:16px;
+  border:1px solid var(--border);
+  margin-bottom:14px;
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  box-shadow:0 3px 12px rgba(200,75,158,0.08);
+}
+
+.asgn-badge{
+  font-size:10px;
+  font-weight:800;
+  color:var(--primary);
+  text-transform:uppercase;
+}
+
+.asgn-title{
+  font-size:18px;
+  font-weight:900;
+  margin-top:2px;
+}
+
+.asgn-subject{
+  color:var(--subtext);
+  font-size:13px;
+  margin-top:2px;
+}
+
+.progress-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:12px;
+}
+
+.progress-track{
+  flex:1;
+  height:7px;
+  border-radius:20px;
+  background:var(--border);
+  overflow:hidden;
+}
+
+.progress-fill{
+  height:100%;
+  background:linear-gradient(
+    90deg,
+    var(--primary),
+    var(--secondary)
+  );
+}
+
+.asgn-pct{
+  font-size:12px;
+  font-weight:800;
+  color:var(--primary);
+}
+
+.chip{
+  background:#D1FAE5;
+  color:var(--success);
+  padding:5px 10px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:800;
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:100%;
+  max-width:430px;
+  background:var(--card);
+  border-top:1px solid var(--border);
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  padding:10px 0;
+}
+
+.nav-btn{
+  background:none;
+  border:none;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+  font-size:11px;
+  color:var(--subtext);
+}
+
+.nav-btn img{
+  width:24px;
+  height:24px;
+}
+
+.nav-btn.active{
+  color:var(--primary);
+  font-weight:800;
+}
+
+.nav-btn-add{
+  width:58px;
+  height:58px;
+  border:none;
+  border-radius:50%;
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--secondary)
+  );
+  color:white;
+  font-size:32px;
+  font-weight:900;
+  margin-top:-30px;
+  box-shadow:0 5px 18px rgba(124,58,237,0.35);
+}
+
+/* DARK MODE */
+
+.dark-mode{
+  --bg:#121212;
+  --card:#1E1E1E;
+  --text:#FFFFFF;
+  --subtext:#BBBBBB;
+  --border:#2E2E2E;
+}
+.header-right{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.mail-btn{
+  position:relative;
+  background:none;
+  border:none;
+}
+
+.mail-btn img{
+  width:50px;
+  height:50px;
+}
+
+.notif-dot{
+  position:absolute;
+  top:-2px;
+  right:-2px;
+
+  width:10px;
+  height:10px;
+
+  background:red;
+  border-radius:50%;
+}
+
+#musicToggleBtnHeader{
+  width:45px;
+  height:45px;
+  border:none;
+  border-radius:50%;
+  background:linear-gradient(135deg,#C84B9E,#7C3AED);
+  color:white;
+  font-size:18px;
+  margin-left:10px;
+  cursor:pointer;
+  box-shadow:0 4px 12px rgba(0,0,0,0.15);
+}
+
+.notif-popup{
+  position:fixed;
+  top:25%;
+  left:50%;
+  transform:translateX(-50%);
+  background:white;
+  padding:20px;
+  border-radius:18px;
+  width:80%;
+  max-width:320px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.2);
+  text-align:center;
+  z-index:9999;
+}

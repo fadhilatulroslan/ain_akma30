@@ -1,0 +1,20 @@
+body{
+  margin:0;
+  padding:20px;
+  font-family:'Nunito',sans-serif;
+  background:#FDF4FF;
+}
+
+.container{
+  max-width:430px;
+  margin:auto;
+}
+
+.notif-card{
+  background:white;
+  padding:18px;
+  border-radius:18px;
+  margin-bottom:14px;
+
+  border:1px solid #E9D5F5;
+}

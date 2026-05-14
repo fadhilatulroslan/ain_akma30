@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Add Assignment - Assignify</title>
+
+  <link rel="stylesheet" href="add-assignment.css">
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1 class="gradient-text">Add Assignment</h1>
+
+    <p class="subtitle">
+      Organize your tasks smarter 🚀
+    </p>
+
+    <!-- TITLE -->
+
+    <input
+      type="text"
+      id="title"
+      class="input-field"
+      placeholder="Assignment Title"
+    />
+
+    <!-- SUBJECT -->
+
+    <input
+      type="text"
+      id="subject"
+      class="input-field"
+      placeholder="Subject"
+    />
+
+    <!-- DUE DATE -->
+
+    <input
+      type="date"
+      id="dueDate"
+      class="input-field"
+    />
+
+    <!-- TYPE -->
+
+    <select id="type" class="input-field">
+
+      <option value="">Assignment Type</option>
+
+      <option value="Individual">Individual</option>
+
+      <option value="Group">Group</option>
+
+    </select>
+
+    <!-- REMINDER -->
+
+    <select id="reminder" class="input-field">
+
+      <option value="">Reminder</option>
+
+      <option value="On">On</option>
+
+      <option value="Off">Off</option>
+
+    </select>
+
+    <!-- BUTTON -->
+
+    <button
+      type="button"
+      class="btn-save"
+      onclick="saveAssignment()"
+    >
+      Save Assignment 🚀
+    </button>
+
+  </div>
+
+  <!-- BOTTOM NAV -->
+
+  <div class="bottom-nav">
+
+    <a href="home.html">
+      <img src="home.jpg">
+    </a>
+
+    <a href="calendar.html">
+      <img src="calendar.png">
+    </a>
+
+   <a href="add-assignment.html">
+      <img src="add.png">
+    </a>
+
+    <a href="ai.html">
+      <img src="owlai.png">
+    </a>
+
+    <a href="profile.html">
+      <img src="profile.png">
+    </a>
+
+  </div>
+
+  <script src="theme.js"></script>
+
+  <script src="add-assignment.js"></script>
+
+</body>
+</html>

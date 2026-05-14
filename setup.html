@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Setup - Assignify</title>
+
+  <link rel="stylesheet" href="setup.css">
+
+  <script src="jquery-4.0.0.js"></script>
+</head>
+
+<body>
+
+  <div class="setup-container">
+
+    <h1 class="gradient-text">Personalization Setup</h1>
+
+    <p class="subtitle">
+      Customize your Assignify experience
+    </p>
+
+    <!-- COURSE -->
+    <input
+      type="text"
+      id="course"
+      class="input-field"
+      placeholder="Enter your course"
+    />
+
+    <!-- SEMESTER -->
+    <input
+      type="text"
+      id="semester"
+      class="input-field"
+      placeholder="Current semester"
+    />
+
+   <!-- REMINDER TIME -->
+
+<p class="time-label">
+  Please set the time you wanted to be reminded here daily.
+</p>
+
+<input
+  type="time"
+  id="reminderTime1"
+  class="input-field"
+/>
+
+<input
+  type="time"
+  id="reminderTime2"
+  class="input-field"
+/>
+
+<!-- HOW MANY TIMES -->
+<select id="reminderCount" class="input-field">
+  <option value="">Reminder Per Day</option>
+  <option value="1">1 Time</option>
+  <option value="2">2 Times</option>
+  <option value="3">3 Times</option>
+  <option value="4">4 Times</option>
+</select>
+
+    <!-- STUDY STYLE -->
+    <select id="studyStyle" class="input-field">
+      <option value="">Select Study Style</option>
+      <option value="Visual">Visual</option>
+      <option value="Audio">Audio</option>
+      <option value="Writing">Writing</option>
+      <option value="Group">Group</option>
+    </select>
+
+    <!-- THEME -->
+    <select id="theme" class="input-field">
+      <option value="">Choose Theme</option>
+      <option value="light">Light Mode</option>
+      <option value="dark">Dark Mode</option>
+    </select>
+
+    <button class="btn-save">
+      Save Setup 🚀
+    </button>
+
+  </div>
+
+  <script src="setup.js"></script>
+
+</body>
+</html>

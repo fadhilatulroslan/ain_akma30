@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Log in - Assignify</title>
+  <title>Assignify Login</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
@@ -18,38 +18,37 @@
 
     <div class="owl">🦉</div>
 
-    <h1 class="title gradient-text">Welcome Back</h1>
+    <h1 class="title gradient-text">Assignify</h1>
 
     <p class="subtitle">
-      Log in to continue your Assignify journey
+      Sign in to continue your assignment journey
     </p>
 
     <input 
       type="text"
-      id="email"
+      id="username"
       class="input-field"
-      placeholder="Enter your email"
+      placeholder="Enter your name"
     />
 
     <input 
       type="password"
       id="password"
       class="input-field"
-      placeholder="Enter your password"
+      placeholder="Enter password"
     />
 
-    <button class="btn-login" onclick="loginUser()">
-      Log In 🚀
+    <button class="btn-login" onclick="signIn()">
+      Sign In 🚀
     </button>
-
-    <p class="bottom-text">
-      New user?
-      <a href="signin.html">Create account</a>
-    </p>
-
+<p class="bottom-text">
+  Already have an account?
+  <a href="login.html">Log In</a>
+</p>
   </div>
-<script src="theme.js"></script>
-  <script src="login.js"></script>
+
+  <script src="signin.js"></script>
+  <script src="theme.js"></script>
 
 </body>
 </html>

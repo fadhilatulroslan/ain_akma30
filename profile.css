@@ -1,0 +1,304 @@
+/* profile.css */
+
+:root{
+  --bg:#FDF4FF;
+  --card:#FFFFFF;
+  --primary:#C84B9E;
+  --secondary:#7C3AED;
+  --text:#1E1B2E;
+  --subtext:#6B7280;
+  --border:#E9D5F5;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Nunito',sans-serif;
+  background:var(--bg);
+  padding:20px;
+  transition:0.3s;
+}
+
+.profile-container{
+  max-width:420px;
+  margin:auto;
+  padding-bottom:120px;
+}
+
+.profile-top{
+  text-align:center;
+  margin-bottom:28px;
+}
+
+.profile-image{
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  object-fit:cover;
+  border:4px solid var(--primary);
+}
+
+.upload-btn{
+  margin-top:14px;
+  padding:12px 18px;
+  border:none;
+  border-radius:50px;
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--secondary)
+  );
+  color:white;
+  font-weight:800;
+  cursor:pointer;
+}
+
+#profileName{
+  margin-top:20px;
+  font-size:28px;
+}
+
+#profileEmail{
+  color:var(--subtext);
+  margin-top:6px;
+}
+
+.section-title{
+  font-size:20px;
+  font-weight:900;
+  margin-bottom:14px;
+  margin-top:24px;
+}
+
+.settings-card{
+  background:var(--card);
+  border-radius:20px;
+  padding:18px;
+  border:1px solid var(--border);
+  margin-bottom:14px;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+}
+
+.settings-card h2{
+  font-size:17px;
+}
+
+.settings-card p{
+  font-size:13px;
+  color:var(--subtext);
+  margin-top:4px;
+}
+
+.select-box{
+  padding:10px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  outline:none;
+}
+
+.clickable{
+  cursor:pointer;
+}
+
+.arrow{
+  font-size:24px;
+  color:var(--subtext);
+}
+
+.save-btn{
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:50px;
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--secondary)
+  );
+  color:white;
+  font-size:16px;
+  font-weight:800;
+  margin-top:20px;
+  cursor:pointer;
+}
+
+.logout-btn{
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:50px;
+  background:#ff4d4d;
+  color:white;
+  font-size:16px;
+  font-weight:800;
+  margin-top:14px;
+  cursor:pointer;
+}
+
+/* SWITCH */
+
+.switch{
+  position:relative;
+  display:inline-block;
+  width:50px;
+  height:26px;
+}
+
+.switch input{
+  opacity:0;
+  width:0;
+  height:0;
+}
+
+.slider{
+  position:absolute;
+  cursor:pointer;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background:#ccc;
+  border-radius:30px;
+  transition:.3s;
+}
+
+.slider:before{
+  position:absolute;
+  content:"";
+  height:20px;
+  width:20px;
+  left:3px;
+  bottom:3px;
+  background:white;
+  border-radius:50%;
+  transition:.3s;
+}
+
+input:checked + .slider{
+  background:var(--primary);
+}
+
+input:checked + .slider:before{
+  transform:translateX(24px);
+}
+
+/* DARK MODE */
+
+.dark-mode{
+  background:#121212;
+  color:white;
+}
+
+.dark-mode .settings-card{
+  background:#1E1E1E;
+  border:1px solid #333;
+}
+
+.dark-mode .select-box{
+  background:#2A2A2A;
+  color:white;
+  border:1px solid #444;
+}
+
+.dark-mode #profileEmail,
+.dark-mode .settings-card p,
+.dark-mode .arrow{
+  color:#CFCFCF;
+}
+
+.custom-dropdown{
+  position:relative;
+  width:180px;
+}
+
+.selected-language{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:14px;
+
+  padding:10px 12px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  cursor:pointer;
+}
+
+.selected-language img{
+  width:22px;
+  height:22px;
+  border-radius:50%;
+}
+
+.selected-language span{
+  font-size:14px;
+  font-weight:700;
+}
+
+.language-dropdown{
+  position:absolute;
+  top:60px;
+  right:0;
+
+  width:100%;
+
+  background:white;
+  border-radius:18px;
+
+  border:1px solid var(--border);
+
+  overflow:hidden;
+
+  display:none;
+
+  z-index:999;
+}
+
+.language-option{
+  padding:12px;
+
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  cursor:pointer;
+
+  transition:0.2s;
+}
+
+.language-option:hover{
+  background:#FDF4FF;
+}
+
+.language-option img{
+  width:22px;
+  height:22px;
+  border-radius:50%;
+}
+
+.dropdown-arrow{
+  font-size:12px;
+}
+
+/* DARK MODE */
+
+.dark-mode .selected-language{
+  background:#2A2A2A;
+}
+
+.dark-mode .language-dropdown{
+  background:#1E1E1E;
+}
+
+.dark-mode .language-option:hover{
+  background:#2A2A2A;
+}
